@@ -1,0 +1,61 @@
+# Deployment for the Syslog service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: im-log
+  labels:
+    name: im-log
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: im-log
+  template:
+    metadata:
+      labels:
+        name: im-log
+    spec:
+      containers:
+        - name: im-log
+          image: voxxit/rsyslog
+          ports:
+          - containerPort: 514
+            protocol: TCP
+            name: syslogtcp
+          - containerPort: 514
+            protocol: UDP
+            name: syslog
+          volumeMounts:
+           - name: im-logs
+             mountPath: /var/log
+          livenessProbe:
+            tcpSocket:
+              port: 514
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            timeoutSeconds: 2
+      volumes:
+        - name: im-logs
+          persistentVolumeClaim:
+            claimName: imlog
+# And the service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: im-log
+  labels:
+    app: im
+spec:
+  ports:
+  - port: 514
+    protocol: TCP
+    targetPort: 514
+    name: logtcp
+  - port: 514
+    protocol: UDP
+    targetPort: 514
+    name: logudp
+  selector:
+    name: im-log

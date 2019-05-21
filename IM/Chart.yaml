@@ -1,0 +1,14 @@
+name: IM
+description: Deploy a HA Infrastructure Manager
+version: 0.1.0
+home: https://www.grycap.upv.es/im
+sources:
+  - https://github.com/grycap/im
+icon: https://appsgrycap.i3m.upv.es:31443/im-web/images/logo_portada.png
+keywords:
+- Infrastructure Manager
+- Cloud Orchestrator
+- TOSCA
+maintainers:
+- email: micafer1@upv.es
+  name: Miguel Caballer

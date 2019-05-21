@@ -1,0 +1,68 @@
+mysql:
+  mysqlUser: imuser
+  mysqlPassword: impass
+  mysqlRootPassword: imrootpass
+  mysqlDatabase: imdb
+  persistence:
+    storageClass: imdb
+
+pvcs:
+  imdb:
+    storageclass: mysql
+    size: 8Gi
+  imlog:
+    storageclass: imlog
+    size: 8Gi
+
+haproxy:
+  stats:
+    ingress: false
+    auth: "admin:admin"
+
+imweb:
+  version: 1.5.10-dev3
+
+im:
+  version: latest
+  replicas: 4
+  configmap:
+    imcfg: |
+      [im]
+      # if you need to add more values check: https://raw.githubusercontent.com/grycap/im/master/etc/im.cfg
+      ACTIVATE_XMLRPC = False
+      ACTIVATE_REST = True
+      INF_CACHE_TIME = 3600
+      PLAYBOOK_RETRIES = 3
+    loggingconf: |
+      [loggers]
+      keys=root,ConfManager,CloudConnector,InfrastructureManager
+      [handlers]
+      keys=fileHandler
+      [formatters]
+      keys=simpleFormatter
+      [logger_root]
+      level=ERROR
+      handlers=fileHandler
+      [logger_ConfManager]
+      level=DEBUG
+      handlers=fileHandler
+      qualname=ConfManager
+      propagate=0
+      [logger_CloudConnector]
+      level=DEBUG
+      handlers=fileHandler
+      qualname=CloudConnector
+      propagate=0
+      [logger_InfrastructureManager]
+      level=DEBUG
+      handlers=fileHandler
+      qualname=InfrastructureManager
+      propagate=0
+      [handler_fileHandler]
+      class=logging.handlers.SysLogHandler
+      level=DEBUG
+      formatter=simpleFormatter
+      args=(('im-log', 514),)
+      [formatter_simpleFormatter]
+      format=%(asctime)s - %(hostname)s - %(name)s - %(levelname)s - %(message)s
+      datefmt=

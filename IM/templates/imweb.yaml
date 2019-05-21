@@ -1,0 +1,77 @@
+# In case you want to track web usage using Google Analytics
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: im-web
+data:
+  analyticstracking.php: |
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script>
+    </script>
+ 
+# Deployment for the IM-web service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: im-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: im-web
+  template:
+    metadata:
+      labels:
+        name: im-web
+    spec:
+      containers:
+        - name: im-web
+          image: grycap/im-web:{{ .Values.imweb.version }}
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "100m"
+          ports:
+          - containerPort: 80
+            protocol: TCP
+            name: http
+          env:
+          - name: im_use_rest
+            value: "true"
+          - name: im_host
+            value: im-load-balancer-svc
+          - name: im_port
+            value: "80"
+          - name: im_db
+            value: mysql://root:{{ .Values.mysql.mysqlRootPassword }}@{{ .Release.Name }}-mysql/imweb
+          volumeMounts:
+           - name: im-web
+             mountPath: /var/www/html/im-web/analyticstracking.php
+             subPath: analyticstracking.php
+          livenessProbe:
+            httpGet:
+              path: /im-web/
+              port: 80
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 2
+      volumes:
+        - name: im-web
+          configMap:
+            name: im-web
+
+
+# IM-Web interface
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: im-web-svc
+spec:
+  ports:
+  - name: http
+    port: 80
+  selector:
+    name: im-web
