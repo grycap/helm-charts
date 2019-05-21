@@ -4,7 +4,7 @@ version: 0.1.0
 home: https://www.grycap.upv.es/im
 sources:
   - https://github.com/grycap/im
-icon: https://appsgrycap.i3m.upv.es:31443/im-web/images/logo_portada.png
+icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
 keywords:
 - Infrastructure Manager
 - Cloud Orchestrator

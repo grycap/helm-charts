@@ -5,7 +5,7 @@ entries:
     description: Deploy a HA Infrastructure Manager
     digest: f682e5bd252a75800ce05fbf4571c15553782362b9332b5e6e2e75c750063c25
     home: https://www.grycap.upv.es/im
-    icon: https://appsgrycap.i3m.upv.es:31443/im-web/images/logo_portada.png
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
     - Infrastructure Manager
     - Cloud Orchestrator
@@ -17,6 +17,6 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - http://0.0.0.0:9999/IM-0.1.0.tgz
+    - https://grycap.github.io/helm-charts/IM-0.1.0.tgz
     version: 0.1.0
 generated: 2019-05-21T07:41:28.793049413Z
