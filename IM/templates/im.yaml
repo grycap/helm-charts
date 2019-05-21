@@ -4,10 +4,48 @@ kind: ConfigMap
 metadata:
   name: im
 data:
+  logging.conf: |
+      [loggers]
+      keys=root,ConfManager,CloudConnector,InfrastructureManager
+      [handlers]
+      keys=fileHandler
+      [formatters]
+      keys=simpleFormatter
+      [logger_root]
+      level=ERROR
+      handlers=fileHandler
+      [logger_ConfManager]
+      level=DEBUG
+      handlers=fileHandler
+      qualname=ConfManager
+      propagate=0
+      [logger_CloudConnector]
+      level=DEBUG
+      handlers=fileHandler
+      qualname=CloudConnector
+      propagate=0
+      [logger_InfrastructureManager]
+      level=DEBUG
+      handlers=fileHandler
+      qualname=InfrastructureManager
+      propagate=0
+      [handler_fileHandler]
+      level={{ .Values.im.log.level }}
+      formatter=simpleFormatter
+{{- if eq .Values.im.replicas 1.0 }}
+      class=logging.handlers.RotatingFileHandler
+      args=('/var/log/im/im.log', 'w', 10485760, 3)
+      [formatter_simpleFormatter]
+      format=%(asctime)s - %(name)s - %(levelname)s - %(message)s
+{{- else }}
+      class=logging.handlers.SysLogHandler
+      args=(('im-log', 514),)
+      [formatter_simpleFormatter]
+      format=%(asctime)s - %(hostname)s - %(name)s - %(levelname)s - %(message)s
+{{- end }}
+      datefmt=
   im.cfg: |
 {{ .Values.im.configmap.imcfg | indent 4 }}
-  logging.conf: |
-{{ .Values.im.configmap.loggingconf | indent 4 }}
 
 ---
 apiVersion: apps/v1
@@ -52,6 +90,10 @@ spec:
            - name: im
              mountPath: /etc/im/im.cfg
              subPath: im.cfg
+{{- if eq .Values.im.replicas 1.0 }}
+           - name: imlog
+             mountPath: /var/log/im
+{{- end }}
         livenessProbe:
           httpGet:
             path: /version
@@ -63,6 +105,15 @@ spec:
         - name: im
           configMap:
             name: im
+{{- if eq .Values.im.replicas 1.0 }}
+        - name: imlog
+{{- if .Values.im.log.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: imlog
+{{- else }}
+          emptyDir: {}
+{{ end }}
+{{ end }} 
 
 ---
 apiVersion: v1
@@ -75,4 +126,3 @@ spec:
     port: 8800
   selector:
     name: im-backend
-

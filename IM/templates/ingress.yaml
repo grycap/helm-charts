@@ -15,15 +15,20 @@ spec:
     - http:
         paths:
         - backend:
+{{- if gt .Values.im.replicas 1.0 }}
             serviceName: im-load-balancer-svc
             servicePort: 80
+{{- else }}
+            serviceName: im-backend
+            servicePort: 8080
+{{- end }}
           path: /im/?(.*)
-{{ if .Values.haproxy.stats.ingress }}
+{{- if and .Values.haproxy.stats.ingress (gt .Values.im.replicas 1.0) }}
         - backend:
             serviceName: im-load-balancer-svc
             servicePort: 1936
           path: /ha_stats/?(.*)
-{{ end }}
+{{- end }}
 
 ---
 apiVersion: extensions/v1beta1

@@ -1,9 +1,9 @@
 apiVersion: v1
 entries:
   IM:
-  - created: 2019-05-21T07:41:28.802788338Z
+  - created: 2019-05-21T14:35:00.167399165Z
     description: Deploy a HA Infrastructure Manager
-    digest: f682e5bd252a75800ce05fbf4571c15553782362b9332b5e6e2e75c750063c25
+    digest: f02a17bbbc9f24ddf0eeb910f8c1607d067fcf9b83f9d382a642c9e8d363e474
     home: https://www.grycap.upv.es/im
     icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
@@ -19,4 +19,3 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/IM-0.1.0.tgz
     version: 0.1.0
-generated: 2019-05-21T07:41:28.793049413Z

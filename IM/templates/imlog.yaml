@@ -1,3 +1,20 @@
+{{ if .Values.im.log.persistence.enabled }}
+# Persistent Volume
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: imlog
+spec:
+  storageClassName: {{ .Values.im.log.persistence.storageclass }}
+  accessModes:
+    - {{ .Values.im.log.persistence.accessmode }}
+  resources:
+    requests:
+      storage: {{ .Values.im.log.persistence.size }}
+{{ end }}
+
+{{ if gt .Values.im.replicas 1.0 }}
 # Deployment for the Syslog service
 ---
 apiVersion: apps/v1
@@ -27,7 +44,7 @@ spec:
             protocol: UDP
             name: syslog
           volumeMounts:
-           - name: im-logs
+           - name: imlog
              mountPath: /var/log
           livenessProbe:
             tcpSocket:
@@ -36,9 +53,14 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 2
       volumes:
-        - name: im-logs
+        - name: imlog
+{{- if .Values.im.log.persistence.enabled }}
           persistentVolumeClaim:
             claimName: imlog
+{{- else }}
+          emptyDir: {}
+{{ end }}
+
 # And the service
 ---
 apiVersion: v1
@@ -59,3 +81,4 @@ spec:
     name: logudp
   selector:
     name: im-log
+{{ end }}

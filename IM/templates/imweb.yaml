@@ -41,9 +41,17 @@ spec:
           - name: im_use_rest
             value: "true"
           - name: im_host
+{{- if eq .Values.im.replicas 1.0 }}
+            value: im-backend
+{{- else }}
             value: im-load-balancer-svc
+{{- end }}
           - name: im_port
+{{- if eq .Values.im.replicas 1.0 }}
+            value: "8800"
+{{- else }}
             value: "80"
+{{- end }}
           - name: im_db
             value: mysql://root:{{ .Values.mysql.mysqlRootPassword }}@{{ .Release.Name }}-mysql/imweb
           volumeMounts:
