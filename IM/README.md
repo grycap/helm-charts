@@ -22,3 +22,5 @@ Miguel Caballer, Ignacio Blanquer, German Molto, and Carlos de Alfonso. "[Dynami
 
 ## 1 Heml Chart
 
+helm repo add grycap https://grycap.github.io/helm-charts/
+helm install --namespace=im --name=im  IM
