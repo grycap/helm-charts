@@ -23,12 +23,6 @@ spec:
             servicePort: 8080
 {{- end }}
           path: /im/?(.*)
-{{- if and .Values.haproxy.stats.ingress (gt .Values.im.replicas 1.0) }}
-        - backend:
-            serviceName: im-load-balancer-svc
-            servicePort: 1936
-          path: /ha_stats/?(.*)
-{{- end }}
 
 ---
 apiVersion: extensions/v1beta1

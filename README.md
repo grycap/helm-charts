@@ -6,4 +6,6 @@ helm repo add grycap https://grycap.github.io/helm-charts/
 
 ## IM Chart
 
-helm install --namespace=im --name=im  IM
+See info at [IM chart README](IM/README.md)
+
+helm install --namespace=im --name=im  grycap/IM

@@ -45,7 +45,14 @@ data:
 {{- end }}
       datefmt=
   im.cfg: |
-{{ .Values.im.configmap.imcfg | indent 4 }}
+    [im]
+    ACTIVATE_XMLRPC = False
+{{- if gt .Values.im.replicas 1.0 }}
+    INF_CACHE_TIME = 3600
+{{- end }}
+    {{- range .Values.im.config }}
+    {{ . | }}
+    {{- end }}
 
 ---
 apiVersion: apps/v1

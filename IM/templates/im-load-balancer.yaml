@@ -134,7 +134,7 @@ kind: ConfigMap
 metadata:
   name: haproxy-load-balancer
 data:
-  stats-auth: "{{ .Values.haproxy.stats.auth }}"
+  stats-auth: "admin:admin"
   haproxy.tmpl: |
     {{`{{- $ing := . -}}
     {{- $cfg := .Cfg -}}
