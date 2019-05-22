@@ -3,7 +3,7 @@ entries:
   IM:
   - created: 2019-05-22T09:56:35.952109702Z
     description: Deploy a HA Infrastructure Manager
-    digest: b68daf76026031df038d7f614b427a87e0390cbd151c35081e95ef8d183d2a6a
+    digest: 1fa11160277ecdf8fe48c8242d2e23797b2c5398351d344896eb71dfa9625ae6
     home: https://www.grycap.upv.es/im
     icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
