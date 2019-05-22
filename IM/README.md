@@ -21,8 +21,12 @@ Miguel Caballer, Ignacio Blanquer, German Molto, and Carlos de Alfonso. "[Dynami
 
 ## 1 Heml Chart
 
+How to install the IM chart:
+
+```
 helm repo add grycap https://grycap.github.io/helm-charts/
 helm install --namespace=im --name=im  grycap/IM
+```
 
 ## Configuration
 
