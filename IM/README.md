@@ -19,11 +19,11 @@ Please acknowledge the use of this software in your scientific publications by i
 
 Miguel Caballer, Ignacio Blanquer, German Molto, and Carlos de Alfonso. "[Dynamic management of virtual infrastructures](https://link.springer.com/article/10.1007/s10723-014-9296-5)". Journal of Grid Computing, Volume 13, Issue 1, Pages 53-70, 2015, ISSN 1570-7873, DOI: 10.1007/s10723-014-9296-5.
 
-## 1 Heml Chart
+## 1 Helm Chart
 
 How to install the IM chart:
 
-```
+```sh
 helm repo add grycap https://grycap.github.io/helm-charts/
 helm install --namespace=im --name=im  grycap/IM
 ```
