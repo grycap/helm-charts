@@ -1,0 +1,13 @@
+suite: test lb deployment
+templates:
+  - im_lb_deployment.yaml
+tests:
+  - name: test1
+    set:
+      im.replicas: 2
+    asserts:
+      - isKind:
+          of: Deployment
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: quay.io/jcmoraisjr/haproxy-ingress:v0.6.3

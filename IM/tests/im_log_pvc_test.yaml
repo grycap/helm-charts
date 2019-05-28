@@ -1,0 +1,19 @@
+suite: test log pvc
+templates:
+  - im_log_pvc.yaml
+tests:
+  - name: test1
+    set:
+      im.log.persistence.enabled: true
+      im.log.persistence.storageclass: class
+      im.log.persistence.size: 10Gi
+      im.log.persistence.accessmode: ReadWriteOnce
+    asserts:
+      - isKind:
+          of: PersistentVolumeClaim
+      - equal:
+          path: spec.accessModes
+          value: [ReadWriteOnce]
+      - equal:
+          path: spec.storageClassName
+          value: class
