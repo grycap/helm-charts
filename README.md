@@ -1,6 +1,6 @@
 # GRyCAP Helm Charts
 
-GRyCAP Charts.
+Helm Charts developed by the [GRyCAP](http://www.grycap.upv.es).
 
 Add GRyCAP repo:
 
