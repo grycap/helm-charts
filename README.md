@@ -2,7 +2,7 @@
 
 Helm Charts developed by the [GRyCAP](http://www.grycap.upv.es).
 
-Add GRyCAP repo:
+How to add the GRyCAP repo:
 
 ```
 helm repo add grycap https://grycap.github.io/helm-charts/
