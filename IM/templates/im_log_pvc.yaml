@@ -1,0 +1,15 @@
+{{ if .Values.im.log.persistence.enabled }}
+# Persistent Volume
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: imlog
+spec:
+  storageClassName: {{ .Values.im.log.persistence.storageclass }}
+  accessModes:
+    - {{ .Values.im.log.persistence.accessmode }}
+  resources:
+    requests:
+      storage: {{ .Values.im.log.persistence.size }}
+{{ end }}

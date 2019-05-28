@@ -1,0 +1,22 @@
+{{ if gt .Values.im.replicas 1.0 }}
+# And the service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: im-log
+  labels:
+    app: im
+spec:
+  ports:
+  - port: 514
+    protocol: TCP
+    targetPort: 514
+    name: logtcp
+  - port: 514
+    protocol: UDP
+    targetPort: 514
+    name: logudp
+  selector:
+    name: im-log
+{{ end }}

@@ -1,0 +1,54 @@
+{{ if gt .Values.im.replicas 1.0 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: haproxy-load-balancer
+  name: haproxy-load-balancer
+spec:
+  selector:
+    matchLabels:
+      run: haproxy-load-balancer
+  template:
+    metadata:
+      labels:
+        run: haproxy-load-balancer
+    spec:
+      serviceAccountName: im-load-balancer
+      containers:
+      - name: haproxy-load-balancer
+        image: quay.io/jcmoraisjr/haproxy-ingress:v0.6.3
+        args:
+        - --default-backend-service=$(POD_NAMESPACE)/im-backend
+        - --configmap=$(POD_NAMESPACE)/haproxy-load-balancer
+        - --sort-backends
+        ports:
+        - name: http
+          containerPort: 80
+        - name: stat
+          containerPort: 1936
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        volumeMounts:
+           - name: haproxy-load-balancer
+             mountPath: /etc/haproxy/template/haproxy.tmpl
+             subPath: haproxy.tmpl
+        livenessProbe:
+          tcpSocket:
+            port: 80
+          initialDelaySeconds: 20
+          periodSeconds: 20
+      volumes:
+        - name: haproxy-load-balancer
+          configMap:
+            name: haproxy-load-balancer
+
+{{ end }}
