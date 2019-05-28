@@ -8,10 +8,8 @@ Add GRyCAP repo:
 helm repo add grycap https://grycap.github.io/helm-charts/
 ```
 
-## IM Chart
+## Chart list
 
-See info at [IM chart README](IM/README.md)
-
-```
-helm install --namespace=im --name=im  grycap/IM
-```
+| Chart Name                 | Description                                                     | Documentation          |
+| -------------------------- | --------------------------------------------------------------- | ---------------------- |
+| `grycap/IM`                | Chart to install the [IM service](http://www.grycap.upv.es/im)  | [README](IM/README.md) |
