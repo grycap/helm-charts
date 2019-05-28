@@ -1,0 +1,31 @@
+suite: test im config
+templates:
+  - im_config.yaml
+tests:
+  - name: test1
+    set:
+      im.replicas: 1
+      im.log.persistence.enabled: true
+    asserts:
+      - isKind:
+          of: ConfigMap
+      - matchRegex:
+          path: data.logging\.conf
+          pattern: class=logging.handlers.RotatingFileHandler
+  - name: test2
+    set:
+      im.replicas: 2
+      im.config:
+        - VALUE = 2
+    asserts:
+      - isKind:
+          of: ConfigMap
+      - matchRegex:
+          path: data.logging\.conf
+          pattern: class=logging.handlers.SysLogHandler
+      - matchRegex:
+          path: data.im\.cfg
+          pattern: INF_CACHE_TIME = 3600
+      - matchRegex:
+          path: data.im\.cfg
+          pattern: VALUE = 2

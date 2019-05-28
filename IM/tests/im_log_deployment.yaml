@@ -1,0 +1,17 @@
+suite: test log deployment
+templates:
+  - im_log_deployment.yaml
+tests:
+  - name: test1
+    set:
+      im.replicas: 2
+      im.log.persistence.enabled: true
+    asserts:
+      - isKind:
+          of: Deployment
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: voxxit/rsyslog
+      - equal:
+          path: spec.template.spec.volumes[0].persistentVolumeClaim.claimName
+          value: imlog

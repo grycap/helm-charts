@@ -20,6 +20,6 @@ spec:
             servicePort: 80
 {{- else }}
             serviceName: im-backend
-            servicePort: 8080
+            servicePort: 8800
 {{- end }}
           path: /im/?(.*)

@@ -1,0 +1,36 @@
+suite: test im web deployment
+templates:
+  - im_web_deployment.yaml
+tests:
+  - name: test1
+    set:
+      im.replicas: 1
+      mysql.mysqlRootPassword: rootpasstest
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: im-web
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: grycap/im-web:latest
+      - equal:
+          path: spec.template.spec.containers[0].env[1].value
+          value: im-backend
+      - equal:
+          path: spec.template.spec.containers[0].env[2].value
+          value: "8800"
+      - equal:
+          path: spec.template.spec.containers[0].env[3].value
+          value: "mysql://root:rootpasstest@RELEASE-NAME-mysql/imweb"
+  - name: test2
+    set:
+      im.replicas: 2
+    asserts:
+      - equal:
+          path: spec.template.spec.containers[0].env[1].value
+          value: im-load-balancer-svc
+      - equal:
+          path: spec.template.spec.containers[0].env[2].value
+          value: "80"

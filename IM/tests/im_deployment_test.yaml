@@ -1,11 +1,14 @@
-suite: test deployment
+suite: test im deployment
 templates:
   - im_deployment.yaml
 tests:
-  - it: should work
+  - name: test1
     set:
       im.replicas: 1
       im.log.persistence.enabled: true
+      mysql.mysqlUser: usertest
+      mysql.mysqlPassword: passtest
+      mysql.mysqlDatabase: dbtest
     asserts:
       - isKind:
           of: Deployment
@@ -17,7 +20,7 @@ tests:
           value: grycap/im:latest
       - equal:
           path: spec.template.spec.containers[0].env[0].value
-          value: mysql://imuser:impass@RELEASE-NAME-mysql/imdb
+          value: mysql://usertest:passtest@RELEASE-NAME-mysql/dbtest
       - equal:
           path: spec.template.spec.volumes[1].persistentVolumeClaim.claimName
           value: imlog
