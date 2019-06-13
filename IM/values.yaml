@@ -1,13 +1,16 @@
 mysql:
   mysqlUser: imuser
   mysqlPassword: impass
-  mysqlRootPassword: imrootpass
-  mysqlDatabase: imdb
   persistence:
     enabled: false
     storageClass: imdb
     accessMode: ReadWriteOnce
     size: 8Gi
+  initializationFiles:
+    imweb.sql: |-
+      CREATE DATABASE IF NOT EXISTS imweb;
+    imdb.sql: |-
+      CREATE DATABASE IF NOT EXISTS imdb;
 
 imweb:
   version: latest

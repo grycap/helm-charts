@@ -8,7 +8,6 @@ tests:
       im.log.persistence.enabled: true
       mysql.mysqlUser: usertest
       mysql.mysqlPassword: passtest
-      mysql.mysqlDatabase: dbtest
     asserts:
       - isKind:
           of: Deployment
@@ -20,7 +19,7 @@ tests:
           value: grycap/im:latest
       - equal:
           path: spec.template.spec.containers[0].env[0].value
-          value: mysql://usertest:passtest@RELEASE-NAME-mysql/dbtest
+          value: mysql://usertest:passtest@RELEASE-NAME-mysql/imdb
       - equal:
           path: spec.template.spec.volumes[1].persistentVolumeClaim.claimName
           value: imlog
