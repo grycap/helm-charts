@@ -5,7 +5,8 @@ tests:
   - name: test1
     set:
       im.replicas: 1
-      mysql.mysqlRootPassword: rootpasstest
+      mysql.mysqlUser: usertest
+      mysql.mysqlPassword: passtest
     asserts:
       - isKind:
           of: Deployment
@@ -23,7 +24,7 @@ tests:
           value: "8800"
       - equal:
           path: spec.template.spec.containers[0].env[3].value
-          value: "mysql://root:rootpasstest@RELEASE-NAME-mysql/imweb"
+          value: "mysql://usertest:passtest@RELEASE-NAME-mysql/imweb"
   - name: test2
     set:
       im.replicas: 2

@@ -36,8 +36,6 @@ The following table lists the configurable parameters of the IM chart and their 
 | -------------------------------- | ----------------------------------------------------------- | ---------------- |
 | `mysql.mysqlUser`                | Username of IM `MySQL` user to create.                      | `imuser`         |
 | `mysql.mysqlPassword`            | Password for the new `MySQL` IM user.                       | `impass`         |
-| `mysql.mysqlRootPassword`        | Password for the `MySQL` root user.                         | `imrootpass`     |
-| `mysql.mysqlDatabase`            | Name for IM `MySQL` database to create.                     | `imdb`           |
 | `mysql.persistence.enabled`      | Create a volume to store `MySQL` data.                      | `false`          |
 | `mysql.persistence.storageClass` | Type of PVC for `MySQL`.                                    | `imdb`           |
 | `mysql.persistence.accessMode`   | Access mode of the `MySQL` PVC.                             | `ReadWriteOnce`  |
