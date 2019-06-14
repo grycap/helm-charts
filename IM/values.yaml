@@ -1,11 +1,15 @@
 mysql:
-  mysqlUser: imuser
   mysqlPassword: impass
   persistence:
     enabled: false
     storageClass: imdb
     accessMode: ReadWriteOnce
     size: 8Gi
+  # Do not modify the initializationFiles and mysqlUser values
+  # unless you know what you are doing:
+  # * dbnames must not be changed.
+  # * mysqlUser must be granted in both dbs.
+  mysqlUser: imuser
   initializationFiles:
     imweb.sql: |-
       CREATE DATABASE IF NOT EXISTS imweb;
