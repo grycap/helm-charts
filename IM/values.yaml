@@ -9,8 +9,10 @@ mysql:
   initializationFiles:
     imweb.sql: |-
       CREATE DATABASE IF NOT EXISTS imweb;
+      GRANT ALL PRIVILEGES ON imweb.* TO 'imuser'@'%';
     imdb.sql: |-
       CREATE DATABASE IF NOT EXISTS imdb;
+      GRANT ALL PRIVILEGES ON imdb.* TO 'imuser'@'%';
 
 imweb:
   version: latest
