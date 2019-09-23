@@ -20,9 +20,17 @@ mysql:
 
 imweb:
   version: latest
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 250m
 
 im:
   version: latest
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 250m
   # In case of using more than 1 replica
   # the IM will be launched in HA mode
   replicas: 1

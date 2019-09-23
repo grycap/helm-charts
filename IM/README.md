@@ -32,23 +32,27 @@ helm install --namespace=im --name=im  grycap/IM
 
 The following table lists the configurable parameters of the IM chart and their default values.
 
-| Parameter                        | Description                                                 | Default          |
-| -------------------------------- | ----------------------------------------------------------- | ---------------- |
-| `mysql.mysqlUser`                | Username of IM `MySQL` user to create.                      | `imuser`         |
-| `mysql.mysqlPassword`            | Password for the new `MySQL` IM user.                       | `impass`         |
-| `mysql.persistence.enabled`      | Create a volume to store `MySQL` data.                      | `false`          |
-| `mysql.persistence.storageClass` | Type of PVC for `MySQL`.                                    | `imdb`           |
-| `mysql.persistence.accessMode`   | Access mode of the `MySQL` PVC.                             | `ReadWriteOnce`  |
-| `mysql.persistence.size`         | Size of PVC for `MySQL`.                                    | `8Gi`            |
-| `im.version`                     | `im` docker image version                                   | `latest`         |
-| `im.replicas`                    | Number of IM Pods to run ([see IM HA mode](#IM-HA-mode)).   | `1`              |
-| `im.log.level`                   | IM Log Level                                                | `DEBUG`          |
-| `im.log.persistence.enabled`     | Create a volume to store `log` data.                        | `false`          |
-| `im.log.persistence.storageClass`| Type of PVC for `log`.                                      | `imlog`          |
-| `im.log.persistence.accessMode`  | Access mode of the `log` PVC.                               | `ReadWriteOnce`  |
-| `im.log.persistence.size`        | Size of PVC for `log`.                                      | `8Gi`            |
-| `im.config`                      | List of IM configuration values. (See [IM docs](https://imdocs.readthedocs.io/en/latest/manual.html#configuration)).             | `[]`             |
-| `imweb.version`                  | `im-web` docker image version                               | `latest`         |
+| Parameter                         | Description                                                 | Default          |
+| --------------------------------- | ----------------------------------------------------------- | ---------------- |
+| `mysql.mysqlUser`                 | Username of IM `MySQL` user to create.                      | `imuser`         |
+| `mysql.mysqlPassword`             | Password for the new `MySQL` IM user.                       | `impass`         |
+| `mysql.persistence.enabled`       | Create a volume to store `MySQL` data.                      | `false`          |
+| `mysql.persistence.storageClass`  | Type of PVC for `MySQL`.                                    | `imdb`           |
+| `mysql.persistence.accessMode`    | Access mode of the `MySQL` PVC.                             | `ReadWriteOnce`  |
+| `mysql.persistence.size`          | Size of PVC for `MySQL`.                                    | `8Gi`            |
+| `im.version`                      | `im` docker image version                                   | `latest`         |
+| `im.resources.requests.memory`    | `im` Memory resource requests/limits                        | `256Mi`          |
+| `im.resources.requests.cpu`       | `im` CPU resource requests/limits                           | `250m`           |
+| `im.replicas`                     | Number of IM Pods to run ([see IM HA mode](#IM-HA-mode)).   | `1`              |
+| `im.log.level`                    | IM Log Level                                                | `DEBUG`          |
+| `im.log.persistence.enabled`      | Create a volume to store `log` data.                        | `false`          |
+| `im.log.persistence.storageClass` | Type of PVC for `log`.                                      | `imlog`          |
+| `im.log.persistence.accessMode`   | Access mode of the `log` PVC.                               | `ReadWriteOnce`  |
+| `im.log.persistence.size`         | Size of PVC for `log`.                                      | `8Gi`            |
+| `im.config`                       | List of IM configuration values. (See [IM docs](https://imdocs.readthedocs.io/en/latest/manual.html#configuration)).             | `[]`             |
+| `imweb.version`                   | `im-web` docker image version                               | `latest`         |
+| `imweb.resources.requests.memory` | `im-web` Memory resource requests/limits                    | `256Mi`          |
+| `imweb.resources.requests.cpu`    | `im-web` CPU resource requests/limits                       | `250m`           |
 
 ## IM HA mode
 
