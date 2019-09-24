@@ -26,8 +26,8 @@ spec:
         image: grycap/im:{{ .Values.im.version }}
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "250m"
+            memory: "{{ .Values.im.resources.requests.memory }}"
+            cpu: "{{ .Values.im.resources.requests.cpu }}"
         ports:
         - containerPort: 8800
         imagePullPolicy: Always
