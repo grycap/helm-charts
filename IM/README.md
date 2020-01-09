@@ -21,12 +21,29 @@ Miguel Caballer, Ignacio Blanquer, German Molto, and Carlos de Alfonso. "[Dynami
 
 ## 1 Helm Chart
 
-How to install the IM chart:
+How to install the IM chart.
+
+First add the GRyCAP repo:
 
 ```sh
 helm repo add grycap https://grycap.github.io/helm-charts/
+```
+
+Then install the IM chart (with Helm v2):
+
+```sh
 helm install --namespace=im --name=im  grycap/IM
 ```
+
+Then install the IM chart (with Helm v3):
+
+```sh
+kubectl create namespace im
+helm install --namespace=im im  grycap/IM
+```
+
+The IM chat uses ingress rules to publish the external services (IM service and IM-web portal). So it expects an ingress
+controller installed and configured in the Kubernetes cluster.
 
 ## Configuration
 
