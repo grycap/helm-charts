@@ -10,6 +10,8 @@ data:
   haproxy.tmpl: |
     {{`{{- $ing := . -}}
     {{- $cfg := .Cfg -}}
+    global
+        tune.bufsize 131072
     defaults
         log global
         timeout http-request    {{ $cfg.TimeoutHTTPRequest }}
