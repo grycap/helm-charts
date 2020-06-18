@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oscar
+  labels:
+    app: oscar
+spec:
+  selector:
+    matchLabels:
+      app: oscar
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: oscar
+    spec:
+      serviceAccountName: oscar-sa
+      containers:
+      - name: oscar
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+        securityContext:
+          readOnlyRootFilesystem: true
+          runAsUser: 10001
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+        env:
+        - name: OSCAR_SERVICE_PORT
+          value: {{ .Values.port | quote }}
+        - name: OSCAR_NAME
+          value: oscar
+        - name: OSCAR_NAMESPACE
+          value: {{ .Release.Namespace | quote }}
+        - name: OSCAR_SERVICES_NAMESPACE
+          value: {{ .Values.servicesNamespace | quote }}
+        - name: OSCAR_USERNAME
+          value: {{ .Values.authUser | quote }}
+        - name: OSCAR_PASSWORD
+          value: {{ .Values.authPass | quote}}
+        - name: MINIO_ENDPOINT
+          value: {{ .Values.minIO.endpoint | quote }}
+        - name: MINIO_ACCESS_KEY
+          value: {{ .Values.minIO.accessKey | quote }}
+        - name: MINIO_SECRET_KEY
+          value: {{ .Values.minIO.secretKey | quote }}
+        - name: MINIO_TLS_VERIFY
+          value: {{ .Values.minIO.TLSVerify | quote }}
+        - name: MINIO_REGION
+          value: {{ .Values.minIO.region | quote }}
+        - name: READ_TIMEOUT
+          value: {{ .Values.readTimeout | quote }}
+        - name: WRITE_TIMEOUT
+          value: {{ .Values.writeTimeout | quote }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.service.port }}
+          protocol: TCP
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+{{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+{{- end }}
+{{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+{{- end }}

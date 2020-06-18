@@ -10,6 +10,7 @@ helm repo add grycap https://grycap.github.io/helm-charts/
 
 ## Chart list
 
-| Chart Name                 | Description                                                     | Documentation          |
-| -------------------------- | --------------------------------------------------------------- | ---------------------- |
-| `grycap/IM`                | Chart to install the [IM service](http://www.grycap.upv.es/im)  | [README](IM/README.md) |
+| Chart Name                 | Description                                                     | Documentation             |
+| -------------------------- | --------------------------------------------------------------- | ------------------------- |
+| `grycap/IM`                | Chart to install the [IM service](http://www.grycap.upv.es/im)  | [README](IM/README.md)    |
+| `grycap/oscar`             | Chart to install [OSCAR](https://github.com/grycap/oscar)       | [README](oscar/README.md) | 

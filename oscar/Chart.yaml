@@ -1,0 +1,16 @@
+apiVersion: v1
+description: Open Source Serverless Computing for Data-Processing Applications
+name: oscar
+version: 2.0.0-beta1
+sources:
+- https://github.com/grycap/oscar
+home: https://o-scar.readthedocs.io/
+icon: https://raw.githubusercontent.com/grycap/oscar/master/docs/source/images/oscar-logo.png
+keywords:
+- serverless
+- containers
+- file-processing
+- batch
+maintainers:
+- name: Sebas Risco
+  email: serisgal@i3m.upv.es

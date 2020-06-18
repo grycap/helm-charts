@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: populate-volume-job
+  namespace: {{ .Values.servicesNamespace | quote }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: download
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args: ["wget https://github.com/grycap/faas-supervisor/releases/download/{{ .Values.volume.supervisorVersion }}/supervisor -O /data/supervisor \
+                  && chmod +x /data/supervisor \
+                  && wget https://github.com/openfaas/faas/releases/download/{{ .Values.volume.watchdogVersion }}/fwatchdog -O /data/fwatchdog \
+                  && chmod +x /data/fwatchdog"]
+        volumeMounts:
+        - name: oscar-vol
+          mountPath: /data
+      restartPolicy: Never
+      volumes:
+      - name: oscar-vol
+        persistentVolumeClaim:
+          claimName: oscar-pvc

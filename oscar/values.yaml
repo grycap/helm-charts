@@ -1,0 +1,65 @@
+# Namespace for services
+servicesNamespace: oscar-svc
+# Credentials for basic-auth
+authUser: oscar
+authPass: oscar123
+
+# Service configuration
+service:
+  type: NodePort
+  port: 8080
+  nodePort: 30301
+
+# Create a NGINX ingress to expose OSCAR
+createIngress: false
+
+# Container image and pullPolicy for deployment
+image:
+  repository: grycap/oscar
+  tag: "2.0.0-beta1"
+  pullPolicy: Always
+
+# Read and write timeouts for OSCAR's HTTP server
+readTimeout: 300
+writeTimeout: 300
+
+# MinIO credentials (must be deployed in the same cluster)
+minIO:
+  endpoint: https://minio-service.minio:9000
+  TLSVerify: "true"
+  region:  us-east-1
+  accessKey: minio
+  secretKey: minio123
+
+# FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
+volume:
+  supervisorVersion: "1.2.4-beta2"
+  watchdogVersion: "0.18.10"
+
+# Liveness and Readiness probe values.
+# ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+livenessProbe:
+  initialDelaySeconds: 15
+  periodSeconds: 15
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 15
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
+
+# Node labels for pod assignment
+# Ref: https://kubernetes.io/docs/user-guide/node-selection/
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Configure resource requests and limits
+# ref: http://kubernetes.io/docs/user-guide/compute-resources/
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 250m
