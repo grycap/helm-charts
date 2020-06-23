@@ -7,13 +7,13 @@ spec:
   template:
     spec:
       containers:
-      - name: download
-        image: busybox
-        command: ["/bin/sh", "-c"]
-        args: ["wget https://github.com/grycap/faas-supervisor/releases/download/{{ .Values.volume.supervisorVersion }}/supervisor -O /data/supervisor \
-                  && chmod +x /data/supervisor \
-                  && wget https://github.com/openfaas/faas/releases/download/{{ .Values.volume.watchdogVersion }}/fwatchdog -O /data/fwatchdog \
-                  && chmod +x /data/fwatchdog"]
+      - name: bin-downloader
+        image: "grycap/oscar-bin-downloader:{{ .Values.image.tag }}"
+        env:
+        - name: FAAS_SUPERVISOR_VERSION
+          value: {{ .Values.volume.supervisorVersion | quote }}
+        - name: WATCHDOG_VERSION
+          value: {{ .Values.volume.watchdogVersion | quote }}
         volumeMounts:
         - name: oscar-vol
           mountPath: /data
