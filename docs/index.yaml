@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v1
-    created: "2020-06-23T13:59:59.715908882+02:00"
+    created: "2020-06-26T16:55:18.690175379+02:00"
     dependencies:
     - name: mysql
       repository: https://kubernetes-charts.storage.googleapis.com
@@ -25,7 +25,7 @@ entries:
     - https://grycap.github.io/helm-charts/IM-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
-    created: "2020-06-23T13:59:59.713360292+02:00"
+    created: "2020-06-26T16:55:18.688468939+02:00"
     dependencies:
     - name: mysql
       repository: https://kubernetes-charts.storage.googleapis.com
@@ -49,9 +49,9 @@ entries:
     version: 1.0.0
   oscar:
   - apiVersion: v1
-    created: "2020-06-23T13:59:59.716804812+02:00"
+    created: "2020-06-26T16:55:18.691042435+02:00"
     description: Open Source Serverless Computing for Data-Processing Applications
-    digest: c524c2cea2134f8920344f517b9b2a7970d0adb731a83a484a2c284143da2ee6
+    digest: b8079f6996a47e39ec578d66715c36361d1d2759490e9d68766689c06efe8627
     home: https://o-scar.readthedocs.io/
     icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
     keywords:
@@ -68,4 +68,4 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/oscar-2.0.0-beta2.tgz
     version: 2.0.0-beta2
-generated: "2020-06-23T13:59:59.711773926+02:00"
+generated: "2020-06-26T16:55:18.686744976+02:00"

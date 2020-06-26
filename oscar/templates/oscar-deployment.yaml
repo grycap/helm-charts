@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: oscar
-  replicas: 1
+  replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:

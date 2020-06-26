@@ -10,6 +10,9 @@ service:
   port: 8080
   nodePort: 30301
 
+# Number of replicas to deploy
+replicas: 1
+
 # Create a NGINX ingress to expose OSCAR
 createIngress: false
 
