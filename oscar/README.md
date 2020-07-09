@@ -39,13 +39,16 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `servicesNamespace`         | Namespace to deploy OSCAR services                                                                  | `oscar-svc`                        |
 | `authUser`                  | Username for basic-auth                                                                             | `oscar`                            |
 | `authPass`                  | Password for basic-auth                                                                             | `oscar123`                         |
+| `serverlessBackend`         | Enable a Serverless backend for sync invocations (disabled if not set) (`openfaas`\|`""`)            | `""`                               |
+| `openfaas.namespace`         | Namespace where the OpenFaaS gateway is deployed                                                    | `openfaas`                         |
+| `openfaas.port`              | Service port where the OpenFaaS gateway is exposed (ClusterIP)                                      | `8080`                             |
 | `service.type`              | Type of service to expose OSCAR                                                                     | `NodePort`                         |
 | `service.port`              | ClusterIP port for OSCAR                                                                            | `8080`                             |
 | `service.nodePort`          | NodePort to expose OSCAR (if `service.type` is `NodePort`)                                          | `30301`                            |
 | `replicas`                  | Number of replicas to deploy                                                                        | `1`                                |
 | `createIngress`             | Create a Kubernetes ingress to expose OSCAR                                                         | `false`                            |
 | `image.repository`          | Docker Hub image to deploy OSCAR                                                                    | `grycap/oscar`                     |
-| `image.tag`                 | Release tag to install                                                                              | `2.0.0-beta2`                      |
+| `image.tag`                 | Release tag to install                                                                              | `2.0.0-beta3`                      |
 | `image.pullPolicy`          | Image [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images)          | `Always`                           |
 | `readTimeout`               | Read timeout for OSCAR's HTTP server (in seconds)                                                   | `300`                              |
 | `writeTimeout`              | Write timeout for OSCAR's HTTP server (in seconds)                                                  | `300`                              |

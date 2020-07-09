@@ -35,6 +35,32 @@ rules:
   - create
   - delete
   - deletecollection
+{{- if ne .Values.serverlessBackend "" }}
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
+{{- end }}
+{{- if eq (lower .Values.serverlessBackend) "openfaas" }}
+- apiGroups:
+  - openfaas.com
+  resources:
+  - functions
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+{{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding

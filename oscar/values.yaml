@@ -4,6 +4,14 @@ servicesNamespace: oscar-svc
 authUser: oscar
 authPass: oscar123
 
+# Enable a Serverless backend for sync invocations (""|openfaas)
+serverlessBackend: ""
+
+# OpenFaaS configuration values
+openfaas:
+  namespace: openfaas
+  port: 8080
+
 # Service configuration
 service:
   type: NodePort
@@ -19,7 +27,7 @@ createIngress: false
 # Container image and pullPolicy for deployment
 image:
   repository: grycap/oscar
-  tag: "2.0.0-beta2"
+  tag: "2.0.0-beta3"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server

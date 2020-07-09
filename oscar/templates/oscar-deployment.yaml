@@ -53,6 +53,12 @@ spec:
           value: {{ .Values.authUser | quote }}
         - name: OSCAR_PASSWORD
           value: {{ .Values.authPass | quote}}
+        - name: SERVERLESS_BACKEND
+          value: {{ .Values.serverlessBackend | lower | quote }}
+        - name: OPENFAAS_NAMESPACE
+          value: {{ .Values.openfaas.namespace | quote }}
+        - name: OPENFAAS_PORT
+          value: {{ .Values.openfaas.port | quote }}
         - name: MINIO_ENDPOINT
           value: {{ .Values.minIO.endpoint | quote }}
         - name: MINIO_ACCESS_KEY
