@@ -1,0 +1,25 @@
+suite: test oscar populate job
+templates:
+  - populate-oscar-volume-job.yaml
+tests:
+  - name: test1
+    set:
+      servicesNamespace: test-namespace
+      image.tag: 2.0.0
+      volume.supervisorVersion: 1.2.3
+      volume.watchdogVersion: 4.5.6
+    asserts:
+      - isKind:
+          of: Job
+      - equal:
+          path: metadata.namespace
+          value: test-namespace
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: "grycap/oscar-bin-downloader:2.0.0"
+      - equal:
+          path: spec.template.spec.containers[0].env[0].value
+          value: "1.2.3"
+      - equal:
+          path: spec.template.spec.containers[0].env[1].value
+          value: "4.5.6"
