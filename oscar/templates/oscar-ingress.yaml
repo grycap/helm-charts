@@ -1,0 +1,17 @@
+{{- if .Values.createIngress }}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: oscar
+  annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - http:
+        paths:
+        - backend:
+            serviceName: oscar
+            servicePort: {{ .Values.service.port }}
+          path: /
+{{- end }}

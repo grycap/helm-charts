@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: populate-volume-job
+  namespace: {{ .Values.servicesNamespace | quote }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: bin-downloader
+        image: "grycap/oscar-bin-downloader:{{ .Values.image.tag }}"
+        env:
+        - name: FAAS_SUPERVISOR_VERSION
+          value: {{ .Values.volume.supervisorVersion | quote }}
+        - name: WATCHDOG_VERSION
+          value: {{ .Values.volume.watchdogVersion | quote }}
+        volumeMounts:
+        - name: oscar-vol
+          mountPath: /data
+      restartPolicy: Never
+      volumes:
+      - name: oscar-vol
+        persistentVolumeClaim:
+          claimName: oscar-pvc
