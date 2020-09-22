@@ -1,0 +1,16 @@
+suite: test oscar volume
+templates:
+  - oscar-volume.yaml
+tests:
+  - name: test1
+    set:
+      servicesNamespace: test-namespace
+    asserts:
+      - isKind:
+          of: PersistentVolumeClaim
+      - equal:
+          path: metadata.namespace
+          value: test-namespace
+      - equal:
+          path: spec.resources.requests.storage
+          value: 2Gi

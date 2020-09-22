@@ -1,0 +1,28 @@
+suite: test oscar deployment
+templates:
+  - oscar-deployment.yaml
+tests:
+  - name: test1
+    set:
+      authUser: username
+      authPass: password
+      replicas: 2
+      image.tag: "2.0.0"
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: oscar
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: grycap/oscar:2.0.0
+      - equal:
+          path: spec.template.spec.containers[0].env[4].value
+          value: username
+      - equal:
+          path: spec.template.spec.containers[0].env[5].value
+          value: password
+      - equal:
+          path: spec.replicas
+          value: 2

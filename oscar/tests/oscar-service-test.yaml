@@ -1,0 +1,21 @@
+suite: test oscar service
+templates:
+  - oscar-service.yaml
+tests:
+  - name: test1
+    set:
+      service.type: NodePort
+      service.port: 80
+      service.nodePort: 30000
+    asserts:
+      - isKind:
+          of: Service
+      - equal:
+          path: spec.type
+          value: NodePort
+      - equal:
+          path: spec.ports[0].port
+          value: 80
+      - equal:
+          path: spec.ports[0].nodePort
+          value: 30000
