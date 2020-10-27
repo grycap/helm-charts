@@ -16,6 +16,12 @@ To install the OSCAR chart first add the GRyCAP repo:
 helm repo add grycap https://grycap.github.io/helm-charts/
 ```
 
+Create the `oscar` and `oscar-svc` namespaces if they don't exist:
+
+```sh
+kubectl apply -f https://raw.githubusercontent.com/grycap/oscar/master/deploy/yaml/oscar-namespaces.yaml
+```
+
 Then install the OSCAR chart (with Helm v2):
 
 ```sh
@@ -25,7 +31,7 @@ helm install --namespace=oscar --name=oscar grycap/oscar
 Then install the IM chart (with Helm v3):
 
 ```sh
-helm install --namespace=oscar --create-namespace oscar grycap/oscar
+helm install --namespace=oscar oscar grycap/oscar
 ```
 
 *OSCAR can be exposed by a Kubernetes Ingress, so it expects an ingress controller installed and configured in the cluster.*
