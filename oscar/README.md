@@ -54,7 +54,7 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `replicas`                  | Number of replicas to deploy                                                                        | `1`                                |
 | `createIngress`             | Create a Kubernetes ingress to expose OSCAR                                                         | `false`                            |
 | `image.repository`          | Docker Hub image to deploy OSCAR                                                                    | `grycap/oscar`                     |
-| `image.tag`                 | Release tag to install                                                                              | `2.0.0-beta3`                      |
+| `image.tag`                 | Release tag to install                                                                              | `2.0.0`                      |
 | `image.pullPolicy`          | Image [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images)          | `Always`                           |
 | `readTimeout`               | Read timeout for OSCAR's HTTP server (in seconds)                                                   | `300`                              |
 | `writeTimeout`              | Write timeout for OSCAR's HTTP server (in seconds)                                                  | `300`                              |
@@ -63,7 +63,7 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `minIO.region`              | Region of the MinIO server                                                                          | `us-east-1`                        |
 | `minIO.accessKey`           | Access key of the MinIO server                                                                      | `minio`                            |
 | `minIO.secretKey`           | Secret key of the MinIO server                                                                      | `minio123`                         |
-| `volume.supervisorVersion`  | [FaaS Supervisor](https://github.com/grycap/faas-supervisor) version to use in the OSCAR's services | `1.2.4-beta3`                      |
+| `volume.supervisorVersion`  | [FaaS Supervisor](https://github.com/grycap/faas-supervisor) version to use in the OSCAR's services | `1.3.0`                      |
 | `resources.requests.memory` | Memory resource requests                                                                            | `256Mi`                            |
 | `resources.requests.cpu`    | CPU resource requests                                                                               | `250m`                             |
 
