@@ -1,0 +1,56 @@
+{{ if  .Values.imdashboard.deploy }}
+# Deployment for the IM-dashboard service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: im-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: im-dashboard
+  template:
+    metadata:
+      labels:
+        name: im-dashboard
+    spec:
+      containers:
+        - name: im-dashboard
+          image: grycap/im-dashboard:{{ .Values.imdashboard.version }}
+          resources:
+            requests:
+              memory: "{{ .Values.imdashboard.resources.requests.memory }}"
+              cpu: "{{ .Values.imdashboard.resources.requests.cpu }}"
+          ports:
+          - containerPort: 5001
+            protocol: TCP
+            name: http
+          env:
+            - name: ENABLE_HTTPS
+              value: 'False'
+            - name: WORKERS
+              value: '4'
+          volumeMounts:
+            - name: im-dashboard
+              mountPath: /app/app/config.json
+              subPath: config.json
+            - name: imdb
+              mountPath: /data
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5001
+              scheme: HTTP
+            initialDelaySeconds: 30
+            periodSeconds: 20
+            timeoutSeconds: 2
+      volumes:
+        - name: im-dashboard
+          configMap:
+            name: im-dashboard
+            defaultMode: 420
+        - name: imdb
+          persistentVolumeClaim:
+            claimName: imdashdb
+{{ end }}

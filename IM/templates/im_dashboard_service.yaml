@@ -1,0 +1,12 @@
+# IM-Web interface
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: im-dashboard-svc
+spec:
+  ports:
+  - name: http
+    port: 5001
+  selector:
+    name: im-dashboard

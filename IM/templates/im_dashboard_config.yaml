@@ -1,0 +1,32 @@
+{{ if  .Values.imdashboard.deploy }}
+# In case you want to track web usage using Google Analytics
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: im-dashboard
+data:
+  config.json: >
+    {
+    "OIDC_NAME": "{{ .Values.imdashboard.oidc.name }}",
+    "OIDC_CLIENT_ID": "{{ .Values.imdashboard.oidc.client_id }}",
+    "OIDC_CLIENT_SECRET": "{{ .Values.imdashboard.oidc.client_secret }}",
+    "OIDC_BASE_URL": "{{ .Values.imdashboard.oidc.base_url }}",
+    "OIDC_GROUP_MEMBERSHIP": {{ .Values.imdashboard.oidc.group_membership }},
+    "OIDC_SCOPES": "{{ .Values.imdashboard.oidc.scopes }}",
+    "SUPPORT_EMAIL": "{{ .Values.imdashboard.support_email }}",
+    "ANALYTICS_TAG": "{{ .Values.imdashboard.analytics_tag }}",
+{{- if eq .Values.im.replicas 1.0 }}
+    "IM_URL": "http://im-backend:8800",
+{{- else }}
+    "IM_URL": "http://im-load-balancer-svc:8800",
+{{- end }}
+    "EXTERNAL_LINKS": {{ .Values.imdashboard.external_links }},
+    "TOSCA_TEMPLATES_DIR": "/data/tosca-templates",
+    "TOSCA_PARAMETERS_DIR": "/data/tosca-templates",
+    "LOG_LEVEL": "{{ .Values.imdashboard.loglevel }}",
+    "DB_URL": "mysql://{{ .Values.mysql.mysqlUser }}:{{ .Values.mysql.mysqlPassword }}@{{ .Release.Name }}-mysql/imdashdb"
+    "STATIC_SITES": {{ .Values.imdashboard.static_sites }},
+    "STATIC_SITES_URL": "https://raw.githubusercontent.com/grycap/im-dashboard/devel/sites.json"
+    }
+{{ end }}
