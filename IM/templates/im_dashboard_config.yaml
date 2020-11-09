@@ -25,7 +25,7 @@ data:
     "TOSCA_TEMPLATES_DIR": "/opt/tosca-templates",
     "TOSCA_PARAMETERS_DIR": "/opt/tosca-templates",
     "LOG_LEVEL": "{{ .Values.imdashboard.loglevel }}",
-    "DB_URL": "mysql://{{ .Values.mysql.mysqlUser }}:{{ .Values.mysql.mysqlPassword }}@{{ .Release.Name }}-mysql/imdashdb"
+    "DB_URL": "mysql://{{ .Values.mysql.mysqlUser }}:{{ .Values.mysql.mysqlPassword }}@{{ .Release.Name }}-mysql/imdashdb",
     "STATIC_SITES": {{ .Values.imdashboard.static_sites }},
     "STATIC_SITES_URL": "https://raw.githubusercontent.com/grycap/im-dashboard/devel/sites.json"
     }

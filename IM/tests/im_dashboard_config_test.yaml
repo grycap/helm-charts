@@ -38,7 +38,7 @@ tests:
             "TOSCA_TEMPLATES_DIR": "/opt/tosca-templates",
             "TOSCA_PARAMETERS_DIR": "/opt/tosca-templates",
             "LOG_LEVEL": "info",
-            "DB_URL": "mysql://usertest:passtest@RELEASE-NAME-mysql/imdashdb"
+            "DB_URL": "mysql://usertest:passtest@RELEASE-NAME-mysql/imdashdb",
             "STATIC_SITES": [],
             "STATIC_SITES_URL": "https://raw.githubusercontent.com/grycap/im-dashboard/devel/sites.json"
             }
