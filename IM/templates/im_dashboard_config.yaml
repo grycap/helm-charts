@@ -22,8 +22,8 @@ data:
     "IM_URL": "http://im-load-balancer-svc:8800",
 {{- end }}
     "EXTERNAL_LINKS": {{ .Values.imdashboard.external_links }},
-    "TOSCA_TEMPLATES_DIR": "/data/tosca-templates",
-    "TOSCA_PARAMETERS_DIR": "/data/tosca-templates",
+    "TOSCA_TEMPLATES_DIR": "/opt/tosca-templates",
+    "TOSCA_PARAMETERS_DIR": "/opt/tosca-templates",
     "LOG_LEVEL": "{{ .Values.imdashboard.loglevel }}",
     "DB_URL": "mysql://{{ .Values.mysql.mysqlUser }}:{{ .Values.mysql.mysqlPassword }}@{{ .Release.Name }}-mysql/imdashdb"
     "STATIC_SITES": {{ .Values.imdashboard.static_sites }},

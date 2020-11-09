@@ -35,8 +35,6 @@ spec:
             - name: im-dashboard
               mountPath: /app/app/config.json
               subPath: config.json
-            - name: imdb
-              mountPath: /data
           livenessProbe:
             httpGet:
               path: /
@@ -50,7 +48,5 @@ spec:
           configMap:
             name: im-dashboard
             defaultMode: 420
-        - name: imdb
-          persistentVolumeClaim:
-            claimName: imdashdb
+
 {{ end }}
