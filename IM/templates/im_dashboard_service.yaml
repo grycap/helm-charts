@@ -1,4 +1,5 @@
-# IM-Web interface
+{{ if  .Values.imdashboard.deploy }}
+# IM-Dashboard interface
 ---
 apiVersion: v1
 kind: Service
@@ -10,3 +11,4 @@ spec:
     port: 5001
   selector:
     name: im-dashboard
+{{ end }}

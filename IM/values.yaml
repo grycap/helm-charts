@@ -40,15 +40,15 @@ imdashboard:
     base_url: url
     client_id: id
     client_secret: sec
-    group_membership: []
-    scopes: openid email profile offline_access eduperson_entitlement
+    group_membership: '[]'
+    scopes: 'openid email profile offline_access eduperson_entitlement'
   support_email: root@server.com
   analytics_tag: ""
   loglevel: info
-  static_sites: []
-  external_links: [ { "url": "https://appsgrycap.i3m.upv.es:31443/im-web/", "menu_item_name": "IM web Portal" },
-                    { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" },
-                    { "url": "https://youtu.be/y2MWG52oI9w", "menu_item_name": "IM Video Demo" }]
+  static_sites: '[]'
+  external_links: '[ { "url": "https://appsgrycap.i3m.upv.es:31443/im-web/", "menu_item_name": "IM web Portal" },
+                     { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" },
+                     { "url": "https://youtu.be/y2MWG52oI9w", "menu_item_name": "IM Video Demo" }]'
 
 im:
   version: latest

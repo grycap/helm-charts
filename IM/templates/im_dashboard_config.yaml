@@ -6,7 +6,7 @@ kind: ConfigMap
 metadata:
   name: im-dashboard
 data:
-  config.json: >
+  config.json: |
     {
     "OIDC_NAME": "{{ .Values.imdashboard.oidc.name }}",
     "OIDC_CLIENT_ID": "{{ .Values.imdashboard.oidc.client_id }}",
