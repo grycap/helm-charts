@@ -26,6 +26,7 @@ spec:
               name: im-web-svc
               port:
                 number: 80
+          pathType: Prefix
 {{- end }}
           path: /im-web/?(.*)
 

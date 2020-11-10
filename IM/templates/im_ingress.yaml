@@ -33,11 +33,13 @@ spec:
               name: im-load-balancer-svc
               port:
                 number: 80
+          pathType: Prefix
 {{- else }}
             service:
               name: im-backend
               port:
                 number: 8800
+          pathType: Prefix
 {{- end }}
 
 {{- end }}
