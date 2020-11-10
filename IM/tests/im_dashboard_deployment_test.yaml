@@ -1,0 +1,19 @@
+suite: test im dashboard deployment
+templates:
+  - im_dashboard_deployment.yaml
+tests:
+  - name: test1
+    set:
+      imdashboard.deploy: true
+    asserts:
+      - isKind:
+          of: Deployment
+      - matchRegex:
+          path: metadata.name
+          pattern: im-dashboard
+      - equal:
+          path: spec.template.spec.containers[0].image
+          value: grycap/im-dashboard:latest
+      - equal:
+          path: spec.template.spec.containers[0].env[0].value
+          value: 'False'

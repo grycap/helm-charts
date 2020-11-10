@@ -2,7 +2,30 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v1
-    created: "2020-10-27T13:09:00.361530764+01:00"
+    created: "2020-11-10T10:06:10.484729405Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.helm.sh/stable
+      version: '>= 1.1.1'
+    description: Deploy a HA Infrastructure Manager
+    digest: 21a379b0d3bcf82b07be0ad2e00c0199fa126a6c7a556b67e899002214c31ac1
+    home: https://www.grycap.upv.es/im
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
+    keywords:
+    - Infrastructure Manager
+    - Cloud Orchestrator
+    - TOSCA
+    maintainers:
+    - email: micafer1@upv.es
+      name: Miguel Caballer
+    name: IM
+    sources:
+    - https://github.com/grycap/im
+    urls:
+    - https://grycap.github.io/helm-charts/IM-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v1
+    created: 2020-09-22T07:55:34.65537051Z
     dependencies:
     - name: mysql
       repository: https://kubernetes-charts.storage.googleapis.com
@@ -91,4 +114,4 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/oscar-2.0.0.tgz
     version: 2.0.0
-generated: "2020-10-27T13:09:00.355669828+01:00"
+generated: "2020-11-10T10:06:10.481889374Z"

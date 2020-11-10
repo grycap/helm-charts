@@ -1,5 +1,9 @@
 ---
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
 apiVersion: networking.k8s.io/v1beta1
+{{- else }}
+apiVersion: networking.k8s.io/v1
+{{- end }}
 kind: Ingress
 metadata:
   name: im-web
@@ -14,7 +18,15 @@ spec:
     - http:
         paths:
         - backend:
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
             serviceName: im-web-svc
             servicePort: 80
+{{- else }}
+            service:
+              name: im-web-svc
+              port:
+                number: 80
+          pathType: Prefix
+{{- end }}
           path: /im-web/?(.*)
 

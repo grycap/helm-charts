@@ -1,0 +1,44 @@
+suite: test dashboard config
+templates:
+  - im_dashboard_config.yaml
+tests:
+  - name: test1
+    set:
+      im.replicas: 2
+      mysql.mysqlUser: usertest
+      mysql.mysqlPassword: passtest
+      imdashboard.deploy: true
+      imdashboard.oidc.name: OIDC_NAME
+      imdashboard.oidc.client_id: CLIENT_ID
+      imdashboard.oidc.client_secret: CLIENT_SECRET
+      imdashboard.oidc.base_url: http://someoidc.com/oidc
+      imdashboard.oidc.group_membership: "[]"
+      imdashboard.oidc.scopes: "openid email profile offline_access eduperson_entitlement"
+      imdashboard.support_email: me@server.com
+      imdashboard.analytics_tag: ""
+      imdashboard.loglevel: "info"
+      imdashboard.static_sites: []
+    asserts:
+      - isKind:
+          of: ConfigMap
+      - equal:
+          path: data.config\.json
+          value: |
+            {
+            "OIDC_NAME": "OIDC_NAME",
+            "OIDC_CLIENT_ID": "CLIENT_ID",
+            "OIDC_CLIENT_SECRET": "CLIENT_SECRET",
+            "OIDC_BASE_URL": "http://someoidc.com/oidc",
+            "OIDC_GROUP_MEMBERSHIP": [],
+            "OIDC_SCOPES": "openid email profile offline_access eduperson_entitlement",
+            "SUPPORT_EMAIL": "me@server.com",
+            "ANALYTICS_TAG": "",
+            "IM_URL": "http://im-load-balancer-svc:8800",
+            "EXTERNAL_LINKS": [ { "url": "https://appsgrycap.i3m.upv.es:31443/im-web/", "menu_item_name": "IM web Portal" }, { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" }, { "url": "https://youtu.be/y2MWG52oI9w", "menu_item_name": "IM Video Demo" }],
+            "TOSCA_TEMPLATES_DIR": "/opt/tosca-templates",
+            "TOSCA_PARAMETERS_DIR": "/opt/tosca-templates",
+            "LOG_LEVEL": "info",
+            "DB_URL": "mysql://usertest:passtest@RELEASE-NAME-mysql/imdashdb",
+            "STATIC_SITES": [],
+            "STATIC_SITES_URL": "https://raw.githubusercontent.com/grycap/im-dashboard/devel/sites.json"
+            }
