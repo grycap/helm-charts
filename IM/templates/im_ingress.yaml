@@ -19,6 +19,7 @@ spec:
     - http:
         paths:
         - backend:
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
 {{- if gt .Values.im.replicas 1.0 }}
             serviceName: im-load-balancer-svc
             servicePort: 80
@@ -26,4 +27,20 @@ spec:
             serviceName: im-backend
             servicePort: 8800
 {{- end }}
+{{- else }}
+{{- if gt .Values.im.replicas 1.0 }}
+            service:
+              name: im-load-balancer-svc
+              port:
+                number: 80
+{{- else }}
+            service:
+              name: im-backend
+              port:
+                number: 8800
+{{- end }}
+
+{{- end }}
+
+
           path: /im/?(.*)

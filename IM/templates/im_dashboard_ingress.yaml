@@ -20,8 +20,15 @@ spec:
     - http:
         paths:
         - backend:
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
             serviceName: im-dashboard-svc
             servicePort: 5001
+{{- else }}
+            service:
+              name: im-dashboard-svc
+              port:
+                number: 5001
+{{- end }}
           path: /im-dashboard/?(.*)
 
 {{ end }}

@@ -18,7 +18,14 @@ spec:
     - http:
         paths:
         - backend:
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
             serviceName: im-web-svc
             servicePort: 80
+{{- else }}
+            service:
+              name: im-web-svc
+              port:
+                number: 80
+{{- end }}
           path: /im-web/?(.*)
 
