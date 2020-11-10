@@ -26,6 +26,10 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     created: 2020-09-22T07:55:34.65537051Z
+    dependencies:
+    - name: mysql
+      repository: https://kubernetes-charts.storage.googleapis.com
+      version: '>= 1.1.1'
     description: Deploy a HA Infrastructure Manager
     digest: 9f7144e74c4ff0d0904923be7ab78ed97410c6b791453ff3a21dd9030d86685a
     home: https://www.grycap.upv.es/im
@@ -44,7 +48,7 @@ entries:
     - https://grycap.github.io/helm-charts/IM-1.0.2.tgz
     version: 1.0.2
   - apiVersion: v1
-    created: "2020-07-09T13:54:25.911540495+02:00"
+    created: "2020-10-27T13:09:00.359776172+01:00"
     dependencies:
     - name: mysql
       repository: https://kubernetes-charts.storage.googleapis.com
@@ -64,10 +68,10 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - IM-1.0.1.tgz
+    - https://grycap.github.io/helm-charts/IM-1.0.1.tgz
     version: 1.0.1
   - apiVersion: v1
-    created: "2020-07-09T13:54:25.908944238+02:00"
+    created: "2020-10-27T13:09:00.3577887+01:00"
     dependencies:
     - name: mysql
       repository: https://kubernetes-charts.storage.googleapis.com
@@ -87,13 +91,13 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - IM-1.0.0.tgz
+    - https://grycap.github.io/helm-charts/IM-1.0.0.tgz
     version: 1.0.0
   oscar:
   - apiVersion: v1
-    created: "2020-07-09T13:54:25.913053545+02:00"
+    created: "2020-10-27T13:09:00.362107703+01:00"
     description: Open Source Serverless Computing for Data-Processing Applications
-    digest: 3f449d570f96ebc84306e416fd0f2833bb868a69208f7d2e3a1e0ef3b16a3152
+    digest: 81d1ddaa3b82572881c7d46822a52c936a2e8670f02e47847d873f37028ca14a
     home: https://o-scar.readthedocs.io/
     icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
     keywords:
@@ -108,26 +112,6 @@ entries:
     sources:
     - https://github.com/grycap/oscar
     urls:
-    - oscar-2.0.0-beta3.tgz
-    version: 2.0.0-beta3
-  - apiVersion: v1
-    created: "2020-07-09T13:54:25.912367074+02:00"
-    description: Open Source Serverless Computing for Data-Processing Applications
-    digest: b8079f6996a47e39ec578d66715c36361d1d2759490e9d68766689c06efe8627
-    home: https://o-scar.readthedocs.io/
-    icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
-    keywords:
-    - serverless
-    - containers
-    - file-processing
-    - batch
-    maintainers:
-    - email: serisgal@i3m.upv.es
-      name: Sebas Risco
-    name: oscar
-    sources:
-    - https://github.com/grycap/oscar
-    urls:
-    - oscar-2.0.0-beta2.tgz
-    version: 2.0.0-beta2
+    - https://grycap.github.io/helm-charts/oscar-2.0.0.tgz
+    version: 2.0.0
 generated: "2020-11-10T10:06:10.481889374Z"
