@@ -44,6 +44,7 @@ minIO:
 
 # FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
+  storageClassName: "nfs"
   supervisorVersion: "1.3.0"
   watchdogVersion: "0.18.10"
 
