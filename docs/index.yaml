@@ -2,13 +2,9 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v1
-    created: "2020-11-10T10:06:10.484729405Z"
-    dependencies:
-    - name: mysql
-      repository: https://charts.helm.sh/stable
-      version: '>= 1.1.1'
+    created: "2021-01-12T14:56:11.813764778Z"
     description: Deploy a HA Infrastructure Manager
-    digest: 21a379b0d3bcf82b07be0ad2e00c0199fa126a6c7a556b67e899002214c31ac1
+    digest: 7114ee635c75be5a64e96735d89fa72088420bd6e5207be86082f93a4e80f9af
     home: https://www.grycap.upv.es/im
     icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
@@ -25,11 +21,25 @@ entries:
     - https://grycap.github.io/helm-charts/IM-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v1
-    created: 2020-09-22T07:55:34.65537051Z
-    dependencies:
-    - name: mysql
-      repository: https://kubernetes-charts.storage.googleapis.com
-      version: '>= 1.1.1'
+    created: "2021-01-12T14:56:11.834466363Z"
+    description: Deploy a HA Infrastructure Manager
+    digest: 21a379b0d3bcf82b07be0ad2e00c0199fa126a6c7a556b67e899002214c31ac1
+    home: https://www.grycap.upv.es/im
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
+    keywords:
+    - Infrastructure Manager
+    - Cloud Orchestrator
+    - TOSCA
+    maintainers:
+    - email: micafer1@upv.es
+      name: Miguel Caballer
+    name: IM
+    sources:
+    - https://github.com/grycap/im
+    urls:
+    - https://grycap.github.io/helm-charts/docs/IM-1.1.0.tgz
+    version: 1.1.0
+  - created: "2021-01-12T14:56:11.831103098Z"
     description: Deploy a HA Infrastructure Manager
     digest: 9f7144e74c4ff0d0904923be7ab78ed97410c6b791453ff3a21dd9030d86685a
     home: https://www.grycap.upv.es/im
@@ -45,14 +55,9 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/IM-1.0.2.tgz
+    - https://grycap.github.io/helm-charts/docs/IM-1.0.2.tgz
     version: 1.0.2
-  - apiVersion: v1
-    created: "2020-10-27T13:09:00.359776172+01:00"
-    dependencies:
-    - name: mysql
-      repository: https://kubernetes-charts.storage.googleapis.com
-      version: '>= 1.1.1'
+  - created: "2021-01-12T14:56:11.82794712Z"
     description: Deploy a HA Infrastructure Manager
     digest: 29ddd36b7df0ca0baac96f302fca9796d2b9844e3454113cce454eef51620231
     home: https://www.grycap.upv.es/im
@@ -68,14 +73,9 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/IM-1.0.1.tgz
+    - https://grycap.github.io/helm-charts/docs/IM-1.0.1.tgz
     version: 1.0.1
-  - apiVersion: v1
-    created: "2020-10-27T13:09:00.3577887+01:00"
-    dependencies:
-    - name: mysql
-      repository: https://kubernetes-charts.storage.googleapis.com
-      version: '>= 1.1.1'
+  - created: "2021-01-12T14:56:11.825028964Z"
     description: Deploy a HA Infrastructure Manager
     digest: 76766fab34b07142947f066477a2af415b43a3093c29c9e01f34e1bc81c247fb
     home: https://www.grycap.upv.es/im
@@ -91,11 +91,31 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/IM-1.0.0.tgz
+    - https://grycap.github.io/helm-charts/docs/IM-1.0.0.tgz
     version: 1.0.0
   oscar:
   - apiVersion: v1
-    created: "2020-10-27T13:09:00.362107703+01:00"
+    created: "2021-01-12T14:56:11.814573231Z"
+    description: Open Source Serverless Computing for Data-Processing Applications
+    digest: 9efdaaff43eefc999a1527443bffc14a0f4797cf18538eb50a861e00cdd9249e
+    home: https://o-scar.readthedocs.io/
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
+    keywords:
+    - serverless
+    - containers
+    - file-processing
+    - batch
+    maintainers:
+    - email: serisgal@i3m.upv.es
+      name: Sebas Risco
+    name: oscar
+    sources:
+    - https://github.com/grycap/oscar
+    urls:
+    - https://grycap.github.io/helm-charts/oscar-2.0.1.tgz
+    version: 2.0.1
+  - apiVersion: v1
+    created: "2021-01-12T14:56:11.835575485Z"
     description: Open Source Serverless Computing for Data-Processing Applications
     digest: 81d1ddaa3b82572881c7d46822a52c936a2e8670f02e47847d873f37028ca14a
     home: https://o-scar.readthedocs.io/
@@ -112,6 +132,6 @@ entries:
     sources:
     - https://github.com/grycap/oscar
     urls:
-    - https://grycap.github.io/helm-charts/oscar-2.0.0.tgz
+    - https://grycap.github.io/helm-charts/docs/oscar-2.0.0.tgz
     version: 2.0.0
-generated: "2020-11-10T10:06:10.481889374Z"
+generated: "2021-01-12T14:56:11.810420938Z"
