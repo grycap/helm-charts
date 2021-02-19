@@ -54,7 +54,7 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `replicas`                  | Number of replicas to deploy                                                                             | `1`                                  |
 | `createIngress`             | Create a Kubernetes ingress to expose OSCAR                                                              | `false`                              |
 | `image.repository`          | Docker Hub image to deploy OSCAR                                                                         | `grycap/oscar`                       |
-| `image.tag`                 | Release tag to install                                                                                   | `2.0.0`                              |
+| `image.tag`                 | Release tag to install                                                                                   | `2.0.1`                              |
 | `image.pullPolicy`          | Image [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images)               | `Always`                             |
 | `readTimeout`               | Read timeout for OSCAR's HTTP server (in seconds)                                                        | `300`                                |
 | `writeTimeout`              | Write timeout for OSCAR's HTTP server (in seconds)                                                       | `300`                                |
@@ -63,9 +63,9 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `minIO.region`              | Region of the MinIO server                                                                               | `us-east-1`                          |
 | `minIO.accessKey`           | Access key of the MinIO server                                                                           | `minio`                              |
 | `minIO.secretKey`           | Secret key of the MinIO server                                                                           | `minio123`                           |
-| `volume.supervisorVersion`  | [FaaS Supervisor](https://github.com/grycap/faas-supervisor) version to use if ServerlessBackend is enabled      | `1.3.0`                              |
+| `volume.supervisorVersion`  | [FaaS Supervisor](https://github.com/grycap/faas-supervisor) version to use if ServerlessBackend is enabled      | `1.3.1`                              |
 | `volume.watchdogVersion`    | [OpenFaaS Watchdog](https://github.com/openfaas/classic-watchdog) version to use in the OSCAR's services | `0.18.10`                            |
-| `volume.storageClassName`   | Storage Class used by the PVC                                                                            | `nfs`                                |
+| `volume.storageClassName`   | Storage Class used by the PVC                                                                            | `""`                                |
 | `resources.requests.memory` | Memory resource requests                                                                                 | `256Mi`                              |
 | `resources.requests.cpu`    | CPU resource requests                                                                                    | `250m`                               |
 
