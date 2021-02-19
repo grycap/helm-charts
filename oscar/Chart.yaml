@@ -4,7 +4,7 @@ name: oscar
 version: 2.0.1
 sources:
 - https://github.com/grycap/oscar
-home: https://o-scar.readthedocs.io/
+home: https://grycap.github.io/oscar
 icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
 keywords:
 - serverless
