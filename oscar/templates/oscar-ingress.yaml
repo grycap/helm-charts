@@ -11,7 +11,8 @@ spec:
     - http:
         paths:
         - backend:
-            serviceName: oscar
-            servicePort: {{ .Values.service.port }}
+            service:
+              name: oscar
+              port: {{ .Values.service.port }}
           path: /
 {{- end }}
