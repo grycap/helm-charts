@@ -13,6 +13,7 @@ spec:
         - backend:
             service:
               name: oscar
-              port: {{ .Values.service.port }}
+              port:
+                number: {{ .Values.service.port }}
           path: /
 {{- end }}
