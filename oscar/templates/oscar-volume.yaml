@@ -6,7 +6,9 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
+{{- if ne .Values.volume.storageClassName "" }}
   storageClassName: {{ .Values.volume.storageClassName | quote }}
+{{- end }}
   resources:
     requests:
       storage: 2Gi
