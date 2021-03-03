@@ -10,10 +10,10 @@ tests:
       - isKind:
           of: Ingress
       - equal:
-          path: spec.rules[0].http.paths[0].backend.serviceName
+          path: spec.rules[0].http.paths[0].backend.service.name
           value: oscar
       - equal:
-          path: spec.rules[0].http.paths[0].backend.servicePort
+          path: spec.rules[0].http.paths[0].backend.service.port
           value: 8081
   - name: test2
     set:
