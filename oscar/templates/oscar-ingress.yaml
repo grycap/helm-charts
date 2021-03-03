@@ -15,5 +15,6 @@ spec:
               name: oscar
               port:
                 number: {{ .Values.service.port }}
+          pathType: Prefix
           path: /
 {{- end }}
