@@ -13,7 +13,7 @@ tests:
           path: spec.rules[0].http.paths[0].backend.service.name
           value: oscar
       - equal:
-          path: spec.rules[0].http.paths[0].backend.service.port
+          path: spec.rules[0].http.paths[0].backend.service.port.number
           value: 8081
   - name: test2
     set:

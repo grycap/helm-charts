@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v1
-    created: "2021-03-03T12:55:41.507771124Z"
+    created: "2021-03-03T13:15:38.039340336Z"
     description: Deploy a HA Infrastructure Manager
-    digest: 6067e34ee096d8a6244c0cf19501c2d0f2489a9d84141552f2937e7093e52d8b
+    digest: 7993ab8932e30481bb2be858d02d884fcf17d630acb25b910ca914b7a42bb7d5
     home: https://www.grycap.upv.es/im
     icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
@@ -21,9 +21,9 @@ entries:
     - https://grycap.github.io/helm-charts/IM-1.1.0.tgz
     version: 1.1.0
   - apiVersion: v1
-    created: "2021-03-03T12:55:41.516382936Z"
+    created: "2021-03-03T13:15:38.052428905Z"
     description: Deploy a HA Infrastructure Manager
-    digest: 0b72d7b101e9f4016f2f0cce69887337d4cabcd447f2b8974cc5ab7192f62297
+    digest: 6067e34ee096d8a6244c0cf19501c2d0f2489a9d84141552f2937e7093e52d8b
     home: https://www.grycap.upv.es/im
     icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
@@ -39,7 +39,7 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/docs/IM-1.1.0.tgz
     version: 1.1.0
-  - created: "2021-03-03T12:55:41.514698214Z"
+  - created: "2021-03-03T13:15:38.049701836Z"
     description: Deploy a HA Infrastructure Manager
     digest: 9f7144e74c4ff0d0904923be7ab78ed97410c6b791453ff3a21dd9030d86685a
     home: https://www.grycap.upv.es/im
@@ -57,7 +57,7 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/docs/IM-1.0.2.tgz
     version: 1.0.2
-  - created: "2021-03-03T12:55:41.512292671Z"
+  - created: "2021-03-03T13:15:38.046594074Z"
     description: Deploy a HA Infrastructure Manager
     digest: 29ddd36b7df0ca0baac96f302fca9796d2b9844e3454113cce454eef51620231
     home: https://www.grycap.upv.es/im
@@ -75,7 +75,7 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/docs/IM-1.0.1.tgz
     version: 1.0.1
-  - created: "2021-03-03T12:55:41.51002431Z"
+  - created: "2021-03-03T13:15:38.043482763Z"
     description: Deploy a HA Infrastructure Manager
     digest: 76766fab34b07142947f066477a2af415b43a3093c29c9e01f34e1bc81c247fb
     home: https://www.grycap.upv.es/im
@@ -95,9 +95,9 @@ entries:
     version: 1.0.0
   oscar:
   - apiVersion: v1
-    created: "2021-03-03T12:55:41.508344816Z"
+    created: "2021-03-03T13:15:38.040476445Z"
     description: Open Source Serverless Computing for Data-Processing Applications
-    digest: 2e99e9da501af37d26b3b99a50ae30b818cf7e97e3a39903b386e135da178a12
+    digest: 16ac8fcac76b2c124865a194fc684f460e1154f91d0ba1482802cda7aa2fb2b3
     home: https://grycap.github.io/oscar
     icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
     keywords:
@@ -115,9 +115,9 @@ entries:
     - https://grycap.github.io/helm-charts/oscar-2.0.1.tgz
     version: 2.0.1
   - apiVersion: v1
-    created: "2021-03-03T12:55:41.517622742Z"
+    created: "2021-03-03T13:15:38.061030007Z"
     description: Open Source Serverless Computing for Data-Processing Applications
-    digest: 756bdb2164ee9fd08921d4d47e75a9f618385258eed503d93dac500f45e5125e
+    digest: 2e99e9da501af37d26b3b99a50ae30b818cf7e97e3a39903b386e135da178a12
     home: https://grycap.github.io/oscar
     icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
     keywords:
@@ -135,7 +135,7 @@ entries:
     - https://grycap.github.io/helm-charts/docs/oscar-2.0.1.tgz
     version: 2.0.1
   - apiVersion: v1
-    created: "2021-03-03T12:55:41.51697442Z"
+    created: "2021-03-03T13:15:38.053462403Z"
     description: Open Source Serverless Computing for Data-Processing Applications
     digest: 81d1ddaa3b82572881c7d46822a52c936a2e8670f02e47847d873f37028ca14a
     home: https://o-scar.readthedocs.io/
@@ -154,4 +154,4 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/docs/oscar-2.0.0.tgz
     version: 2.0.0
-generated: "2021-03-03T12:55:41.50495537Z"
+generated: "2021-03-03T13:15:38.035726619Z"
