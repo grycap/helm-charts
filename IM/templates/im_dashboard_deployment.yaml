@@ -31,6 +31,11 @@ spec:
               value: 'False'
             - name: WORKERS
               value: '4'
+            - name: CREDS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: creds-key
+                  key: key
           volumeMounts:
             - name: im-dashboard
               mountPath: /app/app/config.json

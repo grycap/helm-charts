@@ -49,6 +49,7 @@ imdashboard:
   external_links: '[ { "url": "https://appsgrycap.i3m.upv.es:31443/im-web/", "menu_item_name": "IM web Portal" },
                      { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" },
                      { "url": "https://youtu.be/y2MWG52oI9w", "menu_item_name": "IM Video Demo" }]'
+  credentials_key: ''
 
 im:
   version: latest
