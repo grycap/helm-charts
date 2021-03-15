@@ -56,7 +56,7 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.1.0.tgz
+    - https://grycap.github.io/helm-charts/IM-1.1.0.tgz
     version: 1.1.0
   - created: "2021-03-03T13:30:37.341201195Z"
     description: Deploy a HA Infrastructure Manager
@@ -74,7 +74,7 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.0.2.tgz
+    - https://grycap.github.io/helm-charts/IM-1.0.2.tgz
     version: 1.0.2
   - created: "2021-03-03T13:30:37.338639663Z"
     description: Deploy a HA Infrastructure Manager
@@ -92,7 +92,7 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.0.1.tgz
+    - https://grycap.github.io/helm-charts/IM-1.0.1.tgz
     version: 1.0.1
   - created: "2021-03-03T13:30:37.336902517Z"
     description: Deploy a HA Infrastructure Manager
@@ -110,7 +110,7 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.0.0.tgz
+    - https://grycap.github.io/helm-charts/IM-1.0.0.tgz
     version: 1.0.0
   oscar:
   - apiVersion: v1
@@ -151,7 +151,7 @@ entries:
     sources:
     - https://github.com/grycap/oscar
     urls:
-    - https://grycap.github.io/helm-charts/docs/oscar-2.0.1.tgz
+    - https://grycap.github.io/helm-charts/oscar-2.0.1.tgz
     version: 2.0.1
   - apiVersion: v1
     created: "2021-03-03T13:30:37.3439269Z"
@@ -171,6 +171,6 @@ entries:
     sources:
     - https://github.com/grycap/oscar
     urls:
-    - https://grycap.github.io/helm-charts/docs/oscar-2.0.0.tgz
+    - https://grycap.github.io/helm-charts/oscar-2.0.0.tgz
     version: 2.0.0
 generated: "2021-03-03T13:30:37.332932203Z"
