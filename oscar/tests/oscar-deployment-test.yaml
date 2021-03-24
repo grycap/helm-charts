@@ -16,7 +16,7 @@ tests:
           pattern: oscar
       - equal:
           path: spec.template.spec.containers[0].image
-          value: grycap/oscar:2.0.0
+          value: ghcr.io/grycap/oscar:2.0.0
       - equal:
           path: spec.template.spec.containers[0].env[4].value
           value: username
