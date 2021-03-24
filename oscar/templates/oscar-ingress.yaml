@@ -1,5 +1,10 @@
+---
 {{- if .Values.createIngress }}
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
+apiVersion: networking.k8s.io/v1beta1
+{{- else }}
 apiVersion: networking.k8s.io/v1
+{{- end }}
 kind: Ingress
 metadata:
   name: oscar
@@ -11,10 +16,15 @@ spec:
     - http:
         paths:
         - backend:
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
+            serviceName: oscar
+            servicePort: {{ .Values.service.port }}
+{{- else }}
             service:
               name: oscar
               port:
                 number: {{ .Values.service.port }}
           pathType: Prefix
+{{- end }}
           path: /
 {{- end }}
