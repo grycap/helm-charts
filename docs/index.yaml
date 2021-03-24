@@ -21,25 +21,6 @@ entries:
     - https://grycap.github.io/helm-charts/IM-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v1
-    created: "2021-03-24T11:55:35.593006411Z"
-    description: Deploy a HA Infrastructure Manager
-    digest: 2b477fcef384f68f655ae9a290494d85de0a1cb235db723f20a4d1be93ce6bc3
-    home: https://www.grycap.upv.es/im
-    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
-    keywords:
-    - Infrastructure Manager
-    - Cloud Orchestrator
-    - TOSCA
-    maintainers:
-    - email: micafer1@upv.es
-      name: Miguel Caballer
-    name: IM
-    sources:
-    - https://github.com/grycap/im
-    urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.2.0.tgz
-    version: 1.2.0
-  - apiVersion: v1
     created: "2021-03-24T11:55:35.591117301Z"
     description: Deploy a HA Infrastructure Manager
     digest: 5d23c0221186ff96b73d1603a00917f783ffe24af88ea4e90bb344d2946739e1
@@ -56,7 +37,7 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.1.0.tgz
+    - https://grycap.github.io/helm-charts/IM-1.1.0.tgz
     version: 1.1.0
   - created: "2021-03-24T11:55:35.588665438Z"
     description: Deploy a HA Infrastructure Manager
@@ -74,7 +55,7 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.0.2.tgz
+    - https://grycap.github.io/helm-charts/IM-1.0.2.tgz
     version: 1.0.2
   - created: "2021-03-24T11:55:35.586380362Z"
     description: Deploy a HA Infrastructure Manager
@@ -92,7 +73,7 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.0.1.tgz
+    - https://grycap.github.io/helm-charts/IM-1.0.1.tgz
     version: 1.0.1
   - created: "2021-03-24T11:55:35.584590157Z"
     description: Deploy a HA Infrastructure Manager
@@ -110,7 +91,7 @@ entries:
     sources:
     - https://github.com/grycap/im
     urls:
-    - https://grycap.github.io/helm-charts/docs/IM-1.0.0.tgz
+    - https://grycap.github.io/helm-charts/IM-1.0.0.tgz
     version: 1.0.0
   oscar:
   - apiVersion: v1
@@ -151,7 +132,7 @@ entries:
     sources:
     - https://github.com/grycap/oscar
     urls:
-    - https://grycap.github.io/helm-charts/docs/oscar-2.0.1.tgz
+    - https://grycap.github.io/helm-charts/oscar-2.0.1.tgz
     version: 2.0.1
   - apiVersion: v1
     created: "2021-03-24T11:55:35.593616722Z"
