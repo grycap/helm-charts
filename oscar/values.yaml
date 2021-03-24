@@ -26,7 +26,7 @@ createIngress: false
 
 # Container image and pullPolicy for deployment
 image:
-  repository: grycap/oscar
+  repository: ghcr.io/grycap/oscar
   tag: "2.0.1"
   pullPolicy: Always
 
