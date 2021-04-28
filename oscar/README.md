@@ -52,7 +52,9 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `service.port`              | ClusterIP port for OSCAR                                                                                    | `8080`                             |
 | `service.nodePort`          | NodePort to expose OSCAR (if `service.type` is `NodePort`)                                                  | `30301`                            |
 | `replicas`                  | Number of replicas to deploy                                                                                | `1`                                |
-| `createIngress`             | Create a Kubernetes ingress to expose OSCAR                                                                 | `false`                            |
+| `ingress.create`            | Create a Kubernetes ingress to expose OSCAR                                                                 | `false`                            |
+| `ingress.host`              | DNS Host for the ingress                                                                                    | `""`                               |
+| `ingress.certManagerIssuer` | Cert-manager issuer to automatically assign TLS certificates                                                | `""`                               |
 | `image.repository`          | Docker Hub image to deploy OSCAR                                                                            | `ghcr.io/grycap/oscar`             |
 | `image.tag`                 | Release tag to install                                                                                      | `2.0.2`                            |
 | `image.pullPolicy`          | Image [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images)                  | `Always`                           |

@@ -21,8 +21,12 @@ service:
 # Number of replicas to deploy
 replicas: 1
 
+# Ingress configuration
+ingress:
 # Create a NGINX ingress to expose OSCAR
-createIngress: false
+  create: false
+  certManagerIssuer: ""
+  host: ""
 
 # Container image and pullPolicy for deployment
 image:
