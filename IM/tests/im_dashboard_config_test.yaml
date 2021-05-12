@@ -34,7 +34,7 @@ tests:
             "SUPPORT_EMAIL": "me@server.com",
             "ANALYTICS_TAG": "",
             "IM_URL": "http://im-load-balancer-svc:8800",
-            "EXTERNAL_LINKS": [ { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" }, { "url": "https://youtu.be/y2MWG52oI9w", "menu_item_name": "IM Video Demo" }],
+            "EXTERNAL_LINKS": [ { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" }, { "url": "https://youtu.be/vmtzGOZxiUg", "menu_item_name": "IM Video Demo" }],
             "TOSCA_TEMPLATES_DIR": "/opt/tosca-templates",
             "TOSCA_PARAMETERS_DIR": "/opt/tosca-templates",
             "LOG_LEVEL": "info",
