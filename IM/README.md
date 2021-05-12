@@ -38,8 +38,7 @@ helm install --namespace=im --name=im  grycap/IM
 Then install the IM chart (with Helm v3):
 
 ```sh
-kubectl create namespace im
-helm install --namespace=im im  grycap/IM
+helm install --namespace=im --create-namespace im  grycap/IM
 ```
 
 The IM chat uses ingress rules to publish the external services (IM service and IM-web portal). So it expects an ingress
@@ -70,6 +69,24 @@ The following table lists the configurable parameters of the IM chart and their 
 | `imweb.version`                   | `im-web` docker image version                               | `latest`         |
 | `imweb.resources.requests.memory` | `im-web` Memory resource requests/limits                    | `256Mi`          |
 | `imweb.resources.requests.cpu`    | `im-web` CPU resource requests/limits                       | `250m`           |
+| `imdashboard.deploy`              | Deploy `im-dashboard` web interface.                        | `false`          |
+| `imdashboard.version`             | `im-dashboard` docker image version.                        | `latest`         |
+| `imdashboard.resources.requests.memory` | `im-dashboard` Memory resource requests/limits                        | `256Mi`          |
+| `imdashboard.resources.requests.cpu`    | `im-dashboard` CPU resource requests/limits                           | `250m`           |
+| `imdashboard.oidc.name`           | `im-dashboard` OIDC provider name.                          | `name`           |
+| `imdashboard.oidc.base_url`       | `im-dashboard` OIDC provider base URL.                      | `url`            |
+| `imdashboard.oidc.client_id`      | `im-dashboard` OIDC provider Client ID.                     | `id`             |
+| `imdashboard.oidc.client_secret`  | `im-dashboard` OIDC provider Client Secret.                 | `sec`            |
+| `imdashboard.oidc.client_secret`  | `im-dashboard` OIDC provider Client Secret.                 | `sec`            |
+| `imdashboard.oidc.group_membership` | `im-dashboard` OIDC list of groups needed to access the dashboard.           | `[]`                |
+| `imdashboard.oidc.scopes`  | `im-dashboard` OIDC list of scopes.                 | `openid email profile offline_access eduperson_entitlement'`            |
+| `imdashboard.support_email`       | `im-dashboard` support email.                               | `root@server.com`          |
+| `imdashboard.analytics_tag`       | `im-dashboard` Google Anaytics tag.                         | `""`             |
+| `imdashboard.loglevel`            | `im-dashboard` Log Level.                                   | `info`           |
+| `imdashboard.static_sites`        | `im-dashboard` List of static sites.                        | `[]`             |
+| `imdashboard.credentials_key`     | `im-dashboard` Credentials encryption key (read [this](https://github.com/grycap/im-dashboard#enabling-credentials-encryption)).                  | `PXZ66574VjKIMSRXPWquRbcH8HaxH2yPRYsgZljlclA=`             |
+| `imdashboard.external_links`      | `im-dashboard` List of external links.                        | `[ { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" }, { "url": "https://youtu.be/vmtzGOZxiUg", "menu_item_name": "IM Video Demo" }]'`             |
+
 
 ## IM HA mode
 
