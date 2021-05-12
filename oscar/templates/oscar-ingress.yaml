@@ -1,20 +1,44 @@
-{{- if .Values.createIngress }}
+---
+{{- if .Values.ingress.create }}
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
+apiVersion: networking.k8s.io/v1beta1
+{{- else }}
 apiVersion: networking.k8s.io/v1
+{{- end }}
 kind: Ingress
 metadata:
   name: oscar
   annotations:
     #nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: nginx
+{{- if ne .Values.ingress.certManagerIssuer ""}}
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.certManagerIssuer }}
+{{- end }}
 spec:
   rules:
+{{- if ne .Values.ingress.host "" }}
+    - host: {{ .Values.ingress.host }}
+      http:
+{{- else }}
     - http:
+{{- end }}
         paths:
         - backend:
+{{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
+            serviceName: oscar
+            servicePort: {{ .Values.service.port }}
+{{- else }}
             service:
               name: oscar
               port:
                 number: {{ .Values.service.port }}
           pathType: Prefix
+{{- end }}
           path: /
+{{- if and (ne .Values.ingress.host "") (ne .Values.ingress.certManagerIssuer "") }}
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
+    secretName: {{ .Values.ingress.host }}
+{{- end }}
 {{- end }}

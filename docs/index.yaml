@@ -21,9 +21,9 @@ entries:
     - https://grycap.github.io/helm-charts/IM-1.2.1.tgz
     version: 1.2.1
   - apiVersion: v1
-    created: "2021-03-15T12:05:43.806323301Z"
+    created: "2021-03-24T11:55:35.582354279Z"
     description: Deploy a HA Infrastructure Manager
-    digest: 2b477fcef384f68f655ae9a290494d85de0a1cb235db723f20a4d1be93ce6bc3
+    digest: 08a9504c991fae03b69fce43c684336abf0b7338f1b25a5917dfe4fd00d9bacd
     home: https://www.grycap.upv.es/im
     icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
@@ -40,7 +40,7 @@ entries:
     - https://grycap.github.io/helm-charts/IM-1.2.0.tgz
     version: 1.2.0
   - apiVersion: v1
-    created: "2021-03-03T13:30:37.334716525Z"
+    created: "2021-03-24T11:55:35.591117301Z"
     description: Deploy a HA Infrastructure Manager
     digest: 5d23c0221186ff96b73d1603a00917f783ffe24af88ea4e90bb344d2946739e1
     home: https://www.grycap.upv.es/im
@@ -58,26 +58,7 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/IM-1.1.0.tgz
     version: 1.1.0
-  - apiVersion: v1
-    created: "2021-03-03T13:30:37.343337592Z"
-    description: Deploy a HA Infrastructure Manager
-    digest: 7993ab8932e30481bb2be858d02d884fcf17d630acb25b910ca914b7a42bb7d5
-    home: https://www.grycap.upv.es/im
-    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
-    keywords:
-    - Infrastructure Manager
-    - Cloud Orchestrator
-    - TOSCA
-    maintainers:
-    - email: micafer1@upv.es
-      name: Miguel Caballer
-    name: IM
-    sources:
-    - https://github.com/grycap/im
-    urls:
-    - https://grycap.github.io/helm-charts/IM-1.1.0.tgz
-    version: 1.1.0
-  - created: "2021-03-03T13:30:37.341201195Z"
+  - created: "2021-03-24T11:55:35.588665438Z"
     description: Deploy a HA Infrastructure Manager
     digest: 9f7144e74c4ff0d0904923be7ab78ed97410c6b791453ff3a21dd9030d86685a
     home: https://www.grycap.upv.es/im
@@ -95,7 +76,7 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/IM-1.0.2.tgz
     version: 1.0.2
-  - created: "2021-03-03T13:30:37.338639663Z"
+  - created: "2021-03-24T11:55:35.586380362Z"
     description: Deploy a HA Infrastructure Manager
     digest: 29ddd36b7df0ca0baac96f302fca9796d2b9844e3454113cce454eef51620231
     home: https://www.grycap.upv.es/im
@@ -113,7 +94,7 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/IM-1.0.1.tgz
     version: 1.0.1
-  - created: "2021-03-03T13:30:37.336902517Z"
+  - created: "2021-03-24T11:55:35.584590157Z"
     description: Deploy a HA Infrastructure Manager
     digest: 76766fab34b07142947f066477a2af415b43a3093c29c9e01f34e1bc81c247fb
     home: https://www.grycap.upv.es/im
@@ -133,7 +114,27 @@ entries:
     version: 1.0.0
   oscar:
   - apiVersion: v1
-    created: "2021-03-03T13:30:37.335288Z"
+    created: "2021-04-28T11:21:04.070143053Z"
+    description: Open Source Serverless Computing for Data-Processing Applications
+    digest: 4a361269f5e33f005432084016af72561fd7a6d5c3aa320d2fdace21778d51ea
+    home: https://grycap.github.io/oscar
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
+    keywords:
+    - serverless
+    - containers
+    - file-processing
+    - batch
+    maintainers:
+    - email: serisgal@i3m.upv.es
+      name: Sebas Risco
+    name: oscar
+    sources:
+    - https://github.com/grycap/oscar
+    urls:
+    - https://grycap.github.io/helm-charts/oscar-2.0.2.tgz
+    version: 2.0.2
+  - apiVersion: v1
+    created: "2021-03-24T11:55:35.594224759Z"
     description: Open Source Serverless Computing for Data-Processing Applications
     digest: 665569790d5f96f81d74bd684da78d1f95d229937adb4acfbe56066b5ce4e917
     home: https://grycap.github.io/oscar
@@ -153,27 +154,7 @@ entries:
     - https://grycap.github.io/helm-charts/oscar-2.0.1.tgz
     version: 2.0.1
   - apiVersion: v1
-    created: "2021-03-03T13:30:37.344524469Z"
-    description: Open Source Serverless Computing for Data-Processing Applications
-    digest: 16ac8fcac76b2c124865a194fc684f460e1154f91d0ba1482802cda7aa2fb2b3
-    home: https://grycap.github.io/oscar
-    icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
-    keywords:
-    - serverless
-    - containers
-    - file-processing
-    - batch
-    maintainers:
-    - email: serisgal@i3m.upv.es
-      name: Sebas Risco
-    name: oscar
-    sources:
-    - https://github.com/grycap/oscar
-    urls:
-    - https://grycap.github.io/helm-charts/oscar-2.0.1.tgz
-    version: 2.0.1
-  - apiVersion: v1
-    created: "2021-03-03T13:30:37.3439269Z"
+    created: "2021-03-24T11:55:35.593616722Z"
     description: Open Source Serverless Computing for Data-Processing Applications
     digest: 81d1ddaa3b82572881c7d46822a52c936a2e8670f02e47847d873f37028ca14a
     home: https://o-scar.readthedocs.io/
@@ -190,6 +171,6 @@ entries:
     sources:
     - https://github.com/grycap/oscar
     urls:
-    - https://grycap.github.io/helm-charts/oscar-2.0.0.tgz
+    - https://grycap.github.io/helm-charts/docs/oscar-2.0.0.tgz
     version: 2.0.0
-generated: "2021-03-03T13:30:37.332932203Z"
+generated: "2021-03-24T11:55:35.580319357Z"

@@ -21,13 +21,17 @@ service:
 # Number of replicas to deploy
 replicas: 1
 
+# Ingress configuration
+ingress:
 # Create a NGINX ingress to expose OSCAR
-createIngress: false
+  create: false
+  certManagerIssuer: ""
+  host: ""
 
 # Container image and pullPolicy for deployment
 image:
-  repository: grycap/oscar
-  tag: "2.0.1"
+  repository: ghcr.io/grycap/oscar
+  tag: "2.0.2"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server
@@ -45,7 +49,7 @@ minIO:
 # FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
   storageClassName: ""
-  supervisorVersion: "1.3.1"
+  supervisorVersion: "1.3.2"
   watchdogVersion: "0.18.10"
 
 # Liveness and Readiness probe values.
