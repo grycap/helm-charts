@@ -12,76 +12,76 @@ tests:
           path: data.haproxy\.tmpl
           value: |
             {{- $cfg := .Cfg -}}
-                {{- $global := $cfg.Global }}
-                {{- $backends := $cfg.Backends }}
-                {{- $backendItems := $backends.BuildSortedItems }}
-                global
-                    tune.bufsize 131072
-                    stats socket {{ default "--" $global.AdminSocket }} level admin expose-fd listeners mode 600
-                        {{- if gt $global.Procs.Nbproc 1 }} process 1{{ end }}
-                defaults
-                    log global
-                    timeout client          {{ default "--" $global.Timeout.Client }}
-                {{- if $global.Timeout.ClientFin }}
-                    timeout client-fin      {{ $global.Timeout.ClientFin }}
-                {{- end }}
-                    timeout connect         {{ default "--" $global.Timeout.Connect }}
-                {{- if $global.Timeout.KeepAlive }}
-                    timeout http-keep-alive {{ $global.Timeout.KeepAlive }}
-                {{- end }}
-                {{- if $global.Timeout.HTTPRequest }}
-                    timeout http-request    {{ $global.Timeout.HTTPRequest }}
-                {{- end }}
-                {{- if $global.Timeout.Queue }}
-                    timeout queue           {{ $global.Timeout.Queue }}
-                {{- end }}
-                    timeout server          {{ default "--" $global.Timeout.Server }}
-                {{- if $global.Timeout.ServerFin }}
-                    timeout server-fin      {{ $global.Timeout.ServerFin }}
-                {{- end }}
-                {{- if $global.Timeout.Tunnel }}
-                    timeout tunnel          {{ $global.Timeout.Tunnel }}
-                {{- end }}
-                    mode http
-                ######
-                ###### Stats page
-                ######
-                listen stats
-                    bind {{ $global.Stats.BindIP }}:{{ $global.Stats.Port }}
-                        {{- if $global.Stats.TLSFilename }} ssl crt {{ $global.Stats.TLSFilename }}{{ end }}
-                        {{- if $global.Stats.AcceptProxy }} accept-proxy{{ end }}
-                        {{- if gt $global.Procs.Nbproc 1 }} process 1{{ end }}
-                    mode http
-                    stats enable
-                {{- if $global.Stats.Auth }}
-                    stats realm HAProxy\ Statistics
-                    stats auth {{ $global.Stats.Auth }}
-                {{- end }}
-                    stats uri /
-                    no log
-                frontend http-frontend
-                        bind *:80
-                        default_backend imbackend
-                backend imbackend
-                        option httpchk GET /version
-                        balance roundrobin
-                        stick-table type string len 32 size 30k expire 120m
-                        stick store-response hdr(InfID)
-                        #stick on hdr(InfID)
-                        acl inf_id path -m beg /infrastructures/
-                        #acl inf_id path_len gt 40
-                        stick on path,field(3,/) if inf_id
-                {{- range $backend := $backendItems }}
-                {{- range $ep := $backend.Endpoints }}
-                    server {{ $ep.Name }} {{ $ep.IP }}:{{ $ep.Port }}
-                        {{- if not $ep.Enabled }} disabled{{ end }}
-                        {{- $hc := $backend.HealthCheck }}
-                        {{- if or $hc.Port $hc.Addr $hc.Interval $hc.RiseCount $hc.FallCount }} check
-                            {{- if $hc.Port }} port {{ $hc.Port }}{{ end }}
-                            {{- if $hc.Addr }} addr {{ $hc.Addr }}{{ end }}
-                            {{- if $hc.Interval }} inter {{ $hc.Interval }}{{ end }}
-                            {{- if $hc.RiseCount }} rise {{ $hc.RiseCount }}{{ end }}
-                            {{- if $hc.FallCount }} fall {{ $hc.FallCount }}{{ end }}
-                        {{- end }}
-                {{- end }}{{/* range Endpoints */}}
-                {{- end }}{{/* range backendItems */}}
+            {{- $global := $cfg.Global }}
+            {{- $backends := $cfg.Backends }}
+            {{- $backendItems := $backends.BuildSortedItems }}
+            global
+                tune.bufsize 131072
+                stats socket {{ default "--" $global.AdminSocket }} level admin expose-fd listeners mode 600
+                    {{- if gt $global.Procs.Nbproc 1 }} process 1{{ end }}
+            defaults
+                log global
+                timeout client          {{ default "--" $global.Timeout.Client }}
+            {{- if $global.Timeout.ClientFin }}
+                timeout client-fin      {{ $global.Timeout.ClientFin }}
+            {{- end }}
+                timeout connect         {{ default "--" $global.Timeout.Connect }}
+            {{- if $global.Timeout.KeepAlive }}
+                timeout http-keep-alive {{ $global.Timeout.KeepAlive }}
+            {{- end }}
+            {{- if $global.Timeout.HTTPRequest }}
+                timeout http-request    {{ $global.Timeout.HTTPRequest }}
+            {{- end }}
+            {{- if $global.Timeout.Queue }}
+                timeout queue           {{ $global.Timeout.Queue }}
+            {{- end }}
+                timeout server          {{ default "--" $global.Timeout.Server }}
+            {{- if $global.Timeout.ServerFin }}
+                timeout server-fin      {{ $global.Timeout.ServerFin }}
+            {{- end }}
+            {{- if $global.Timeout.Tunnel }}
+                timeout tunnel          {{ $global.Timeout.Tunnel }}
+            {{- end }}
+                mode http
+            ######
+            ###### Stats page
+            ######
+            listen stats
+                bind {{ $global.Stats.BindIP }}:{{ $global.Stats.Port }}
+                    {{- if $global.Stats.TLSFilename }} ssl crt {{ $global.Stats.TLSFilename }}{{ end }}
+                    {{- if $global.Stats.AcceptProxy }} accept-proxy{{ end }}
+                    {{- if gt $global.Procs.Nbproc 1 }} process 1{{ end }}
+                mode http
+                stats enable
+            {{- if $global.Stats.Auth }}
+                stats realm HAProxy\ Statistics
+                stats auth {{ $global.Stats.Auth }}
+            {{- end }}
+                stats uri /
+                no log
+            frontend http-frontend
+                    bind *:80
+                    default_backend imbackend
+            backend imbackend
+                    option httpchk GET /version
+                    balance roundrobin
+                    stick-table type string len 32 size 30k expire 120m
+                    stick store-response hdr(InfID)
+                    #stick on hdr(InfID)
+                    acl inf_id path -m beg /infrastructures/
+                    #acl inf_id path_len gt 40
+                    stick on path,field(3,/) if inf_id
+            {{- range $backend := $backendItems }}
+            {{- range $ep := $backend.Endpoints }}
+                server {{ $ep.Name }} {{ $ep.IP }}:{{ $ep.Port }}
+                    {{- if not $ep.Enabled }} disabled{{ end }}
+                    {{- $hc := $backend.HealthCheck }}
+                    {{- if or $hc.Port $hc.Addr $hc.Interval $hc.RiseCount $hc.FallCount }} check
+                        {{- if $hc.Port }} port {{ $hc.Port }}{{ end }}
+                        {{- if $hc.Addr }} addr {{ $hc.Addr }}{{ end }}
+                        {{- if $hc.Interval }} inter {{ $hc.Interval }}{{ end }}
+                        {{- if $hc.RiseCount }} rise {{ $hc.RiseCount }}{{ end }}
+                        {{- if $hc.FallCount }} fall {{ $hc.FallCount }}{{ end }}
+                    {{- end }}
+            {{- end }}{{/* range Endpoints */}}
+            {{- end }}{{/* range backendItems */}}
