@@ -18,7 +18,7 @@ spec:
       serviceAccountName: im-load-balancer
       containers:
       - name: haproxy-load-balancer
-        image: quay.io/jcmoraisjr/haproxy-ingress:v0.6.3
+        image: quay.io/jcmoraisjr/haproxy-ingress:v0.12.3
         args:
         - --default-backend-service=$(POD_NAMESPACE)/im-backend
         - --configmap=$(POD_NAMESPACE)/haproxy-load-balancer
@@ -39,11 +39,13 @@ spec:
               fieldPath: metadata.namespace
         volumeMounts:
            - name: haproxy-load-balancer
-             mountPath: /etc/haproxy/template/haproxy.tmpl
+             mountPath: /etc/templates/haproxy/haproxy.tmpl
              subPath: haproxy.tmpl
         livenessProbe:
-          tcpSocket:
+          httpGet:
+            path: /version
             port: 80
+            scheme: HTTP
           initialDelaySeconds: 20
           periodSeconds: 20
       volumes:

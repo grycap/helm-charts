@@ -1,8 +1,8 @@
 mysql:
   mysqlPassword: impass
   persistence:
-    enabled: false
-    storageClass: imdb
+    enabled: true
+    storageClass: ""
     accessMode: ReadWriteOnce
     size: 8Gi
   # Do not modify the initializationFiles and mysqlUser values
@@ -62,8 +62,8 @@ im:
   log:
     level: DEBUG
     persistence:
-      enabled: false
-      storageclass: imlog
+      enabled: true
+      storageclass: ""
       accessmode: ReadWriteOnce
       size: 8Gi
   # if you need to add values check: https://raw.githubusercontent.com/grycap/im/master/etc/im.cfg

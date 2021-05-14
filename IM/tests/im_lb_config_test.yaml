@@ -11,38 +11,59 @@ tests:
       - equal:
           path: data.haproxy\.tmpl
           value: |
-            {{- $ing := . -}}
             {{- $cfg := .Cfg -}}
+            {{- $global := $cfg.Global }}
+            {{- $backends := $cfg.Backends }}
+            {{- $backendItems := $backends.BuildSortedItems }}
+            {{- $backend := index $backendItems 0 }}
             global
                 tune.bufsize 131072
+                stats socket {{ default "--" $global.AdminSocket }} level admin expose-fd listeners mode 600
+                    {{- if gt $global.Procs.Nbproc 1 }} process 1{{ end }}
             defaults
                 log global
-                timeout http-request    {{ $cfg.TimeoutHTTPRequest }}
-                timeout connect         {{ $cfg.TimeoutConnect }}
-                timeout client          {{ $cfg.TimeoutClient }}
-                timeout client-fin      {{ $cfg.TimeoutClientFin }}
-                timeout server          {{ $cfg.TimeoutServer }}
-                timeout server-fin      {{ $cfg.TimeoutServerFin }}
-                timeout tunnel          {{ $cfg.TimeoutTunnel }}
-                timeout http-keep-alive {{ $cfg.TimeoutKeepAlive }}
+                timeout client          {{ default "--" $global.Timeout.Client }}
+            {{- if $global.Timeout.ClientFin }}
+                timeout client-fin      {{ $global.Timeout.ClientFin }}
+            {{- end }}
+                timeout connect         {{ default "--" $global.Timeout.Connect }}
+            {{- if $global.Timeout.KeepAlive }}
+                timeout http-keep-alive {{ $global.Timeout.KeepAlive }}
+            {{- end }}
+            {{- if $global.Timeout.HTTPRequest }}
+                timeout http-request    {{ $global.Timeout.HTTPRequest }}
+            {{- end }}
+            {{- if $global.Timeout.Queue }}
+                timeout queue           {{ $global.Timeout.Queue }}
+            {{- end }}
+                timeout server          {{ default "--" $global.Timeout.Server }}
+            {{- if $global.Timeout.ServerFin }}
+                timeout server-fin      {{ $global.Timeout.ServerFin }}
+            {{- end }}
+            {{- if $global.Timeout.Tunnel }}
+                timeout tunnel          {{ $global.Timeout.Tunnel }}
+            {{- end }}
                 mode http
             ######
             ###### Stats page
             ######
             listen stats
-                bind *:{{ $cfg.StatsPort }}{{ if $cfg.StatsProxyProtocol }} accept-proxy{{ end }}
+                bind {{ $global.Stats.BindIP }}:{{ $global.Stats.Port }}
+                    {{- if $global.Stats.TLSFilename }} ssl crt {{ $global.Stats.TLSFilename }}{{ end }}
+                    {{- if $global.Stats.AcceptProxy }} accept-proxy{{ end }}
+                    {{- if gt $global.Procs.Nbproc 1 }} process 1{{ end }}
                 mode http
                 stats enable
+            {{- if $global.Stats.Auth }}
                 stats realm HAProxy\ Statistics
-            {{- if ne $cfg.StatsAuth "" }}
-                stats auth {{ $cfg.StatsAuth }}
+                stats auth {{ $global.Stats.Auth }}
             {{- end }}
                 stats uri /
                 no log
             frontend http-frontend
                     bind *:80
-                    default_backend imbackend
-            backend imbackend
+                    default_backend {{ $backend.ID }}
+            backend {{ $backend.ID }}
                     option httpchk GET /version
                     balance roundrobin
                     stick-table type string len 32 size 30k expire 120m
@@ -51,14 +72,15 @@ tests:
                     acl inf_id path -m beg /infrastructures/
                     #acl inf_id path_len gt 40
                     stick on path,field(3,/) if inf_id
-            {{- range $backend := $ing.Backends }}
-            {{- if eq $backend.Name "upstream-default-backend" -}}
-            {{- $BackendSlots := index $ing.BackendSlots $backend.Name }}
-            {{- range $target, $slot := $BackendSlots.FullSlots }}
-                server {{ $slot.BackendServerName }} {{ $target }} check port {{ $slot.BackendEndpoint.Port }} inter {{ $cfg.BackendCheckInterval }}
-            {{- end }}
-            {{- range $empty := $BackendSlots.EmptySlots }}
-                server {{ $empty }} 127.0.0.1:81 check disabled inter {{ $cfg.BackendCheckInterval }}
-            {{- end }}
-            {{- end }}{{/* if eq $backend.Name */}}
-            {{- end }}{{/* range Backends */}}
+            {{- range $ep := $backend.Endpoints }}
+                    server {{ $ep.Name }} {{ $ep.IP }}:{{ $ep.Port }}
+                    {{- if not $ep.Enabled }} disabled{{ end }}
+                    {{- $hc := $backend.HealthCheck }}
+                    {{- if or $hc.Port $hc.Addr $hc.Interval $hc.RiseCount $hc.FallCount }} check
+                        {{- if $hc.Port }} port {{ $hc.Port }}{{ end }}
+                        {{- if $hc.Addr }} addr {{ $hc.Addr }}{{ end }}
+                        {{- if $hc.Interval }} inter {{ $hc.Interval }}{{ end }}
+                        {{- if $hc.RiseCount }} rise {{ $hc.RiseCount }}{{ end }}
+                        {{- if $hc.FallCount }} fall {{ $hc.FallCount }}{{ end }}
+                    {{- end }}
+            {{- end }}{{/* range Endpoints */}}
