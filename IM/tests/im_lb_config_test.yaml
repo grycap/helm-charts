@@ -73,7 +73,6 @@ tests:
                     #acl inf_id path_len gt 40
                     stick on path,field(3,/) if inf_id
             {{- range $ep := $backend.Endpoints }}
-                {{- if $ep.Enabled }}
                     server {{ $ep.Name }} {{ $ep.IP }}:{{ $ep.Port }}
                     {{- if not $ep.Enabled }} disabled{{ end }}
                     {{- $hc := $backend.HealthCheck }}
@@ -84,5 +83,4 @@ tests:
                         {{- if $hc.RiseCount }} rise {{ $hc.RiseCount }}{{ end }}
                         {{- if $hc.FallCount }} fall {{ $hc.FallCount }}{{ end }}
                     {{- end }}
-                {{- end }} {{/* $ep.Enabled */}}
             {{- end }}{{/* range Endpoints */}}
