@@ -15,6 +15,7 @@ tests:
             {{- $global := $cfg.Global }}
             {{- $backends := $cfg.Backends }}
             {{- $backendItems := $backends.BuildSortedItems }}
+            {{- $backend := index $backendItems 0 }}
             global
                 tune.bufsize 131072
                 stats socket {{ default "--" $global.AdminSocket }} level admin expose-fd listeners mode 600
@@ -61,8 +62,8 @@ tests:
                 no log
             frontend http-frontend
                     bind *:80
-                    default_backend imbackend
-            backend imbackend
+                    default_backend {{ $backend.ID }}
+            backend {{ $backend.ID }}
                     option httpchk GET /version
                     balance roundrobin
                     stick-table type string len 32 size 30k expire 120m
@@ -71,7 +72,6 @@ tests:
                     acl inf_id path -m beg /infrastructures/
                     #acl inf_id path_len gt 40
                     stick on path,field(3,/) if inf_id
-            {{- range $backend := $backendItems }}
             {{- range $ep := $backend.Endpoints }}
                 {{- if $ep.Enabled }}
                     server {{ $ep.Name }} {{ $ep.IP }}:{{ $ep.Port }}
@@ -85,4 +85,3 @@ tests:
                     {{- end }}
                 {{- end }} {{/* $ep.Enabled */}}
             {{- end }}{{/* range Endpoints */}}
-            {{- end }}{{/* range backendItems */}}
