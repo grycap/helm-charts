@@ -75,6 +75,7 @@ tests:
             {{- range $ep := $backend.Endpoints }}
                 {{- if $ep.Enabled }}
                     server {{ $ep.Name }} {{ $ep.IP }}:{{ $ep.Port }}
+                    {{- if not $ep.Enabled }} disabled{{ end }}
                     {{- $hc := $backend.HealthCheck }}
                     {{- if or $hc.Port $hc.Addr $hc.Interval $hc.RiseCount $hc.FallCount }} check
                         {{- if $hc.Port }} port {{ $hc.Port }}{{ end }}
