@@ -70,8 +70,8 @@ data:
             stick on path,field(3,/) if inf_id
     {{- range $backend := $backendItems }}
     {{- range $ep := $backend.Endpoints }}
-        server {{ $ep.Name }} {{ $ep.IP }}:{{ $ep.Port }}
-            {{- if not $ep.Enabled }} disabled{{ end }}
+        {{- if $ep.Enabled }}
+            server {{ $ep.Name }} {{ $ep.IP }}:{{ $ep.Port }}
             {{- $hc := $backend.HealthCheck }}
             {{- if or $hc.Port $hc.Addr $hc.Interval $hc.RiseCount $hc.FallCount }} check
                 {{- if $hc.Port }} port {{ $hc.Port }}{{ end }}
@@ -80,6 +80,7 @@ data:
                 {{- if $hc.RiseCount }} rise {{ $hc.RiseCount }}{{ end }}
                 {{- if $hc.FallCount }} fall {{ $hc.FallCount }}{{ end }}
             {{- end }}
+        {{- end }} {{/* $ep.Enabled */}}
     {{- end }}{{/* range Endpoints */}}
     {{- end }}{{/* range backendItems */}}`}}
 
