@@ -42,8 +42,10 @@ spec:
              mountPath: /etc/templates/haproxy/haproxy.tmpl
              subPath: haproxy.tmpl
         livenessProbe:
-          tcpSocket:
+          httpGet:
+            path: /version
             port: 80
+            scheme: HTTP
           initialDelaySeconds: 20
           periodSeconds: 20
       volumes:
