@@ -11,6 +11,12 @@ serverlessBackend: ""
 openfaas:
   namespace: openfaas
   port: 8080
+  prometheusPort: 9090
+  basicAuthSecret: basic-auth
+  scaler:
+    enable: false
+    interval: "2m"
+    inactivityDuration: "10m"
 
 # Service configuration
 service:
@@ -31,7 +37,7 @@ ingress:
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
-  tag: "2.0.2"
+  tag: "2.1.0"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server
@@ -77,5 +83,5 @@ affinity: {}
 # ref: http://kubernetes.io/docs/user-guide/compute-resources/
 resources:
   requests:
-    memory: 256Mi
-    cpu: 250m
+    memory: 512Mi
+    cpu: 500m
