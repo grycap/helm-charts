@@ -84,6 +84,16 @@ spec:
           value: {{ .Values.readTimeout | quote }}
         - name: WRITE_TIMEOUT
           value: {{ .Values.writeTimeout | quote }}
+        - name: WATCHDOG_MAX_INFLIGHT
+          value: {{ .Values.openfaas.watchdog.maxInflight | quote }}
+        - name: WATCHDOG_WRITE_DEBUG
+          value: {{ .Values.openfaas.watchdog.writeDebug | quote }}
+        - name: WATCHDOG_EXEC_TIMEOUT
+          value: {{ .Values.openfaas.watchdog.execTimeout | quote }}
+        - name: WATCHDOG_READ_TIMEOUT
+          value: {{ .Values.openfaas.watchdog.readTimeout | quote }}
+        - name: WATCHDOG_WRITE_TIMEOUT
+          value: {{ .Values.openfaas.watchdog.writeTimeout | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}
