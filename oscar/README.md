@@ -53,6 +53,11 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `openfaas.scaler.enable`             | Option to enable the bundled OpenFaaS scaler                                                                | `false`                            |
 | `openfaas.scaler.interval`           | Time interval to check if there are idle OpenFaaS functions                                                 | `2m`                               |
 | `openfaas.scaler.inactivityDuration` | Duration with no requests to consider that an OpenFaaS function is idle                                     | `10m`                              |
+| `openfaas.watchdog.maxInflight`      | Limit the maximum number of requests in flight for the OpenFaaS watchdog                                    | `1`                                |
+| `openfaas.watchdog.writeDebug`       | Write all output, error messages, and additional information to the logs for the OpenFaaS watchdog          | `true`                             |
+| `openfaas.watchdog.execTimeout`      | Exec timeout for process exec'd for each incoming request (in seconds). Disabled if set to 0                | `0`                                |
+| `openfaas.watchdog.readTimeout`      | HTTP timeout for reading the payload from the client caller (in seconds)                                    | `300`                              |
+| `openfaas.watchdog.writeTimeout`     | HTTP timeout for writing a response body from your function (in seconds)                                    | `300`                              |
 | `service.type`                       | Type of service to expose OSCAR                                                                             | `NodePort`                         |
 | `service.port`                       | ClusterIP port for OSCAR                                                                                    | `8080`                             |
 | `service.nodePort`                   | NodePort to expose OSCAR (if `service.type` is `NodePort`)                                                  | `30301`                            |
@@ -61,7 +66,7 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `ingress.host`                       | DNS Host for the ingress                                                                                    | `""`                               |
 | `ingress.certManagerIssuer`          | Cert-manager issuer to automatically assign TLS certificates                                                | `""`                               |
 | `image.repository`                   | Docker Hub image to deploy OSCAR                                                                            | `ghcr.io/grycap/oscar`             |
-| `image.tag`                          | Release tag to install                                                                                      | `2.1.0`                            |
+| `image.tag`                          | Release tag to install                                                                                      | `2.1.2`                            |
 | `image.pullPolicy`                   | Image [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images)                  | `Always`                           |
 | `readTimeout`                        | Read timeout for OSCAR's HTTP server (in seconds)                                                           | `300`                              |
 | `writeTimeout`                       | Write timeout for OSCAR's HTTP server (in seconds)                                                          | `300`                              |
@@ -70,7 +75,7 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `minIO.region`                       | Region of the MinIO server                                                                                  | `us-east-1`                        |
 | `minIO.accessKey`                    | Access key of the MinIO server                                                                              | `minio`                            |
 | `minIO.secretKey`                    | Secret key of the MinIO server                                                                              | `minio123`                         |
-| `volume.supervisorVersion`           | [FaaS Supervisor](https://github.com/grycap/faas-supervisor) version to use if ServerlessBackend is enabled | `1.3.2`                            |
+| `volume.supervisorVersion`           | [FaaS Supervisor](https://github.com/grycap/faas-supervisor) version to use if ServerlessBackend is enabled | `1.4.0`                            |
 | `volume.watchdogVersion`             | [OpenFaaS Watchdog](https://github.com/openfaas/classic-watchdog) version to use in the OSCAR's services    | `0.18.10`                          |
 | `volume.storageClassName`            | Storage Class used by the PVC                                                                               | `""`                               |
 | `resources.requests.memory`          | Memory resource requests                                                                                    | `512Mi`                            |
