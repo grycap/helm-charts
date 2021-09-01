@@ -17,6 +17,12 @@ openfaas:
     enable: false
     interval: "2m"
     inactivityDuration: "10m"
+  watchdog:
+    maxInflight: 1
+    writeDebug: "true"
+    execTimeout: 0
+    readTimeout: 300
+    writeTimeout: 300
 
 # Service configuration
 service:
