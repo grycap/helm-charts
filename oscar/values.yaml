@@ -37,7 +37,7 @@ ingress:
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
-  tag: "2.1.0"
+  tag: "2.1.2"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server
@@ -55,7 +55,7 @@ minIO:
 # FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
   storageClassName: ""
-  supervisorVersion: "1.3.2"
+  supervisorVersion: "1.4.0"
   watchdogVersion: "0.18.10"
 
 # Liveness and Readiness probe values.
