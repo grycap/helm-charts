@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/schema#",
+    "type": "object",
+    "properties": {
+      "imweb": {
+        "type": "object",
+        "form": true,
+        "title": "IM-Web Configuration",
+        "properties": {
+          "version": {
+            "type": "string",
+            "form": true,
+            "title": "IM-Web version",
+            "description": "IM-Web version"
+          }
+        }
+      },
+      "im": {
+        "type": "object",
+        "form": true,
+        "title": "IM Configuration",
+        "properties": {
+            "version": {
+                "type": "string",
+                "form": true,
+                "title": "IM version",
+                "description": "IM version"
+            },
+            "replicas": {
+                "type": "integer",
+                "form": true,
+                "title": "Number of replicas",
+                "description": "Number of replicas"
+            }
+        }
+      },
+      "imdashboard": {
+        "type": "object",
+        "title": "IM-Dasboard Configuration",
+        "form": true,
+        "properties": {
+          "deploy": {
+            "type": "boolean",
+            "title": "Deploy IM-Dashboard",
+            "form": true
+          },
+          "support_email": {
+            "type": "string",
+            "form": true,
+            "title": "IM-Dasboard support email",
+            "hidden": {
+                "value": false,
+                "path": "imdashboard/deploy"
+              }
+          },
+          "version": {
+            "type": "string",
+            "form": true,
+            "title": "IM-Dasboard version",
+            "description": "IM-Web version",
+            "hidden": {
+                "value": false,
+                "path": "imdashboard/deploy"
+              }
+          },
+          "oidc": {
+            "type": "object",
+            "form": true,
+            "title": "OIDC IM-Dasboard configuration",
+            "hidden": {
+                "value": false,
+                "path": "imdashboard/deploy"
+            },
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "form": true,
+                    "title": "OIDC provider name",
+                  },
+                "base_url": {
+                    "type": "string",
+                    "form": true,
+                    "title": "OIDC provider base url",
+                },
+                "client_id": {
+                    "type": "string",
+                    "form": true,
+                    "title": "OIDC provider Client ID",
+                },
+                "client_secret": {
+                    "type": "string",
+                    "form": true,
+                    "title": "OIDC provider Client Secret",
+                },
+            }
+          }
+        }
+      }
+    }
+  }

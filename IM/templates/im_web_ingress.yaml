@@ -12,10 +12,15 @@ metadata:
       nginx.ingress.kubernetes.io/proxy-connect-timeout: "1800"
       nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
       nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
-      nginx.ingress.kubernetes.io/x-forwarded-prefix: /im-web
+      nginx.ingress.kubernetes.io/x-forwarded-prefix: {{ .Values.imweb.ingress.path }}
 spec:
   rules:
+{{- if .Values.imweb.ingress.host }}
+    - host: {{ .Values.imweb.ingress.host }}
+      http:
+{{- else }}
     - http:
+{{- end }}
         paths:
         - backend:
 {{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
@@ -28,5 +33,5 @@ spec:
                 number: 80
           pathType: Prefix
 {{- end }}
-          path: /im-web/?(.*)
+          path: {{ .Values.imweb.ingress.path }}/?(.*)
 

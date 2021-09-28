@@ -24,6 +24,9 @@ mysql:
 imweb:
   version: latest
   image: grycap/im-web
+  ingress:
+    host: ""
+    path: "/im-web"
   resources:
     requests:
       memory: 256Mi
@@ -33,6 +36,9 @@ imdashboard:
   deploy: false
   image: grycap/im-dashboard
   version: latest
+  ingress:
+    host: ""
+    path: "/im-dashboard"
   resources:
     requests:
       memory: 256Mi
@@ -55,6 +61,10 @@ imdashboard:
 im:
   version: latest
   image: grycap/im
+  ingress:
+    enabled: true
+    host: ""
+    path: "/im"
   resources:
     requests:
       memory: 256Mi
