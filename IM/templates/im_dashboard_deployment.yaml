@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: im-dashboard
-          image: grycap/im-dashboard:{{ .Values.imdashboard.version }}
+          image: {{ .Values.imdashboard.image }}:{{ .Values.imdashboard.version }}
           resources:
             requests:
               memory: "{{ .Values.imdashboard.resources.requests.memory }}"

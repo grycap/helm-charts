@@ -23,6 +23,7 @@ mysql:
 
 imweb:
   version: latest
+  image: grycap/im-web
   resources:
     requests:
       memory: 256Mi
@@ -30,6 +31,7 @@ imweb:
 
 imdashboard:
   deploy: false
+  image: grycap/im-dashboard
   version: latest
   resources:
     requests:
@@ -52,6 +54,7 @@ imdashboard:
 
 im:
   version: latest
+  image: grycap/im
   resources:
     requests:
       memory: 256Mi

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: im-web
-          image: grycap/im-web:{{ .Values.imweb.version }}
+          image: {{ .Values.imweb.image }}:{{ .Values.imweb.version }}
           resources:
             requests:
               memory: "{{ .Values.imweb.resources.requests.memory }}"

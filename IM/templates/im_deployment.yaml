@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: im
-        image: grycap/im:{{ .Values.im.version }}
+        image: {{ .Values.im.image }}:{{ .Values.im.version }}
         resources:
           requests:
             memory: "{{ .Values.im.resources.requests.memory }}"
