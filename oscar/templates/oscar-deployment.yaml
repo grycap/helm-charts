@@ -43,7 +43,7 @@ spec:
           failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
         env:
         - name: OSCAR_SERVICE_PORT
-          value: {{ .Values.port | quote }}
+          value: {{ .Values.service.port | quote }}
         - name: OSCAR_NAME
           value: oscar
         - name: OSCAR_NAMESPACE
@@ -60,6 +60,16 @@ spec:
           value: {{ .Values.openfaas.namespace | quote }}
         - name: OPENFAAS_PORT
           value: {{ .Values.openfaas.port | quote }}
+        - name: OPENFAAS_BASIC_AUTH_SECRET
+          value: {{ .Values.openfaas.basicAuthSecret | quote }}
+        - name: OPENFAAS_PROMETHEUS_PORT
+          value: {{ .Values.openfaas.prometheusPort | quote }}
+        - name: OPENFAAS_SCALER_ENABLE
+          value: {{ .Values.openfaas.scaler.enable | quote }}
+        - name: OPENFAAS_SCALER_INTERVAL
+          value: {{ .Values.openfaas.scaler.interval | quote }}
+        - name: OPENFAAS_SCALER_INACTIVITY_DURATION
+          value: {{ .Values.openfaas.scaler.inactivityDuration | quote }}
         - name: MINIO_ENDPOINT
           value: {{ .Values.minIO.endpoint | quote }}
         - name: MINIO_ACCESS_KEY
@@ -74,6 +84,16 @@ spec:
           value: {{ .Values.readTimeout | quote }}
         - name: WRITE_TIMEOUT
           value: {{ .Values.writeTimeout | quote }}
+        - name: WATCHDOG_MAX_INFLIGHT
+          value: {{ .Values.openfaas.watchdog.maxInflight | quote }}
+        - name: WATCHDOG_WRITE_DEBUG
+          value: {{ .Values.openfaas.watchdog.writeDebug | quote }}
+        - name: WATCHDOG_EXEC_TIMEOUT
+          value: {{ .Values.openfaas.watchdog.execTimeout | quote }}
+        - name: WATCHDOG_READ_TIMEOUT
+          value: {{ .Values.openfaas.watchdog.readTimeout | quote }}
+        - name: WATCHDOG_WRITE_TIMEOUT
+          value: {{ .Values.openfaas.watchdog.writeTimeout | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}
