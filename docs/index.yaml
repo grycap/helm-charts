@@ -2,9 +2,9 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v1
-    created: "2021-09-29T07:41:25.108464433Z"
+    created: "2021-09-29T08:06:13.899920552Z"
     description: Deploy a HA Infrastructure Manager
-    digest: 04ccebe05e0079baa138c8c4a90f19706dc7631cd5ac6aba912b56772b46aebb
+    digest: 9ba49c8419faf70582fd0155d3f9b2f4c5672614786212fd36cb0687e10891b0
     home: https://www.grycap.upv.es/im
     icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
