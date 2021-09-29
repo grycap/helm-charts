@@ -10,8 +10,7 @@
           "version": {
             "type": "string",
             "form": true,
-            "title": "IM-Web version",
-            "description": "IM-Web version"
+            "title": "Version"
           }
         }
       },
@@ -23,14 +22,12 @@
             "version": {
                 "type": "string",
                 "form": true,
-                "title": "IM version",
-                "description": "IM version"
+                "title": "Version"
             },
             "replicas": {
                 "type": "integer",
                 "form": true,
-                "title": "Number of replicas",
-                "description": "Number of replicas"
+                "title": "Number of replicas"
             }
         }
       },
@@ -41,13 +38,13 @@
         "properties": {
           "deploy": {
             "type": "boolean",
-            "title": "Deploy IM-Dashboard",
+            "title": "Deploy",
             "form": true
           },
           "support_email": {
             "type": "string",
             "form": true,
-            "title": "IM-Dasboard support email",
+            "title": "Support email",
             "hidden": {
                 "value": false,
                 "path": "imdashboard/deploy"
@@ -56,8 +53,7 @@
           "version": {
             "type": "string",
             "form": true,
-            "title": "IM-Dasboard version",
-            "description": "IM-Web version",
+            "title": "Version",
             "hidden": {
                 "value": false,
                 "path": "imdashboard/deploy"
@@ -75,23 +71,23 @@
                 "name": {
                     "type": "string",
                     "form": true,
-                    "title": "OIDC provider name",
+                    "title": "OIDC provider name"
                   },
                 "base_url": {
                     "type": "string",
                     "form": true,
-                    "title": "OIDC provider base url",
+                    "title": "OIDC provider base url"
                 },
                 "client_id": {
                     "type": "string",
                     "form": true,
-                    "title": "OIDC provider Client ID",
+                    "title": "OIDC provider Client ID"
                 },
                 "client_secret": {
                     "type": "string",
                     "form": true,
-                    "title": "OIDC provider Client Secret",
-                },
+                    "title": "OIDC provider Client Secret"
+                }
             }
           }
         }
