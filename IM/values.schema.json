@@ -6,6 +6,7 @@
         "type": "object",
         "form": true,
         "title": "IM Configuration",
+        "description": "IM Service configuration values",
         "properties": {
             "version": {
               "type": "string",
@@ -21,6 +22,7 @@
               "type": "object",
               "form": true,
               "title": "Ingress",
+              "description": "Enable the ingress resource that allows accessing the IM service REST API.",
               "properties": {
                 "enabled": {
                   "type": "boolean",
@@ -53,32 +55,43 @@
         "type": "object",
         "form": true,
         "title": "IM-Web Configuration",
+        "description": "IM-Web portal configuration values",
         "properties": {
           "version": {
             "type": "string",
             "form": true,
             "title": "Version"
+          },
+          "ingress": {
+            "type": "object",
+            "form": true,
+            "title": "Ingress",
+            "properties": {
+              "host": {
+                "type": "string",
+                "title": "Host",
+                "form": true
+              },
+              "path": {
+                "type": "string",
+                "title": "Path",
+                "form": true
+              }
+            }
           }
         }
       },
       "imdashboard": {
         "type": "object",
         "title": "IM-Dasboard Configuration",
+        "description": "IM-Dashboard configuration values",
         "form": true,
         "properties": {
           "deploy": {
             "type": "boolean",
             "title": "Deploy",
+            "description": "Flag to deploy the IM-Dasboard (OIDC configuration is required).",
             "form": true
-          },
-          "support_email": {
-            "type": "string",
-            "form": true,
-            "title": "Support email",
-            "hidden": {
-                "value": false,
-                "path": "imdashboard/deploy"
-              }
           },
           "version": {
             "type": "string",
@@ -89,10 +102,41 @@
                 "path": "imdashboard/deploy"
               }
           },
+          "support_email": {
+            "type": "string",
+            "form": true,
+            "title": "Support email",
+            "hidden": {
+                "value": false,
+                "path": "imdashboard/deploy"
+              }
+          },
+          "ingress": {
+            "type": "object",
+            "form": true,
+            "title": "Ingress",
+            "hidden": {
+              "value": false,
+              "path": "imdashboard/deploy"
+            },
+            "properties": {
+              "host": {
+                "type": "string",
+                "title": "Host",
+                "form": true
+              },
+              "path": {
+                "type": "string",
+                "title": "Path",
+                "form": true
+              }
+            }
+          },
           "oidc": {
             "type": "object",
             "form": true,
             "title": "OIDC Configuration",
+            "description": "OIDC Configuration for the authenti",
             "hidden": {
                 "value": false,
                 "path": "imdashboard/deploy"
