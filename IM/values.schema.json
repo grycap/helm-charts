@@ -2,6 +2,53 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "properties": {
+      "im": {
+        "type": "object",
+        "form": true,
+        "title": "IM Configuration",
+        "properties": {
+            "version": {
+              "type": "string",
+              "form": true,
+              "title": "Version"
+            },
+            "replicas": {
+                "type": "integer",
+                "form": true,
+                "title": "Number of replicas"
+            },
+            "ingress": {
+              "type": "object",
+              "form": true,
+              "title": "Ingress",
+              "properties": {
+                "enabled": {
+                  "type": "boolean",
+                  "title": "Enabled",
+                  "form": true
+                },
+                "host": {
+                  "type": "string",
+                  "title": "Host",
+                  "form": true,
+                  "hidden": {
+                    "value": false,
+                    "path": "im/ingress/enabled"
+                  }
+                },
+                "path": {
+                  "type": "string",
+                  "title": "Path",
+                  "form": true,
+                  "hidden": {
+                    "value": false,
+                    "path": "im/ingress/enabled"
+                  }
+                }
+              }
+            }
+        }
+      },
       "imweb": {
         "type": "object",
         "form": true,
@@ -12,23 +59,6 @@
             "form": true,
             "title": "Version"
           }
-        }
-      },
-      "im": {
-        "type": "object",
-        "form": true,
-        "title": "IM Configuration",
-        "properties": {
-            "version": {
-                "type": "string",
-                "form": true,
-                "title": "Version"
-            },
-            "replicas": {
-                "type": "integer",
-                "form": true,
-                "title": "Number of replicas"
-            }
         }
       },
       "imdashboard": {
@@ -62,7 +92,7 @@
           "oidc": {
             "type": "object",
             "form": true,
-            "title": "OIDC IM-Dasboard configuration",
+            "title": "OIDC Configuration",
             "hidden": {
                 "value": false,
                 "path": "imdashboard/deploy"
@@ -71,22 +101,22 @@
                 "name": {
                     "type": "string",
                     "form": true,
-                    "title": "OIDC provider name"
+                    "title": "Provider Name"
                   },
                 "base_url": {
                     "type": "string",
                     "form": true,
-                    "title": "OIDC provider base url"
+                    "title": "Provider Base URL"
                 },
                 "client_id": {
                     "type": "string",
                     "form": true,
-                    "title": "OIDC provider Client ID"
+                    "title": "Client ID"
                 },
                 "client_secret": {
                     "type": "string",
                     "form": true,
-                    "title": "OIDC provider Client Secret"
+                    "title": "Client Secret"
                 }
             }
           }
