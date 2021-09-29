@@ -57,6 +57,10 @@ The following table lists the configurable parameters of the IM chart and their 
 | `mysql.persistence.accessMode`    | Access mode of the `MySQL` PVC.                             | `ReadWriteOnce`  |
 | `mysql.persistence.size`          | Size of PVC for `MySQL`.                                    | `8Gi`            |
 | `im.version`                      | `im` docker image version                                   | `latest`         |
+| `im.image`                        | `im` docker image name                                      | `grycap/im`      |
+| `im.ingress.enabled`              | Create Ingress for IM                                       | `true`           |
+| `im.ingress.host`                 | Ingress host                                                | `""`             |
+| `im.ingress.path`                 | Ingress path                                                | `/im`            |
 | `im.resources.requests.memory`    | `im` Memory resource requests/limits                        | `256Mi`          |
 | `im.resources.requests.cpu`       | `im` CPU resource requests/limits                           | `250m`           |
 | `im.replicas`                     | Number of IM Pods to run ([see IM HA mode](#IM-HA-mode)).   | `1`              |
@@ -67,10 +71,16 @@ The following table lists the configurable parameters of the IM chart and their 
 | `im.log.persistence.size`         | Size of PVC for `log`.                                      | `8Gi`            |
 | `im.config`                       | List of IM configuration values. (See [IM docs](https://imdocs.readthedocs.io/en/latest/manual.html#configuration)).             | `[]`             |
 | `imweb.version`                   | `im-web` docker image version                               | `latest`         |
+| `imweb.image`                     | `im-web` docker image name                                  | `grycap/im-web`  |
+| `imweb.ingress.host`              | Ingress host                                                | `""`             |
+| `imweb.ingress.path`              | Ingress path                                                | `/im-web`        |
 | `imweb.resources.requests.memory` | `im-web` Memory resource requests/limits                    | `256Mi`          |
 | `imweb.resources.requests.cpu`    | `im-web` CPU resource requests/limits                       | `250m`           |
 | `imdashboard.deploy`              | Deploy `im-dashboard` web interface.                        | `false`          |
 | `imdashboard.version`             | `im-dashboard` docker image version.                        | `latest`         |
+| `imdashboard.image`               | `im-imdashboard` docker image name                          | `grycap/im-imdashboard`|
+| `imdashboard.ingress.host`        | Ingress host                                                | `""`             |
+| `imdashboard.ingress.path`        | Ingress path                                                | `/im-imdashboard`|
 | `imdashboard.resources.requests.memory` | `im-dashboard` Memory resource requests/limits                        | `256Mi`          |
 | `imdashboard.resources.requests.cpu`    | `im-dashboard` CPU resource requests/limits                           | `250m`           |
 | `imdashboard.oidc.name`           | `im-dashboard` OIDC provider name.                          | `name`           |
