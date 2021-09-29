@@ -1,0 +1,21 @@
+suite: test im ingress
+templates:
+  - im_ingress.yaml
+tests:
+  - name: test1
+    set:
+      im.ingress.enabled: true
+      im.ingress.path: /im
+      im.ingress.host: somehost.com
+    asserts:
+      - isKind:
+          of: Ingress
+      - equal:
+          path: metadata.name
+          value: im
+      - equal:
+          path: spec.rules[0].http.paths[0].path
+          value: /im/?(.*)
+      - equal:
+          path: spec.rules[0].host
+          value: somehost.com

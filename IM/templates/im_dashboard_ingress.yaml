@@ -13,11 +13,16 @@ metadata:
       nginx.ingress.kubernetes.io/proxy-connect-timeout: "1800"
       nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
       nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
-      nginx.ingress.kubernetes.io/x-forwarded-prefix: /im-dashboard
+      nginx.ingress.kubernetes.io/x-forwarded-prefix: {{ .Values.imdashboard.ingress.path }}
       nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
   rules:
+{{- if .Values.imdashboard.ingress.host }}
+    - host: {{ .Values.imdashboard.ingress.host }}
+      http:
+{{- else }}
     - http:
+{{- end }}
         paths:
         - backend:
 {{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
@@ -30,6 +35,6 @@ spec:
                 number: 5001
           pathType: Prefix
 {{- end }}
-          path: /im-dashboard/?(.*)
+          path: {{ .Values.imdashboard.ingress.path }}/?(.*)
 
 {{ end }}
