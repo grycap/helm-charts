@@ -75,7 +75,7 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `minIO.region`                       | Region of the MinIO server                                                                                  | `us-east-1`                        |
 | `minIO.accessKey`                    | Access key of the MinIO server                                                                              | `minio`                            |
 | `minIO.secretKey`                    | Secret key of the MinIO server                                                                              | `minio123`                         |
-| `volume.supervisorVersion`           | [FaaS Supervisor](https://github.com/grycap/faas-supervisor) version to use if ServerlessBackend is enabled | `1.4.0`                            |
+| `volume.supervisorVersion`           | [FaaS Supervisor](https://github.com/grycap/faas-supervisor) version to use if ServerlessBackend is enabled | `1.4.1`                            |
 | `volume.watchdogVersion`             | [OpenFaaS Watchdog](https://github.com/openfaas/classic-watchdog) version to use in the OSCAR's services    | `0.18.10`                          |
 | `volume.storageClassName`            | Storage Class used by the PVC                                                                               | `""`                               |
 | `resources.requests.memory`          | Memory resource requests                                                                                    | `512Mi`                            |
