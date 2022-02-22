@@ -58,6 +58,10 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `openfaas.watchdog.execTimeout`      | Exec timeout for process exec'd for each incoming request (in seconds). Disabled if set to 0                | `0`                                |
 | `openfaas.watchdog.readTimeout`      | HTTP timeout for reading the payload from the client caller (in seconds)                                    | `300`                              |
 | `openfaas.watchdog.writeTimeout`     | HTTP timeout for writing a response body from your function (in seconds)                                    | `300`                              |
+| `yuniKorn.enable`                    | Option to enable the integration with [Apache YuniKorn](https://yunikorn.apache.org/)                       | `false`                            |
+| `yuniKorn.namespace`                 | Namespace where the Apache YuniKorn's scheduler is deployed                                                 | `yunikorn`                         |
+| `yuniKorn.configMap`                 | Name of the Apache YuniKorn's configMap                                                                     | `yunikorn-configs`                 |
+| `yuniKorn.configFileName`            | Name of the Apache YuniKorn's filename inside the configMap                                                 | `queues.yaml`                      |
 | `service.type`                       | Type of service to expose OSCAR                                                                             | `NodePort`                         |
 | `service.port`                       | ClusterIP port for OSCAR                                                                                    | `8080`                             |
 | `service.nodePort`                   | NodePort to expose OSCAR (if `service.type` is `NodePort`)                                                  | `30301`                            |
