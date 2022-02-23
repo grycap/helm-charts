@@ -105,3 +105,38 @@ subjects:
   name: oscar-sa
   namespace: {{ .Release.Namespace | quote }}
 {{- end }}
+{{- if .Values.yuniKorn.enable }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: yunikorn-config-reader
+  namespace: {{ .Values.yuniKorn.namespace | quote }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: yunikorn-config-reader-binding
+  namespace: {{ .Values.yuniKorn.namespace | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: yunikorn-config-reader
+subjects:
+- kind: ServiceAccount
+  name: oscar-sa
+  namespace: {{ .Release.Namespace | quote }}
+{{- end }}
