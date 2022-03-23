@@ -35,7 +35,7 @@ rules:
   - create
   - delete
   - deletecollection
-{{- if ne .Values.serverlessBackend "" }}
+{{- if eq (lower .Values.serverlessBackend) "openfaas" }}
 - apiGroups:
   - apps
   resources:
@@ -48,8 +48,6 @@ rules:
   - delete
   - update
   - patch
-{{- end }}
-{{- if eq (lower .Values.serverlessBackend) "openfaas" }}
 - apiGroups:
   - openfaas.com
   resources:
@@ -60,6 +58,19 @@ rules:
   - watch
   - create
   - delete
+{{- end }}
+{{- if eq (lower .Values.serverlessBackend) "knative" }}
+- apiGroups:
+  - serving.knative.dev
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
 {{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1

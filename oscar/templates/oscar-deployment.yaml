@@ -94,6 +94,8 @@ spec:
           value: {{ .Values.openfaas.watchdog.readTimeout | quote }}
         - name: WATCHDOG_WRITE_TIMEOUT
           value: {{ .Values.openfaas.watchdog.writeTimeout | quote }}
+        - name: WATCHDOG_HEALTHCHECK_INTERVAL
+          value: {{ .Values.openfaas.watchdog.healthCheckInterval | quote }}
         - name: YUNIKORN_ENABLE
           value: {{ .Values.yuniKorn.enable | quote }}
         - name: YUNIKORN_NAMESPACE
