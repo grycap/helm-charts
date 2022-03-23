@@ -23,6 +23,7 @@ openfaas:
     execTimeout: 0
     readTimeout: 300
     writeTimeout: 300
+    healthCheckInterval: 5
 
 # Service configuration
 service:
@@ -43,7 +44,7 @@ ingress:
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
-  tag: "2.3.0"
+  tag: "2.4.0"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server
@@ -69,7 +70,7 @@ yuniKorn:
 volume:
   storageClassName: ""
   supervisorVersion: "1.5.0"
-  watchdogVersion: "0.18.10"
+  watchdogVersion: "0.2.0"
 
 # Liveness and Readiness probe values.
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
