@@ -2,6 +2,25 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v1
+    created: "2022-05-03T10:47:24.590258991Z"
+    description: Deploy a HA Infrastructure Manager
+    digest: 5c7d9f8ba11817d36fb44444d39eed60d744811f961c6bbf0dad25673cd46b90
+    home: https://www.grycap.upv.es/im
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
+    keywords:
+    - Infrastructure Manager
+    - Cloud Orchestrator
+    - TOSCA
+    maintainers:
+    - email: micafer1@upv.es
+      name: Miguel Caballer
+    name: IM
+    sources:
+    - https://github.com/grycap/im
+    urls:
+    - https://grycap.github.io/helm-charts/IM-1.4.2.tgz
+    version: 1.4.2
+  - apiVersion: v1
     created: "2021-09-29T08:06:13.899920552Z"
     description: Deploy a HA Infrastructure Manager
     digest: 9ba49c8419faf70582fd0155d3f9b2f4c5672614786212fd36cb0687e10891b0
