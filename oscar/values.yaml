@@ -66,6 +66,17 @@ yuniKorn:
   configMap:  yunikorn-configs
   configFileName: queues.yaml
 
+# ResourceManager configuration
+resourceManager:
+  enable: false
+  interval: 15
+
+# ReScheduler configuration
+reScheduler:
+  enable: false
+  interval: 15
+  threshold: 30
+
 # FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
   storageClassName: ""

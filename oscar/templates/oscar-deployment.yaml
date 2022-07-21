@@ -104,6 +104,16 @@ spec:
           value: {{ .Values.yuniKorn.configMap | quote }}
         - name: YUNIKORN_CONFIG_FILENAME
           value: {{ .Values.yuniKorn.configFileName | quote }}
+        - name: RESOURCE_MANAGER_ENABLE
+          value: {{ .Values.resourceManager.enable | quote }}
+        - name: RESOURCE_MANAGER_INTERVAL
+          value: {{ .Values.resourceManager.interval | quote }}
+        - name: RESCHEDULER_ENABLE
+          value: {{ .Values.reScheduler.enable | quote }}
+        - name: RESCHEDULER_INTERVAL
+          value: {{ .Values.reScheduler.interval | quote }}
+        - name: RESCHEDULER_THRESHOLD
+          value: {{ .Values.reScheduler.threshold | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}
