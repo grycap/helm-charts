@@ -44,7 +44,7 @@ ingress:
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
-  tag: "2.4.2"
+  tag: "2.5.0"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server
@@ -69,8 +69,8 @@ yuniKorn:
 # FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
   storageClassName: ""
-  supervisorVersion: "1.5.0"
-  watchdogVersion: "0.2.0"
+  supervisorVersion: "1.5.2"
+  watchdogVersion: "0.2.1"
 
 # Liveness and Readiness probe values.
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
