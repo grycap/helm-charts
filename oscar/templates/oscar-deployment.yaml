@@ -114,6 +114,14 @@ spec:
           value: {{ .Values.reScheduler.interval | quote }}
         - name: RESCHEDULER_THRESHOLD
           value: {{ .Values.reScheduler.threshold | quote }}
+        - name: OIDC_ENABLE
+          value: {{ .Values.oidc.enable | quote }}
+        - name: OIDC_ISSUER
+          value: {{ .Values.oidc.issuer | quote }}
+        - name: OIDC_SUBJECT
+          value: {{ .Values.oidc.subject | quote }}
+        - name: OIDC_GROUPS
+          value: {{ .Values.oidc.groups | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}

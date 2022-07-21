@@ -77,6 +77,13 @@ reScheduler:
   interval: 15
   threshold: 30
 
+# OIDC configuration
+oidc:
+  enable: false
+  issuer: "https://aai.egi.eu/oidc/"
+  subject: ""
+  groups: ""
+
 # FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
   storageClassName: ""
