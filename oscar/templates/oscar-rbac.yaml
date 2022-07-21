@@ -151,3 +151,33 @@ subjects:
   name: oscar-sa
   namespace: {{ .Release.Namespace | quote }}
 {{- end }}
+{{- if .Values.resourceManager.enable }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: oscar-cluster-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: oscar-cluster-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: oscar-cluster-role
+subjects:
+- kind: ServiceAccount
+  name: oscar-sa
+  namespace: {{ .Release.Namespace | quote }}
+{{- end }}
