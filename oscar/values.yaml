@@ -80,7 +80,7 @@ reScheduler:
 # OIDC configuration
 oidc:
   enable: false
-  issuer: "https://aai.egi.eu/oidc/"
+  issuer: "https://aai.egi.eu/auth/realms/egi"
   subject: ""
   groups: ""
 
