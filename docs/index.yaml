@@ -190,6 +190,26 @@ entries:
     version: 1.0.0
   oscar:
   - apiVersion: v1
+    created: "2022-10-07T08:45:44.771165271Z"
+    description: Open Source Serverless Computing for Data-Processing Applications
+    digest: 4e364e24bee820938d1688552c45a1fdfb2ee24dc5789c50a1bd6094a472358f
+    home: https://grycap.github.io/oscar
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
+    keywords:
+    - serverless
+    - containers
+    - file-processing
+    - batch
+    maintainers:
+    - email: srisco@i3m.upv.es
+      name: Sebastián Risco
+    name: oscar
+    sources:
+    - https://github.com/grycap/oscar
+    urls:
+    - https://grycap.github.io/helm-charts/oscar-2.5.1.tgz
+    version: 2.5.1
+  - apiVersion: v1
     created: "2022-08-03T11:17:54.528375498+02:00"
     description: Open Source Serverless Computing for Data-Processing Applications
     digest: 4b8a3f02f60527b3235a0037681254179b6bf92f37880d56f2abdf7e9e1795b6
