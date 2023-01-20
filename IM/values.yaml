@@ -82,3 +82,12 @@ im:
       size: 8Gi
   # if you need to add values check: https://raw.githubusercontent.com/grycap/im/master/etc/im.cfg
   config: []
+
+vault:
+  enabled: false
+  resources:
+    resources:
+      cpu: 250m
+      memory: 256Mi
+  dataStorage:
+    storageClass: ""

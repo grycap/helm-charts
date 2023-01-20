@@ -29,12 +29,6 @@ First add the GRyCAP repo:
 helm repo add grycap https://grycap.github.io/helm-charts/
 ```
 
-Then install the IM chart (with Helm v2):
-
-```sh
-helm install --namespace=im --name=im  grycap/IM
-```
-
 Then install the IM chart (with Helm v3):
 
 ```sh
@@ -46,14 +40,16 @@ controller installed and configured in the Kubernetes cluster.
 
 ## Configuration
 
-The following table lists the configurable parameters of the IM chart and their default values.
+The following table lists the configurable parameters of the IM chart and their default values. This chart has some subcharts
+[MySQL](https://github.com/helm/charts/tree/master/stable/mysql) and [Vault](https://developer.hashicorp.com/vault/docs/platform/k8s/helm)
+see their documentations for advance configuration parameters.
 
 | Parameter                         | Description                                                 | Default          |
 | --------------------------------- | ----------------------------------------------------------- | ---------------- |
 | `mysql.mysqlUser`                 | Username of IM `MySQL` user to create.                      | `imuser`         |
 | `mysql.mysqlPassword`             | Password for the new `MySQL` IM user.                       | `impass`         |
 | `mysql.persistence.enabled`       | Create a volume to store `MySQL` data.                      | `false`          |
-| `mysql.persistence.storageClass`  | Type of PVC for `MySQL`.                                    | `imdb`           |
+| `mysql.persistence.storageClass`  | Type of PVC for `MySQL`.                                    | `""`             |
 | `mysql.persistence.accessMode`    | Access mode of the `MySQL` PVC.                             | `ReadWriteOnce`  |
 | `mysql.persistence.size`          | Size of PVC for `MySQL`.                                    | `8Gi`            |
 | `im.version`                      | `im` docker image version                                   | `latest`         |
@@ -66,7 +62,7 @@ The following table lists the configurable parameters of the IM chart and their 
 | `im.replicas`                     | Number of IM Pods to run ([see IM HA mode](#IM-HA-mode)).   | `1`              |
 | `im.log.level`                    | IM Log Level                                                | `DEBUG`          |
 | `im.log.persistence.enabled`      | Create a volume to store `log` data.                        | `false`          |
-| `im.log.persistence.storageClass` | Type of PVC for `log`.                                      | `imlog`          |
+| `im.log.persistence.storageClass` | Type of PVC for `log`.                                      | `""`             |
 | `im.log.persistence.accessMode`   | Access mode of the `log` PVC.                               | `ReadWriteOnce`  |
 | `im.log.persistence.size`         | Size of PVC for `log`.                                      | `8Gi`            |
 | `im.config`                       | List of IM configuration values. (See [IM docs](https://imdocs.readthedocs.io/en/latest/manual.html#configuration)).             | `[]`             |
@@ -89,17 +85,27 @@ The following table lists the configurable parameters of the IM chart and their 
 | `imdashboard.oidc.client_secret`  | `im-dashboard` OIDC provider Client Secret.                 | `sec`            |
 | `imdashboard.oidc.client_secret`  | `im-dashboard` OIDC provider Client Secret.                 | `sec`            |
 | `imdashboard.oidc.group_membership` | `im-dashboard` OIDC list of groups needed to access the dashboard.           | `[]`                |
-| `imdashboard.oidc.scopes`  | `im-dashboard` OIDC list of scopes.                 | `openid email profile offline_access eduperson_entitlement'`            |
+| `imdashboard.oidc.scopes`         | `im-dashboard` OIDC list of scopes.                 | `openid email profile offline_access eduperson_entitlement'`            |
 | `imdashboard.support_email`       | `im-dashboard` support email.                               | `root@server.com`          |
 | `imdashboard.analytics_tag`       | `im-dashboard` Google Anaytics tag.                         | `""`             |
 | `imdashboard.loglevel`            | `im-dashboard` Log Level.                                   | `info`           |
 | `imdashboard.static_sites`        | `im-dashboard` List of static sites.                        | `[]`             |
 | `imdashboard.credentials_key`     | `im-dashboard` Credentials encryption key (read [this](https://github.com/grycap/im-dashboard#enabling-credentials-encryption)).                  | `PXZ66574VjKIMSRXPWquRbcH8HaxH2yPRYsgZljlclA=`             |
 | `imdashboard.external_links`      | `im-dashboard` List of external links.                        | `[ { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" }, { "url": "https://youtu.be/vmtzGOZxiUg", "menu_item_name": "IM Video Demo" }]'`             |
-
+| `vault.enabled`                   | Launch a Hashicorp Vault instance.                          | `false`          |
+| `vault.dataStorage.enabled`       | Create a volume to store `Vault` data.                      | `true`           |
+| `vault.dataStorage.storageClass`  | Type of PVC for `Vault`.                                    | `""`             |
+| `vault.dataStorage.accessMode`    | Access mode of the `Vault` PVC.                             | `ReadWriteOnce`  |
+| `vault.dataStorage.size`          | Size of PVC for `Vault`.                                    | `10Gi`           |
 
 ## IM HA mode
 
 In case of setting more than 1 in the number of IM Pods to run (`im.replicas`) the IM service will be launched in
 HA mode. It requires an [HAProxy](http://www.haproxy.org/) load balanced on top of them. Furtemore a [rsyslog](https://www.rsyslog.com/)
 service is also required to manage the log information of all the IM pods.
+
+## Vault support to store Cloud credentials
+
+After the Vault Helm subchart is installed in standalone or ha mode one of the Vault servers need to be initialized.
+The initialization generates the credentials necessary to unseal all the Vault servers. See full instructions
+[here](https://developer.hashicorp.com/vault/docs/platform/k8s/helm/run#initialize-and-unseal-vault).

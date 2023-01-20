@@ -21,6 +21,9 @@ data:
 {{- else }}
     "IM_URL": "http://im-load-balancer-svc:8800",
 {{- end }}
+{{- if .Values.vault.enabled }}
+    "VAULT_URL": "https://{{ .Release.Name }}-vault:8200",
+{{- end }}
     "EXTERNAL_LINKS": {{ .Values.imdashboard.external_links }},
     "TOSCA_TEMPLATES_DIR": "/opt/tosca-templates",
     "TOSCA_PARAMETERS_DIR": "/opt/tosca-templates",

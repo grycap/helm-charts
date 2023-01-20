@@ -18,6 +18,7 @@ tests:
       imdashboard.analytics_tag: ""
       imdashboard.loglevel: "info"
       imdashboard.static_sites: []
+      vault.enabled: true
     asserts:
       - isKind:
           of: ConfigMap
@@ -34,6 +35,7 @@ tests:
             "SUPPORT_EMAIL": "me@server.com",
             "ANALYTICS_TAG": "",
             "IM_URL": "http://im-load-balancer-svc:8800",
+            "VAULT_URL": "https://RELEASE-NAME-vault:8200",
             "EXTERNAL_LINKS": [ { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" }, { "url": "https://youtu.be/vmtzGOZxiUg", "menu_item_name": "IM Video Demo" }],
             "TOSCA_TEMPLATES_DIR": "/opt/tosca-templates",
             "TOSCA_PARAMETERS_DIR": "/opt/tosca-templates",

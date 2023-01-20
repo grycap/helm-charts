@@ -1,7 +1,8 @@
-apiVersion: v1
+apiVersion: v2
 name: IM
 description: Deploy a HA Infrastructure Manager
-version: 1.4.2
+version: 1.5.0
+type: application
 home: https://www.grycap.upv.es/im
 sources:
   - https://github.com/grycap/im
@@ -13,3 +14,11 @@ keywords:
 maintainers:
 - email: micafer1@upv.es
   name: Miguel Caballer
+dependencies:
+  - name: mysql
+    version: ">= 1.1.1"
+    repository: https://charts.helm.sh/stable
+  - name: vault
+    version: ">= 0.17.1"
+    repository: https://helm.releases.hashicorp.com
+    condition: vault.enabled

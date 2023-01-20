@@ -51,6 +51,9 @@ data:
 {{- if gt .Values.im.replicas 1.0 }}
     INF_CACHE_TIME = 3600
 {{- end }}
+{{- if .Values.vault.enabled }}
+    VAULT_URL = https://RELEASE-NAME-vault:8200
+{{- end }}
     {{- range .Values.im.config }}
     {{ . | }}
     {{- end }}
