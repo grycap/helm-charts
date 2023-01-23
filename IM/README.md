@@ -123,26 +123,31 @@ kubectl exec -ti -n im im-vault-0 -- vault operator unseal # ... Unseal Key 3
 
 ### Vault Config
 
+Finally Vault must be configured to enable JWT authentication method setting EGI Checkin OIDC.
+A KV secrets engine called `credentials` must be created setting the correct policies to enable
+JWT users to access only to their own credentials.
+
 ```sh
-# Enable JWT Auth method
-kubectl exec -ti -n im im-vault-0 -- sh -c 'VAULT_TOKEN=token vault auth enable jwt'
+kubectl exec -ti -n im im-vault-0 -- sh -c '
+export VAULT_TOKEN=root.token
+
+# Enable JWT auth method
+vault auth enable jwt
 
 # Enable EGI Checking OIDC
-kubectl exec -ti -n im im-vault-0 -- sh -c 'VAULT_TOKEN=token \
-    vault write auth/jwt/config \
-    oidc_discovery_url="https://aai.egi.eu/auth/realms/egi" \
-    default_role="im"'
+vault write auth/jwt/config \
+oidc_discovery_url="https://aai.egi.eu/auth/realms/egi" \
+default_role="im"
 
 # Create the policy to manage the credentials
-kubectl exec -ti -n im im-vault-0 -- sh -c 'VAULT_TOKEN=token vault policy write read-imcreds  - <<EOF
+vault policy write read-imcreds  - <<EOF
 path "credentials/{{identity.entity.id}}" {
   capabilities = [ "create", "read", "update", "delete", "list" ]
 }
-EOF'
+EOF
 
 # Create the im role
-kubectl exec -ti -n im im-vault-0 -- sh -c '
-VAULT_TOKEN=token vault write -address=http://127.0.0.1:8200 auth/jwt/role/im - <<EOF
+vault write -address=http://127.0.0.1:8200 auth/jwt/role/im - <<EOF
 {
   "role_type": "jwt",
   "policies": ["read-imcreds"],
@@ -154,5 +159,8 @@ VAULT_TOKEN=token vault write -address=http://127.0.0.1:8200 auth/jwt/role/im - 
   "bound_claims_type": "glob"
 }
 EOF
+
+# Create the KV secrets engine in path credentials
+vault secrets enable -path=credentials -version=1 kv
 '
 ```
