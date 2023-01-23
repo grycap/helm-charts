@@ -52,7 +52,7 @@ data:
     INF_CACHE_TIME = 3600
 {{- end }}
 {{- if .Values.vault.enabled }}
-    VAULT_URL = https://RELEASE-NAME-vault:8200
+    VAULT_URL = http://{{ .Release.Name }}-vault:8200
 {{- end }}
     {{- range .Values.im.config }}
     {{ . | }}

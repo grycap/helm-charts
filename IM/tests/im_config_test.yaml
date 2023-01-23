@@ -32,4 +32,4 @@ tests:
           pattern: VALUE = 2
       - matchRegex:
           path: data.im\.cfg
-          pattern: VAULT_URL = https://RELEASE-NAME-vault:8200
+          pattern: VAULT_URL = http://RELEASE-NAME-vault:8200
