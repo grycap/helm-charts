@@ -17,6 +17,7 @@ tests:
       im.replicas: 2
       im.config:
         - VALUE = 2
+      vault.enabled: true
     asserts:
       - isKind:
           of: ConfigMap
@@ -29,3 +30,6 @@ tests:
       - matchRegex:
           path: data.im\.cfg
           pattern: VALUE = 2
+      - matchRegex:
+          path: data.im\.cfg
+          pattern: VAULT_URL = http://RELEASE-NAME-vault:8200
