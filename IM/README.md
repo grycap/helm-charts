@@ -108,7 +108,18 @@ service is also required to manage the log information of all the IM pods.
 
 After the Vault Helm subchart is installed in standalone or ha mode one of the Vault servers need to be initialized.
 The initialization generates the credentials necessary to unseal all the Vault servers. See full instructions
-[here](https://developer.hashicorp.com/vault/docs/platform/k8s/helm/run#initialize-and-unseal-vault).
+[here](https://developer.hashicorp.com/vault/docs/platform/k8s/helm/run#initialize-and-unseal-vault). But the
+basic steps are:
+
+```sh
+# Initialize one Vault server
+kubectl exec -ti -n im im-vault-0 -- vault operator init
+
+# Unseal the first vault server until it reaches the key threshold
+kubectl exec -ti -n im im-vault-0 -- vault operator unseal # ... Unseal Key 1
+kubectl exec -ti -n im im-vault-0 -- vault operator unseal # ... Unseal Key 2
+kubectl exec -ti -n im im-vault-0 -- vault operator unseal # ... Unseal Key 3
+```
 
 ### Vault Config
 
@@ -118,19 +129,16 @@ kubectl exec -ti -n im im-vault-0 -- sh -c 'VAULT_TOKEN=token vault auth enable 
 
 # Enable EGI Checking OIDC
 kubectl exec -ti -n im im-vault-0 -- sh -c 'VAULT_TOKEN=token \
-    vault write uth/jwt/config \
+    vault write auth/jwt/config \
     oidc_discovery_url="https://aai.egi.eu/auth/realms/egi" \
     default_role="im"'
 
 # Create the policy to manage the credentials
-kubectl exec -ti -n im im-vault-0 -- sh -c '
-cat <<EOF > /tmp/policy.hcl
+kubectl exec -ti -n im im-vault-0 -- sh -c 'VAULT_TOKEN=token vault policy write read-imcreds  - <<EOF
 path "credentials/{{identity.entity.id}}" {
   capabilities = [ "create", "read", "update", "delete", "list" ]
 }
-EOF
-'
-kubectl exec -ti -n im im-vault-0 -- sh -c 'VAULT_TOKEN=token vault policy write read-imcreds /tmp/policy.hcl'
+EOF'
 
 # Create the im role
 kubectl exec -ti -n im im-vault-0 -- sh -c '
@@ -145,5 +153,6 @@ VAULT_TOKEN=token vault write -address=http://127.0.0.1:8200 auth/jwt/role/im - 
   },
   "bound_claims_type": "glob"
 }
+EOF
 '
 ```

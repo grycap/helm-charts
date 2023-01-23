@@ -91,3 +91,5 @@ vault:
       memory: 256Mi
   dataStorage:
     storageClass: ""
+  injector:
+    enabled: false
