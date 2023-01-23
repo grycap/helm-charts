@@ -57,6 +57,12 @@
         "title": "IM-Web Configuration",
         "description": "IM-Web portal configuration values",
         "properties": {
+          "deploy": {
+            "type": "boolean",
+            "title": "Deploy",
+            "description": "Flag to deploy the IM-Web portal.",
+            "form": true
+          },
           "version": {
             "type": "string",
             "form": true,
@@ -163,6 +169,20 @@
                     "title": "Client Secret"
                 }
             }
+          }
+        }
+      },
+      "vault": {
+        "type": "object",
+        "form": true,
+        "title": "Vault Configuration",
+        "description": "Vault configuration values",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enable",
+            "description": "Flag to enable the Vault server.",
+            "form": true
           }
         }
       }
