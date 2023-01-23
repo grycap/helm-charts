@@ -23,6 +23,7 @@ mysql:
       GRANT ALL PRIVILEGES ON imdashdb.* TO 'imuser'@'%';
 
 imweb:
+  deploy: true
   version: latest
   image: grycap/im-web
   ingress:

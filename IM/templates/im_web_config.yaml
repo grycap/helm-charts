@@ -1,3 +1,4 @@
+{{ if  .Values.imweb.deploy }}
 # In case you want to track web usage using Google Analytics
 ---
 apiVersion: v1
@@ -9,3 +10,4 @@ data:
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script>
     </script>
+{{ end }}
