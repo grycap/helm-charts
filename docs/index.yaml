@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v2
-    created: "2023-01-23T13:00:39.577710425Z"
+    created: "2023-01-23T15:00:40.590694643Z"
     dependencies:
     - name: mysql
       repository: https://charts.helm.sh/stable
@@ -12,7 +12,7 @@ entries:
       repository: https://helm.releases.hashicorp.com
       version: '>= 0.17.1'
     description: Deploy a HA Infrastructure Manager
-    digest: d03ead55d43a621a01ea629cac293bec8c1ef908227d1a08c9f7ce411eafebd7
+    digest: 2f62e1cc79f4d29cf068b8615989221d9a2fa7b2b7e15e13a43785769409d370
     home: https://www.grycap.upv.es/im
     icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
     keywords:
