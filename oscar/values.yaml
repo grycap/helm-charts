@@ -44,7 +44,7 @@ ingress:
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
-  tag: "2.5.3"
+  tag: "2.5.4"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server
