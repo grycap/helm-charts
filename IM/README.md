@@ -68,6 +68,7 @@ see their documentations for advance configuration parameters.
 | `im.config`                       | List of IM configuration values. (See [IM docs](https://imdocs.readthedocs.io/en/latest/manual.html#configuration)).             | `[]`             |
 | `imweb.version`                   | `im-web` docker image version                               | `latest`         |
 | `imweb.image`                     | `im-web` docker image name                                  | `grycap/im-web`  |
+| `imweb.ingress.enabled`           | Create Ingress                                              | `true`           |
 | `imweb.ingress.host`              | Ingress host                                                | `""`             |
 | `imweb.ingress.path`              | Ingress path                                                | `/im-web`        |
 | `imweb.resources.requests.memory` | `im-web` Memory resource requests/limits                    | `256Mi`          |
@@ -75,6 +76,7 @@ see their documentations for advance configuration parameters.
 | `imdashboard.deploy`              | Deploy `im-dashboard` web interface.                        | `false`          |
 | `imdashboard.version`             | `im-dashboard` docker image version.                        | `latest`         |
 | `imdashboard.image`               | `im-imdashboard` docker image name                          | `grycap/im-imdashboard`|
+| `imdashboard.ingress.enabled`     | Create Ingress                                              | `true`           |
 | `imdashboard.ingress.host`        | Ingress host                                                | `""`             |
 | `imdashboard.ingress.path`        | Ingress path                                                | `/im-imdashboard`|
 | `imdashboard.resources.requests.memory` | `im-dashboard` Memory resource requests/limits                        | `256Mi`          |

@@ -1,4 +1,5 @@
 ---
+{{ if  .Values.im.ingress.enabled }}
 {{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
 apiVersion: networking.k8s.io/v1beta1
 {{- else }}
@@ -48,6 +49,5 @@ spec:
 {{- end }}
 
 {{- end }}
-
-
           path: {{ .Values.im.ingress.path }}/?(.*)
+{{- end }}
