@@ -27,6 +27,7 @@ imweb:
   version: latest
   image: grycap/im-web
   ingress:
+    enabled: true
     host: ""
     path: "/im-web"
   resources:
@@ -39,6 +40,7 @@ imdashboard:
   image: grycap/im-dashboard
   version: latest
   ingress:
+    enabled: true
     host: ""
     path: "/im-dashboard"
   resources:
