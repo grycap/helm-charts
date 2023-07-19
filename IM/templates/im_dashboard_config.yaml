@@ -19,7 +19,7 @@ data:
 {{- if eq .Values.im.replicas 1.0 }}
     "IM_URL": "http://im-backend:8800",
 {{- else }}
-    "IM_URL": "http://im-load-balancer-svc:8800",
+    "IM_URL": "http://im-load-balancer-svc:80",
 {{- end }}
 {{- if .Values.vault.enabled }}
     "VAULT_URL": "http://{{ .Release.Name }}-vault:8200",
