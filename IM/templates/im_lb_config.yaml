@@ -7,6 +7,9 @@ metadata:
   name: haproxy-load-balancer
 data:
   stats-auth: "admin:admin"
+  timeout-client: "1800s"
+	timeout-connect: "1800s"
+	timeout-server: "1800s"
   haproxy.tmpl: |
     {{`{{- $cfg := .Cfg -}}
     {{- $global := $cfg.Global }}
