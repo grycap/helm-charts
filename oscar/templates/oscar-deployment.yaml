@@ -94,6 +94,34 @@ spec:
           value: {{ .Values.openfaas.watchdog.readTimeout | quote }}
         - name: WATCHDOG_WRITE_TIMEOUT
           value: {{ .Values.openfaas.watchdog.writeTimeout | quote }}
+        - name: WATCHDOG_HEALTHCHECK_INTERVAL
+          value: {{ .Values.openfaas.watchdog.healthCheckInterval | quote }}
+        - name: YUNIKORN_ENABLE
+          value: {{ .Values.yuniKorn.enable | quote }}
+        - name: YUNIKORN_NAMESPACE
+          value: {{ .Values.yuniKorn.namespace | quote }}
+        - name: YUNIKORN_CONFIGMAP
+          value: {{ .Values.yuniKorn.configMap | quote }}
+        - name: YUNIKORN_CONFIG_FILENAME
+          value: {{ .Values.yuniKorn.configFileName | quote }}
+        - name: RESOURCE_MANAGER_ENABLE
+          value: {{ .Values.resourceManager.enable | quote }}
+        - name: RESOURCE_MANAGER_INTERVAL
+          value: {{ .Values.resourceManager.interval | quote }}
+        - name: RESCHEDULER_ENABLE
+          value: {{ .Values.reScheduler.enable | quote }}
+        - name: RESCHEDULER_INTERVAL
+          value: {{ .Values.reScheduler.interval | quote }}
+        - name: RESCHEDULER_THRESHOLD
+          value: {{ .Values.reScheduler.threshold | quote }}
+        - name: OIDC_ENABLE
+          value: {{ .Values.oidc.enable | quote }}
+        - name: OIDC_ISSUER
+          value: {{ .Values.oidc.issuer | quote }}
+        - name: OIDC_SUBJECT
+          value: {{ .Values.oidc.subject | quote }}
+        - name: OIDC_GROUPS
+          value: {{ .Values.oidc.groups | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}
