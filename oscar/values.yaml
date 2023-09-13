@@ -23,6 +23,7 @@ openfaas:
     execTimeout: 0
     readTimeout: 300
     writeTimeout: 300
+    healthCheckInterval: 5
 
 # Service configuration
 service:
@@ -43,7 +44,7 @@ ingress:
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
-  tag: "2.2.0"
+  tag: "2.6.2"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server
@@ -58,11 +59,36 @@ minIO:
   accessKey: minio
   secretKey: minio123
 
+# Apache YuniKorn configuration
+yuniKorn:
+  enable: false
+  namespace: yunikorn
+  configMap:  yunikorn-configs
+  configFileName: queues.yaml
+
+# ResourceManager configuration
+resourceManager:
+  enable: false
+  interval: 15
+
+# ReScheduler configuration
+reScheduler:
+  enable: false
+  interval: 15
+  threshold: 30
+
+# OIDC configuration
+oidc:
+  enable: false
+  issuer: "https://aai.egi.eu/auth/realms/egi"
+  subject: ""
+  groups: ""
+
 # FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
   storageClassName: ""
-  supervisorVersion: "1.4.0"
-  watchdogVersion: "0.18.10"
+  supervisorVersion: "1.5.7"
+  watchdogVersion: "0.2.1"
 
 # Liveness and Readiness probe values.
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/

@@ -14,7 +14,7 @@ metadata:
       nginx.ingress.kubernetes.io/proxy-body-size: 20m
       nginx.ingress.kubernetes.io/proxy-connect-timeout: "1800"
       nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
-      nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
+      nginx.ingress.kubernetes.io/proxy-read-timeout: '1800'
       nginx.ingress.kubernetes.io/x-forwarded-prefix: {{ .Values.imweb.ingress.path }}
 spec:
   rules:

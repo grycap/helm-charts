@@ -35,11 +35,12 @@ rules:
   - create
   - delete
   - deletecollection
-{{- if ne .Values.serverlessBackend "" }}
+{{- if eq (lower .Values.serverlessBackend) "openfaas" }}
 - apiGroups:
   - apps
   resources:
   - deployments
+  - daemonsets
   verbs:
   - get
   - list
@@ -48,8 +49,6 @@ rules:
   - delete
   - update
   - patch
-{{- end }}
-{{- if eq (lower .Values.serverlessBackend) "openfaas" }}
 - apiGroups:
   - openfaas.com
   resources:
@@ -60,6 +59,19 @@ rules:
   - watch
   - create
   - delete
+{{- end }}
+{{- if eq (lower .Values.serverlessBackend) "knative" }}
+- apiGroups:
+  - serving.knative.dev
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
 {{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -100,6 +112,71 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: secret-reader
+subjects:
+- kind: ServiceAccount
+  name: oscar-sa
+  namespace: {{ .Release.Namespace | quote }}
+{{- end }}
+{{- if .Values.yuniKorn.enable }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: yunikorn-config-reader
+  namespace: {{ .Values.yuniKorn.namespace | quote }}
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: yunikorn-config-reader-binding
+  namespace: {{ .Values.yuniKorn.namespace | quote }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: yunikorn-config-reader
+subjects:
+- kind: ServiceAccount
+  name: oscar-sa
+  namespace: {{ .Release.Namespace | quote }}
+{{- end }}
+{{- if .Values.resourceManager.enable }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: oscar-cluster-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - nodes
+  - pods
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: oscar-cluster-role-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: oscar-cluster-role
 subjects:
 - kind: ServiceAccount
   name: oscar-sa
