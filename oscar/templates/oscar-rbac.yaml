@@ -35,6 +35,18 @@ rules:
   - create
   - delete
   - deletecollection
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
 {{- if eq (lower .Values.serverlessBackend) "openfaas" }}
 - apiGroups:
   - apps
