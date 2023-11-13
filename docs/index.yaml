@@ -2,6 +2,34 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v2
+    created: "2023-09-13T11:25:37.889101738Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.helm.sh/stable
+      version: '>= 1.1.1'
+    - condition: vault.enabled
+      name: vault
+      repository: https://helm.releases.hashicorp.com
+      version: '>= 0.17.1'
+    description: Deploy a HA Infrastructure Manager
+    digest: ccf85cdabfe7be30a20db5a3f681f53dd35d8a8c0d5a362b6bf79af3602ba631
+    home: https://www.grycap.upv.es/im
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
+    keywords:
+    - Infrastructure Manager
+    - Cloud Orchestrator
+    - TOSCA
+    maintainers:
+    - email: micafer1@upv.es
+      name: Miguel Caballer
+    name: IM
+    sources:
+    - https://github.com/grycap/im
+    type: application
+    urls:
+    - https://grycap.github.io/helm-charts/IM-1.5.2.tgz
+    version: 1.5.2
+  - apiVersion: v2
     created: "2023-02-13T07:50:45.014663221Z"
     dependencies:
     - name: mysql
