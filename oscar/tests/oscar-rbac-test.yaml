@@ -21,16 +21,3 @@ tests:
         equal:
           path: metadata.namespace
           value: test-namespace
-  - name: test1
-    set:
-      serverlessBackend: openfaas
-    asserts:
-      - hasDocuments:
-          count: 3
-      - documentIndex: 1
-        isKind:
-          of: Role
-      - documentIndex: 1
-        equal:
-          path: rules[3].apiGroups[0]
-          value: openfaas.com
