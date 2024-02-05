@@ -18,6 +18,7 @@ rules:
   - podtemplates
   - configmaps
   - services
+  - secrets
   verbs:
   - get
   - list
