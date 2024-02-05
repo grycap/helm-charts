@@ -17,6 +17,8 @@ rules:
   - pods/log
   - podtemplates
   - configmaps
+  - services
+  - secrets
   verbs:
   - get
   - list
@@ -35,6 +37,39 @@ rules:
   - create
   - delete
   - deletecollection
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+  - patch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
 {{- if eq (lower .Values.serverlessBackend) "openfaas" }}
 - apiGroups:
   - apps
