@@ -1,7 +1,7 @@
 apiVersion: v2
 name: IM
 description: Deploy a HA Infrastructure Manager
-version: 1.5.2
+version: 1.6.0
 type: application
 home: https://www.grycap.upv.es/im
 sources:
@@ -22,3 +22,7 @@ dependencies:
     version: ">= 0.17.1"
     repository: https://helm.releases.hashicorp.com
     condition: vault.enabled
+  - name: mongodb
+    version: ">= 12.1.31"
+    repository: https://charts.bitnami.com/bitnami
+    condition: mongodb.enabled

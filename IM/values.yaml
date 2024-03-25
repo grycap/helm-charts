@@ -22,6 +22,27 @@ mysql:
       CREATE DATABASE IF NOT EXISTS imdashdb;
       GRANT ALL PRIVILEGES ON imdashdb.* TO 'imuser'@'%';
 
+mongodb:
+  enabled: true
+  useStatefulSet: true
+  architecture: replicaset
+  replicaCount: 2
+  arbiter:
+    enabled: false
+  auth:
+    replicaSetKey: "replicaSetKey893"
+    enabled: true
+    rootUser: root
+    rootPassword: rootpass
+    username: imuser
+    password: impass
+    database: imdb
+  persistence:
+    enabled: true
+    storageClass: ""
+    accessMode: ReadWriteOnce
+    size: 8Gi
+
 imweb:
   deploy: true
   version: latest
