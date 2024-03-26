@@ -33,13 +33,14 @@ spec:
         imagePullPolicy: Always
         env:
           - name: IM_DATA_DB
+{{ $ReleaseName := .Release.Name }}
 {{- if .Values.mongodb.enabled }}
-            value: mongodb://{{ .Values.mongodb.auth.username }}:{{ .Values.mongodb.auth.password }}@
+            value: mongodb://{{ index .Values.mongodb.auth.usernames 0 }}:{{ index .Values.mongodb.auth.passwords 0 }}@
 {{- range (untilStep 0 (int .Values.mongodb.replicaCount) 1) -}}
 {{- if ne . 0 }},{{ end -}}
-mongodb-{{ . }}.mongodb-headless
+{{ $ReleaseName }}-mongodb-{{ . }}.{{ $ReleaseName }}-mongodb-headless
 {{- end -}}
-/{{ .Values.mongodb.auth.database }}
+/{{ index .Values.mongodb.auth.databases 0 }}
 {{- else }}
             value: mysql://{{ .Values.mysql.mysqlUser }}:{{ .Values.mysql.mysqlPassword }}@{{ .Release.Name }}-mysql/imdb
 {{- end }}

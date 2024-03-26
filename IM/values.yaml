@@ -34,9 +34,12 @@ mongodb:
     enabled: true
     rootUser: root
     rootPassword: rootpass
-    username: imuser
-    password: impass
-    database: imdb
+    usernames:
+      - imuser
+    passwords:
+      - impass
+    databases:
+      - imdb
   persistence:
     enabled: true
     storageClass: ""
