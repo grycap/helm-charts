@@ -9,7 +9,6 @@ kind: Ingress
 metadata:
   name: im-dashboard
   annotations:
-      kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/client-body-buffer-size: 64k
       nginx.ingress.kubernetes.io/proxy-body-size: 20m
       nginx.ingress.kubernetes.io/proxy-connect-timeout: "1800"
@@ -18,6 +17,7 @@ metadata:
       nginx.ingress.kubernetes.io/x-forwarded-prefix: {{ .Values.imdashboard.ingress.path }}
       nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
+  ingressClassName: nginx
   rules:
 {{- if .Values.imdashboard.ingress.host }}
     - host: {{ .Values.imdashboard.ingress.host }}

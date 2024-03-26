@@ -33,7 +33,17 @@ spec:
         imagePullPolicy: Always
         env:
           - name: IM_DATA_DB
+{{ $ReleaseName := .Release.Name }}
+{{- if .Values.mongodb.enabled }}
+            value: mongodb://{{ .Values.mongodb.auth.rootUser }}:{{ .Values.mongodb.auth.rootPassword }}@
+{{- range (untilStep 0 (int .Values.mongodb.replicaCount) 1) -}}
+{{- if ne . 0 }},{{ end -}}
+{{ $ReleaseName }}-mongodb-{{ . }}.{{ $ReleaseName }}-mongodb-headless
+{{- end -}}
+/imdb
+{{- else }}
             value: mysql://{{ .Values.mysql.mysqlUser }}:{{ .Values.mysql.mysqlPassword }}@{{ .Release.Name }}-mysql/imdb
+{{- end }}
         volumeMounts:
            - name: im
              mountPath: /etc/im/logging.conf

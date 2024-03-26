@@ -23,3 +23,14 @@ tests:
       - equal:
           path: spec.template.spec.volumes[1].persistentVolumeClaim.claimName
           value: imlog
+  - name: test_mongo
+    set:
+      mongodb.enabled: true
+      mongodb.auth.rootUser: usertest
+      mongodb.auth.rootPassword: passtest
+    asserts:
+      - isKind:
+          of: Deployment
+      - equal:
+          path: spec.template.spec.containers[0].env[0].value
+          value: mongodb://usertest:passtest@RELEASE-NAME-mongodb-0.RELEASE-NAME-mongodb-headless,RELEASE-NAME-mongodb-1.RELEASE-NAME-mongodb-headless/imdb
