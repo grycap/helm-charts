@@ -9,7 +9,6 @@ kind: Ingress
 metadata:
   name: im-web
   annotations:
-      kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/client-body-buffer-size: 64k
       nginx.ingress.kubernetes.io/proxy-body-size: 20m
       nginx.ingress.kubernetes.io/proxy-connect-timeout: "1800"
@@ -17,6 +16,7 @@ metadata:
       nginx.ingress.kubernetes.io/proxy-read-timeout: '1800'
       nginx.ingress.kubernetes.io/x-forwarded-prefix: {{ .Values.imweb.ingress.path }}
 spec:
+  ingressClassName: nginx
   rules:
 {{- if .Values.imweb.ingress.host }}
     - host: {{ .Values.imweb.ingress.host }}

@@ -35,12 +35,12 @@ spec:
           - name: IM_DATA_DB
 {{ $ReleaseName := .Release.Name }}
 {{- if .Values.mongodb.enabled }}
-            value: mongodb://{{ index .Values.mongodb.auth.usernames 0 }}:{{ index .Values.mongodb.auth.passwords 0 }}@
+            value: mongodb://{{ .Values.mongodb.auth.rootUser }}:{{ .Values.mongodb.auth.rootPassword }}@
 {{- range (untilStep 0 (int .Values.mongodb.replicaCount) 1) -}}
 {{- if ne . 0 }},{{ end -}}
 {{ $ReleaseName }}-mongodb-{{ . }}.{{ $ReleaseName }}-mongodb-headless
 {{- end -}}
-/{{ index .Values.mongodb.auth.databases 0 }}
+/imdb
 {{- else }}
             value: mysql://{{ .Values.mysql.mysqlUser }}:{{ .Values.mysql.mysqlPassword }}@{{ .Release.Name }}-mysql/imdb
 {{- end }}
