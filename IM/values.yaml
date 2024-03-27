@@ -24,14 +24,12 @@ mysql:
 
 mongodb:
   enabled: false
-  useStatefulSet: true
   architecture: replicaset
   replicaCount: 2
   arbiter:
     enabled: false
   auth:
     replicaSetKey: "f079596e599b8210f566"
-    enabled: true
     rootUser: root
     rootPassword: rootpass
   persistence:
@@ -41,7 +39,7 @@ mongodb:
     size: 8Gi
   resources:
     requests:
-      memory: 256Mi
+      memory: 512Mi
       cpu: 250m
 
 imweb:
