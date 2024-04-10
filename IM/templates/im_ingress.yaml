@@ -52,4 +52,9 @@ spec:
 
 {{- end }}
           path: {{ .Values.im.ingress.path }}/?(.*)
+{{- if .Values.imdashboard.ingress.tls }}
+  tls:
+{{ tpl (toYaml .Values.imdashboard.ingress.tls | indent 4) . }}
+{{- end -}}
+
 {{- end }}
