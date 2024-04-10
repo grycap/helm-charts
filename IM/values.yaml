@@ -50,6 +50,7 @@ imweb:
     enabled: true
     host: ""
     path: "/im-web"
+    tls: []
   resources:
     requests:
       memory: 256Mi
@@ -63,6 +64,7 @@ imdashboard:
     enabled: true
     host: ""
     path: "/im-dashboard"
+    tls: []
   resources:
     requests:
       memory: 256Mi
@@ -89,6 +91,7 @@ im:
     enabled: true
     host: ""
     path: "/im"
+    tls: []
   resources:
     requests:
       memory: 256Mi
