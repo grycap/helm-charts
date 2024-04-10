@@ -24,5 +24,8 @@ tests:
           path: spec.rules[0].host
           value: somehost.com
       - equal:
-          path: spec.rules[0].tls[0].hosts[0]
+          path: spec.tls[0].hosts[0]
           value: somehost.com
+      - equal:
+          path: spec.tls[0].secretName
+          value: tls-secret
