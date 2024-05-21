@@ -2,6 +2,102 @@ apiVersion: v1
 entries:
   IM:
   - apiVersion: v2
+    created: "2024-04-10T10:05:48.594751554Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.helm.sh/stable
+      version: '>= 1.1.1'
+    - condition: vault.enabled
+      name: vault
+      repository: https://helm.releases.hashicorp.com
+      version: '>= 0.17.1'
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: '>= 12.1.31'
+    description: Deploy a HA Infrastructure Manager
+    digest: ef717f489fabfe443828ed698c0d97e8d02178a8523452c8896a639f1af418b9
+    home: https://www.grycap.upv.es/im
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
+    keywords:
+    - Infrastructure Manager
+    - Cloud Orchestrator
+    - TOSCA
+    maintainers:
+    - email: micafer1@upv.es
+      name: Miguel Caballer
+    name: IM
+    sources:
+    - https://github.com/grycap/im
+    type: application
+    urls:
+    - https://grycap.github.io/helm-charts/IM-1.6.2.tgz
+    version: 1.6.2
+  - apiVersion: v2
+    created: "2024-03-27T07:45:48.471861612Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.helm.sh/stable
+      version: '>= 1.1.1'
+    - condition: vault.enabled
+      name: vault
+      repository: https://helm.releases.hashicorp.com
+      version: '>= 0.17.1'
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: '>= 12.1.31'
+    description: Deploy a HA Infrastructure Manager
+    digest: 92deecaa95c2f125583882266200481a42ec910d250154b6460712cee31851f2
+    home: https://www.grycap.upv.es/im
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
+    keywords:
+    - Infrastructure Manager
+    - Cloud Orchestrator
+    - TOSCA
+    maintainers:
+    - email: micafer1@upv.es
+      name: Miguel Caballer
+    name: IM
+    sources:
+    - https://github.com/grycap/im
+    type: application
+    urls:
+    - https://grycap.github.io/helm-charts/IM-1.6.1.tgz
+    version: 1.6.1
+  - apiVersion: v2
+    created: "2024-03-26T14:45:49.158279567Z"
+    dependencies:
+    - name: mysql
+      repository: https://charts.helm.sh/stable
+      version: '>= 1.1.1'
+    - condition: vault.enabled
+      name: vault
+      repository: https://helm.releases.hashicorp.com
+      version: '>= 0.17.1'
+    - condition: mongodb.enabled
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: '>= 12.1.31'
+    description: Deploy a HA Infrastructure Manager
+    digest: 37980a7cb9a0cd1e076feb464ca937a2cd20cd8d63d1a5d0b462fd9d22c7c86a
+    home: https://www.grycap.upv.es/im
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/im.png
+    keywords:
+    - Infrastructure Manager
+    - Cloud Orchestrator
+    - TOSCA
+    maintainers:
+    - email: micafer1@upv.es
+      name: Miguel Caballer
+    name: IM
+    sources:
+    - https://github.com/grycap/im
+    type: application
+    urls:
+    - https://grycap.github.io/helm-charts/IM-1.6.0.tgz
+    version: 1.6.0
+  - apiVersion: v2
     created: "2023-09-13T11:25:37.889101738Z"
     dependencies:
     - name: mysql
@@ -273,6 +369,26 @@ entries:
     - https://grycap.github.io/helm-charts/IM-1.0.0.tgz
     version: 1.0.0
   oscar:
+  - apiVersion: v1
+    created: "2024-02-26T12:35:41.583618944Z"
+    description: Open Source Serverless Computing for Data-Processing Applications
+    digest: 092399ae834533e6ca65a8f1fad7267b37d16a06fba3b41072fb61bf00ca98c8
+    home: https://grycap.github.io/oscar
+    icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
+    keywords:
+    - serverless
+    - containers
+    - file-processing
+    - batch
+    maintainers:
+    - email: products@grycap.upv.es
+      name: GRyCAP
+    name: oscar
+    sources:
+    - https://github.com/grycap/oscar
+    urls:
+    - https://grycap.github.io/helm-charts/oscar-3.0.1.tgz
+    version: 3.0.1
   - apiVersion: v1
     created: "2024-02-05T11:31:08.315210413Z"
     description: Open Source Serverless Computing for Data-Processing Applications

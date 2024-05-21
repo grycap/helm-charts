@@ -5,6 +5,7 @@ metadata:
   name: populate-volume-job
   namespace: {{ .Values.servicesNamespace | quote }}
 spec:
+  ttlSecondsAfterFinished: 120
   template:
     spec:
       containers:

@@ -172,6 +172,20 @@
           }
         }
       },
+      "mongodb": {
+        "type": "object",
+        "form": true,
+        "title": "MongoDB Configuration",
+        "description": "MongoDB configuration values",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "title": "Enable",
+            "description": "Flag to enable the MongoDB server to store IM database.",
+            "form": true
+          }
+        }
+      },
       "vault": {
         "type": "object",
         "form": true,

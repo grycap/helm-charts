@@ -7,6 +7,10 @@ tests:
       im.ingress.enabled: true
       im.ingress.path: /im
       im.ingress.host: somehost.com
+      im.ingress.tls:
+        - secretName: tls-secret
+          hosts:
+            - somehost.com
     asserts:
       - isKind:
           of: Ingress
@@ -19,3 +23,9 @@ tests:
       - equal:
           path: spec.rules[0].host
           value: somehost.com
+      - equal:
+          path: spec.tls[0].hosts[0]
+          value: somehost.com
+      - equal:
+          path: spec.tls[0].secretName
+          value: tls-secret

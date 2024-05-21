@@ -1,5 +1,5 @@
 mysql:
-  imageTag: "5.7.38"
+  imageTag: "8.0.36"
   mysqlPassword: impass
   persistence:
     enabled: true
@@ -22,6 +22,26 @@ mysql:
       CREATE DATABASE IF NOT EXISTS imdashdb;
       GRANT ALL PRIVILEGES ON imdashdb.* TO 'imuser'@'%';
 
+mongodb:
+  enabled: false
+  architecture: replicaset
+  replicaCount: 2
+  arbiter:
+    enabled: false
+  auth:
+    replicaSetKey: "f079596e599b8210f566"
+    rootUser: root
+    rootPassword: rootpass
+  persistence:
+    enabled: true
+    storageClass: ""
+    accessMode: ReadWriteOnce
+    size: 8Gi
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+
 imweb:
   deploy: true
   version: latest
@@ -30,6 +50,7 @@ imweb:
     enabled: true
     host: ""
     path: "/im-web"
+    tls: []
   resources:
     requests:
       memory: 256Mi
@@ -43,6 +64,7 @@ imdashboard:
     enabled: true
     host: ""
     path: "/im-dashboard"
+    tls: []
   resources:
     requests:
       memory: 256Mi
@@ -69,6 +91,7 @@ im:
     enabled: true
     host: ""
     path: "/im"
+    tls: []
   resources:
     requests:
       memory: 256Mi

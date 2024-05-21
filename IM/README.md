@@ -99,6 +99,19 @@ see their documentations for advance configuration parameters.
 | `vault.dataStorage.storageClass`  | Type of PVC for `Vault`.                                    | `""`             |
 | `vault.dataStorage.accessMode`    | Access mode of the `Vault` PVC.                             | `ReadWriteOnce`  |
 | `vault.dataStorage.size`          | Size of PVC for `Vault`.                                    | `10Gi`           |
+| `mongodb.enabled`                 | Launch MonoDB to store IM data insted of using MySQL        | `false`          |
+| `mongodb.architecture`            | MongoDB architecture (`standalone` or `replicaset`)         | `replicaset`     |
+| `mongodb.replicaCount`            | MongoDB replicas (only used with `replicaset`)              | `2`              |
+| `mongodb.arbiter.enabled`         | Deploy MongoDB Arbiter                                      | `false`          |
+| `mongodb.auth.replicaSetKey`      | Key used for authentication in the replicaset               | `*****`          |
+| `mongodb.auth.rootUser`           | MongoDB root user                                           | `root`          |
+| `mongodb.auth.rootPassword`       | MongoDB root password                                       | `rootpass`          |
+| `mongodb.persistence.enabled`      | Create a volume to store MongoDB data.                     | `true`          |
+| `mongodb.persistence.storageClass` | Type of PVC for MongoDB data.                              | `""`             |
+| `mongodb.persistence.accessMode`   | Access mode of the MongoDB data PVC.                       | `ReadWriteOnce`  |
+| `mongodb.persistence.size`         | Size of PVC for MongoDB data.                              | `8Gi`            |
+| `mongodb.resources.requests.memory` | MongoDB Memory resource requests/limits                   | `512Mi`          |
+| `mongodb.resources.requests.cpu`    | MongoDB CPU resource requests/limits                      | `250m`           |
 
 ## IM HA mode
 

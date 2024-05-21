@@ -9,7 +9,6 @@ kind: Ingress
 metadata:
   name: im
   annotations:
-      kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/client-body-buffer-size: "64k"
       nginx.ingress.kubernetes.io/proxy-body-size: "20m"
       nginx.ingress.kubernetes.io/proxy-connect-timeout: "1800"
@@ -18,6 +17,7 @@ metadata:
       nginx.ingress.kubernetes.io/x-forwarded-prefix: {{ .Values.im.ingress.path }}
       nginx.ingress.kubernetes.io/rewrite-target: /$1
 spec:
+  ingressClassName: nginx
   rules:
 {{- if .Values.im.ingress.host }}
     - host: {{ .Values.im.ingress.host }}
@@ -52,4 +52,9 @@ spec:
 
 {{- end }}
           path: {{ .Values.im.ingress.path }}/?(.*)
+{{- if .Values.im.ingress.tls }}
+  tls:
+{{ tpl (toYaml .Values.im.ingress.tls | indent 4) . }}
+{{- end -}}
+
 {{- end }}
