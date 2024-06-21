@@ -10,4 +10,4 @@ tests:
           of: Deployment
       - equal:
           path: spec.template.spec.containers[0].image
-          value: quay.io/jcmoraisjr/haproxy-ingress:v0.13.7
+          value: quay.io/jcmoraisjr/haproxy-ingress:v0.13.16
