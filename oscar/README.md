@@ -94,4 +94,5 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `volume.storageClassName`               | Storage Class used by the PVC                                                                                                                                                                         | `""`                                 |
 | `resources.requests.memory`             | Memory resource requests                                                                                                                                                                              | `512Mi`                              |
 | `resources.requests.cpu`                | CPU resource requests                                                                                                                                                                                 | `500m`                               |
+| `additionalConfig.allowedImagePrefix` | List of repository prefixes to restrict Docker images | `""` |
 

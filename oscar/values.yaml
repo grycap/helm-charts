@@ -31,6 +31,10 @@ service:
   port: 8080
   nodePort: 30301
 
+# Additional OSCAR configuration
+additionalConfig:
+  allowedImagePrefix: ""
+  
 # Number of replicas to deploy
 replicas: 1
 
