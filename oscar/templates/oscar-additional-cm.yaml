@@ -1,4 +1,4 @@
-{{- if ne .Values.additionalConfig.allowedImagePrefix "" }}
+{{- if .Values.additionalConfig.allowedImagePrefix }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,7 +7,7 @@ metadata:
 data:
   config.yaml: |
     images:
-      allowed_prefixes: |-
+      allowed_prefixes:
         {{- range .Values.additionalConfig.allowedImagePrefix }}
         - {{ . | title | quote}}
         {{- end }}

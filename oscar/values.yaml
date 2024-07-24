@@ -33,7 +33,7 @@ service:
 
 # Additional OSCAR configuration
 additionalConfig:
-  allowedImagePrefix: ""
+  allowedImagePrefix: []
   
 # Number of replicas to deploy
 replicas: 1
