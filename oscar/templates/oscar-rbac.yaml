@@ -26,6 +26,7 @@ rules:
   - create
   - delete
   - update
+  - deletecollection
 - apiGroups:
   - batch
   resources:
@@ -70,6 +71,7 @@ rules:
   - list
   - watch
   - create
+  - update
   - delete
 
 {{- if eq (lower .Values.serverlessBackend) "openfaas" }}

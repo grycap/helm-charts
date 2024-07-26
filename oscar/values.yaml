@@ -31,6 +31,10 @@ service:
   port: 8080
   nodePort: 30301
 
+# Additional OSCAR configuration
+additionalConfig:
+  allowedImagePrefix: []
+  
 # Number of replicas to deploy
 replicas: 1
 
@@ -44,7 +48,7 @@ ingress:
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
-  tag: "3.1.0"
+  tag: "3.2.0"
   pullPolicy: Always
 
 # Read and write timeouts for OSCAR's HTTP server

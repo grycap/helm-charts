@@ -1,0 +1,14 @@
+{{- if .Values.additionalConfig.allowedImagePrefix }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: additional-oscar-config
+  namespace: oscar-svc
+data:
+  config.yaml: |
+    images:
+      allowed_prefixes:
+        {{- range .Values.additionalConfig.allowedImagePrefix }}
+        - {{ . | title | quote}}
+        {{- end }}
+{{- end }}
