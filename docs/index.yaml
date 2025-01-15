@@ -421,6 +421,7 @@ entries:
     urls:
     - https://grycap.github.io/helm-charts/oscar-3.3.1.tgz
     version: 3.3.1
+    
   - apiVersion: v1
     created: "2024-06-21T11:50:48.19443738Z"
     description: Open Source Serverless Computing for Data-Processing Applications
