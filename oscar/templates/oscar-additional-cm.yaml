@@ -9,6 +9,6 @@ data:
     images:
       allowed_prefixes:
         {{- range .Values.additionalConfig.allowedImagePrefix }}
-        - {{ . | title | quote}}
+        - {{ . | quote}}
         {{- end }}
 {{- end }}
