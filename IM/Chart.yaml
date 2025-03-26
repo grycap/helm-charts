@@ -1,7 +1,7 @@
 apiVersion: v2
 name: IM
 description: Deploy a HA Infrastructure Manager
-version: 1.6.3
+version: 1.6.4
 type: application
 home: https://www.grycap.upv.es/im
 sources:
