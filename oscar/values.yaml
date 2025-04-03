@@ -93,7 +93,7 @@ volume:
   storageClassName: ""
   supervisorVersion: "1.6.1"
   watchdogVersion: "0.2.1"
-
+  supervisorKit : "docker://ghcr.io/grycap/faas-supervisor-kit"
 # Liveness and Readiness probe values.
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
 livenessProbe:
