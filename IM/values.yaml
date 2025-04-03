@@ -1,5 +1,5 @@
 mysql:
-  imageTag: "8.0.36"
+  imageTag: "8.0.41"
   mysqlPassword: impass
   persistence:
     enabled: true
@@ -43,7 +43,7 @@ mongodb:
       cpu: 250m
 
 imweb:
-  deploy: true
+  deploy: false
   version: latest
   image: grycap/im-web
   ingress:
