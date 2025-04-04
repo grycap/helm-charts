@@ -1,5 +1,5 @@
 mysql:
-  imageTag: "8.0.41"
+  imageTag: "8.4"
   mysqlPassword: impass
   persistence:
     enabled: true
