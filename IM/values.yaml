@@ -58,7 +58,7 @@ imweb:
 
 imdashboard:
   deploy: false
-  image: grycap/im-dashboard
+  image: ghcr.io/grycap/im-dashboard
   version: latest
   ingress:
     enabled: true
@@ -86,7 +86,7 @@ imdashboard:
 
 im:
   version: latest
-  image: grycap/im
+  image: ghcr.io/grycap/im
   ingress:
     enabled: true
     host: ""
