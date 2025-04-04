@@ -42,20 +42,6 @@ mongodb:
       memory: 512Mi
       cpu: 250m
 
-imweb:
-  deploy: false
-  version: latest
-  image: grycap/im-web
-  ingress:
-    enabled: true
-    host: ""
-    path: "/im-web"
-    tls: []
-  resources:
-    requests:
-      memory: 256Mi
-      cpu: 250m
-
 imdashboard:
   deploy: false
   image: ghcr.io/grycap/im-dashboard
