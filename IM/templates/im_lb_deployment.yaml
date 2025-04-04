@@ -18,7 +18,7 @@ spec:
       serviceAccountName: im-load-balancer
       containers:
       - name: haproxy-load-balancer
-        image: quay.io/jcmoraisjr/haproxy-ingress:v0.13.17
+        image: quay.io/jcmoraisjr/haproxy-ingress:v0.14.8
         args:
         - --default-backend-service=$(POD_NAMESPACE)/im-backend
         - --configmap=$(POD_NAMESPACE)/haproxy-load-balancer
