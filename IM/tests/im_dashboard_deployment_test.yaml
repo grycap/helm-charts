@@ -13,7 +13,7 @@ tests:
           pattern: im-dashboard
       - equal:
           path: spec.template.spec.containers[0].image
-          value: grycap/im-dashboard:latest
+          value: ghcr.io/grycap/im-dashboard:latest
       - equal:
           path: spec.template.spec.containers[0].env[0].value
           value: 'False'

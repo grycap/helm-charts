@@ -1,5 +1,5 @@
 mysql:
-  imageTag: "8.0.36"
+  imageTag: "8.4"
   mysqlPassword: impass
   persistence:
     enabled: true
@@ -42,23 +42,9 @@ mongodb:
       memory: 512Mi
       cpu: 250m
 
-imweb:
-  deploy: true
-  version: latest
-  image: grycap/im-web
-  ingress:
-    enabled: true
-    host: ""
-    path: "/im-web"
-    tls: []
-  resources:
-    requests:
-      memory: 256Mi
-      cpu: 250m
-
 imdashboard:
   deploy: false
-  image: grycap/im-dashboard
+  image: ghcr.io/grycap/im-dashboard
   version: latest
   ingress:
     enabled: true
@@ -86,7 +72,7 @@ imdashboard:
 
 im:
   version: latest
-  image: grycap/im
+  image: ghcr.io/grycap/im
   ingress:
     enabled: true
     host: ""
