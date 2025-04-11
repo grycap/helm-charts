@@ -15,7 +15,7 @@ spec:
       labels:
         run: haproxy-load-balancer
     spec:
-      serviceAccountName: im-load-balancer
+      serviceAccountName: {{ .Release.Namespace }}-im-load-balancer
       containers:
       - name: haproxy-load-balancer
         image: quay.io/jcmoraisjr/haproxy-ingress:v0.14.8
