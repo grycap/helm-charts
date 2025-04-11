@@ -1,4 +1,5 @@
 mysql:
+  enabled: true
   imageTag: "8.4"
   mysqlPassword: impass
   persistence:
