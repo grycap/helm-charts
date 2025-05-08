@@ -132,7 +132,7 @@ spec:
         - name: OIDC_GROUPS
           value: {{ .Values.oidc.groups | quote }}
         - name: SUPERVISOR_KIT_IMAGE
-          value: {{ .Values.volume.supervisorKit:.Values.volume.supervisorVersion | quote}}
+          value: {{ printf "%s:%s" .Values.volume.supervisorKit .Values.volume.supervisorVersion | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}
