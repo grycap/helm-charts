@@ -51,42 +51,6 @@
             }
         }
       },
-      "imweb": {
-        "type": "object",
-        "form": true,
-        "title": "IM-Web Configuration",
-        "description": "IM-Web portal configuration values",
-        "properties": {
-          "deploy": {
-            "type": "boolean",
-            "title": "Deploy",
-            "description": "Flag to deploy the IM-Web portal.",
-            "form": true
-          },
-          "version": {
-            "type": "string",
-            "form": true,
-            "title": "Version"
-          },
-          "ingress": {
-            "type": "object",
-            "form": true,
-            "title": "Ingress",
-            "properties": {
-              "host": {
-                "type": "string",
-                "title": "Host",
-                "form": true
-              },
-              "path": {
-                "type": "string",
-                "title": "Path",
-                "form": true
-              }
-            }
-          }
-        }
-      },
       "imdashboard": {
         "type": "object",
         "title": "IM-Dasboard Configuration",

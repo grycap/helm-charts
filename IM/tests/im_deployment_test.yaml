@@ -16,7 +16,7 @@ tests:
           pattern: im-backend
       - equal:
           path: spec.template.spec.containers[0].image
-          value: grycap/im:latest
+          value: ghcr.io/grycap/im:latest
       - equal:
           path: spec.template.spec.containers[0].env[0].value
           value: mysql://usertest:passtest@RELEASE-NAME-mysql/imdb
