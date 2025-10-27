@@ -133,6 +133,12 @@ spec:
           value: {{ .Values.oidc.groups | quote }}
         - name: SUPERVISOR_KIT_IMAGE
           value: {{ printf "%s:%s" .Values.volume.supervisorKit .Values.volume.supervisorVersion | quote }}
+        - name: USERS_ADMIN
+          value: {{ .Values.UsersAdmin | quote }}
+        - name: TTL_JOB
+          value: {{ .Values.TTLJob | quote }}
+        - name: JOB_LISTING_LIMIT
+          value: {{ .Values.JobListingLimit | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}
