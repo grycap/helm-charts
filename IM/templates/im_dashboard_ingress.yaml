@@ -1,5 +1,25 @@
----
 {{ if  and .Values.imdashboard.deploy .Values.imdashboard.ingress.enabled }}
+{{ if eq .Values.imdashboard.ingress.type "traefik" }}
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: imdashboard-rewrite
+spec:
+  replacePathRegex:
+    regex: "^{{ .Values.imdashboard.ingress.path }}/(.*)"
+    replacement: "/$1"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: imdashboard-transport
+spec:
+  forwardingTimeouts:
+    dialTimeout: 1800s
+    responseHeaderTimeout: 1800s
+{{- end }}
+---
 {{- if lt (int .Capabilities.KubeVersion.Minor) 19 }}
 apiVersion: networking.k8s.io/v1beta1
 {{- else }}
@@ -9,6 +29,11 @@ kind: Ingress
 metadata:
   name: im-dashboard
   annotations:
+{{ if eq .Values.imdashboard.ingress.type "traefik" }}
+      traefik.ingress.kubernetes.io/router.middlewares: imdashboard-rewrite@kubernetescrd
+      traefik.ingress.kubernetes.io/service.servers-transport: imdashboard-transport
+{{- end }}
+{{- if eq .Values.imdashboard.ingress.type  "nginx" }}
       nginx.ingress.kubernetes.io/client-body-buffer-size: 64k
       nginx.ingress.kubernetes.io/proxy-body-size: 20m
       nginx.ingress.kubernetes.io/proxy-connect-timeout: "1800"
@@ -17,6 +42,7 @@ metadata:
       nginx.ingress.kubernetes.io/x-forwarded-prefix: {{ .Values.imdashboard.ingress.path }}
       nginx.ingress.kubernetes.io/rewrite-target: /$1
       nginx.ingress.kubernetes.io/use-regex: "true"
+{{- end }}
 spec:
   ingressClassName: nginx
   rules:
@@ -36,9 +62,15 @@ spec:
               name: im-dashboard-svc
               port:
                 number: 5001
+{{- if eq .Values.imdashboard.ingress.type "nginx" }}
           pathType: ImplementationSpecific
-{{- end }}
           path: {{ .Values.imdashboard.ingress.path }}/?(.*)
+{{- end }}
+{{- if eq .Values.imdashboard.ingress.type "traefik" }}
+          pathType: Prefix
+          path: {{ .Values.imdashboard.ingress.path }}/
+{{- end }}
+{{- end }}
 {{- if .Values.imdashboard.ingress.tls }}
   tls:
 {{ tpl (toYaml .Values.imdashboard.ingress.tls | indent 4) . }}

@@ -2,12 +2,14 @@ suite: test im dashboard ingress
 templates:
   - im_dashboard_ingress.yaml
 tests:
-  - name: test1
+  - name: test-nginx
     set:
       imdashboard.ingress.path: /im-dashboard
       imdashboard.ingress.host: somehost.com
       imdashboard.deploy: true
     asserts:
+      - hasDocuments:
+          count: 1
       - isKind:
           of: Ingress
       - equal:
@@ -17,5 +19,52 @@ tests:
           path: spec.rules[0].http.paths[0].path
           value: /im-dashboard/?(.*)
       - equal:
+          path: spec.rules[0].http.paths[0].pathType
+          value: ImplementationSpecific
+      - equal:
           path: spec.rules[0].host
           value: somehost.com
+  - name: test-traefik
+    set:
+      imdashboard.ingress.path: /im-dashboard
+      imdashboard.ingress.host: somehost.com
+      imdashboard.deploy: true
+      imdashboard.ingress.type: traefik
+    asserts:
+      - hasDocuments:
+          count: 3
+      - isKind:
+          of: Middleware
+        documentIndex: 0
+      - equal:
+          path: spec.replacePathRegex.regex
+          value: "^/im-dashboard/(.*)"
+        documentIndex: 0
+      - isKind:
+          of: ServersTransport
+        documentIndex: 1
+      - isKind:
+          of: Ingress
+        documentIndex: 2
+      - equal:
+          path: metadata.name
+          value: im-dashboard
+        documentIndex: 2
+      - equal:
+          path: spec.rules[0].http.paths[0].path
+          value: /im-dashboard/
+        documentIndex: 2
+      - equal:
+          path: spec.rules[0].http.paths[0].pathType
+          value: Prefix
+        documentIndex: 2
+      - equal:
+          path: spec.rules[0].host
+          value: somehost.com
+        documentIndex: 2
+      - equal:
+          path: metadata.annotations
+          value:
+            traefik.ingress.kubernetes.io/router.middlewares: imdashboard-rewrite@kubernetescrd
+            traefik.ingress.kubernetes.io/service.servers-transport: imdashboard-transport
+        documentIndex: 2
