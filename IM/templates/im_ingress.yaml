@@ -30,7 +30,7 @@ metadata:
   name: im
   annotations:
 {{- if eq .Values.im.ingress.type "traefik" }}
-      traefik.ingress.kubernetes.io/router.middlewares: im-rewrite@kubernetescrd
+      traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-im-rewrite@kubernetescrd
       traefik.ingress.kubernetes.io/service.servers-transport: im-transport
 {{- end }}
 {{- if eq .Values.im.ingress.type "nginx" }}
@@ -44,7 +44,6 @@ metadata:
       nginx.ingress.kubernetes.io/use-regex: "true"
 {{- end }}
 spec:
-  ingressClassName: nginx
   rules:
 {{- if .Values.im.ingress.host }}
     - host: {{ .Values.im.ingress.host }}
