@@ -1,0 +1,48 @@
+---
+{{ if  Values.im.httproute.enabled }}
+apiVersion: gateway.nginx.org/v1alpha1
+kind: SnippetsFilter
+metadata:
+  name: im-snippets
+spec:
+  snippets:
+    - context: http.server.location
+      value: |
+        proxy_connect_timeout 1800s;
+        proxy_send_timeout 1800s;
+        proxy_read_timeout 1800s;
+        client_max_body_size 20m;
+        client_body_buffer_size 64k;
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: im-dashboard
+spec:
+  parentRefs:
+  - name: {{ .Values.im.httproute.gateway.name }}
+    namespace: {{ .Values.im.httproute.gateway.namespace }}
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "{{ .Values.im.ingress.path }}"
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: "/"
+    - type: ExtensionRef
+      extensionRef:
+        group: gateway.nginx.org
+        kind: SnippetsFilter
+        name: im-snippets
+    backendRefs:
+{{- if gt .Values.im.replicas 1.0 }}
+    - name: im-load-balancer-svc
+      port: 80
+{{- else }}
+    - name: im-backend
+      port: 8800
+{{- end }}

@@ -52,6 +52,12 @@ imdashboard:
     host: ""
     path: "/im-dashboard"
     tls: []
+  httproute:
+    enabled: false
+    gateway:
+      name: nginx-gateway
+      namespace: nginx-gateway
+    path: "/im-dashboard"
   resources:
     requests:
       memory: 256Mi
@@ -79,6 +85,12 @@ im:
     host: ""
     path: "/im"
     tls: []
+  httproute:
+    enabled: false
+    gateway:
+      name: nginx-gateway
+      namespace: nginx-gateway
+    path: "/im"
   resources:
     requests:
       memory: 256Mi
