@@ -41,3 +41,4 @@ spec:
     backendRefs:
     - name: im-dashboard-svc
       port: 5001
+{{- end }}
