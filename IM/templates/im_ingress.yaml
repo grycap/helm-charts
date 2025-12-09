@@ -41,7 +41,7 @@ metadata:
   annotations:
 {{- if eq .Values.im.ingress.type "traefik" }}
       traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-im-rewrite@kubernetescrd,{{ .Release.Namespace }}-im-buffering@kubernetescrd
-      traefik.ingress.kubernetes.io/service.servers-transport: im-transport
+      traefik.ingress.kubernetes.io/service.serverstransport: im-transport
 {{- end }}
 {{- if eq .Values.im.ingress.type "nginx" }}
       nginx.ingress.kubernetes.io/client-body-buffer-size: "64k"
