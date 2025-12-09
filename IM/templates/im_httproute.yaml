@@ -1,5 +1,5 @@
 ---
-{{ if  Values.im.httproute.enabled }}
+{{ if  .Values.im.httproute.enabled }}
 apiVersion: gateway.nginx.org/v1alpha1
 kind: SnippetsFilter
 metadata:
