@@ -4,7 +4,7 @@ templates:
 tests:
   - name: test1
     set:
-      imdashboard.httproute.deploy: true
+      imdashboard.deploy: true
       imdashboard.httproute.enabled: true
       imdashboard.httproute.path: /im-imdashboard
     asserts:
