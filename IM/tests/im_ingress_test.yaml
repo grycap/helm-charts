@@ -54,11 +54,15 @@ tests:
           of: Middleware
         documentIndex: 1
       - equal:
-          path: spec.forwardingTimeouts.dialTimeout
-          value: "1800"
+          path: spec.buffering.maxRequestBodyBytes
+          value: 20971520
         documentIndex: 1
       - isKind:
           of: ServersTransport
+        documentIndex: 2
+      - equal:
+          path: spec.forwardingTimeouts.dialTimeout
+          value: "1800"
         documentIndex: 2
       - isKind:
           of: Ingress
