@@ -62,7 +62,7 @@ tests:
         documentIndex: 2
       - equal:
           path: spec.forwardingTimeouts.dialTimeout
-          value: "1800"
+          value: "1800s"
         documentIndex: 2
       - isKind:
           of: Ingress
