@@ -40,7 +40,7 @@ metadata:
   name: im
   annotations:
 {{- if eq .Values.im.ingress.type "traefik" }}
-      traefik.ingress.kubernetes.io/router.middlewares: im-rewrite@kubernetescrd,im-buffering@kubernetescrd
+      traefik.ingress.kubernetes.io/router.middlewares: {{ .Release.Namespace }}-im-rewrite@kubernetescrd,{{ .Release.Namespace }}-im-buffering@kubernetescrd
       traefik.ingress.kubernetes.io/service.servers-transport: im-transport
 {{- end }}
 {{- if eq .Values.im.ingress.type "nginx" }}
