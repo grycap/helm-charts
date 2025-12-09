@@ -73,33 +73,6 @@ rules:
   - create
   - update
   - delete
-
-{{- if eq (lower .Values.serverlessBackend) "openfaas" }}
-- apiGroups:
-  - apps
-  resources:
-  - deployments
-  - daemonsets
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-  - update
-  - patch
-- apiGroups:
-  - openfaas.com
-  resources:
-  - functions
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-{{- end }}
-{{- if eq (lower .Values.serverlessBackend) "knative" }}
 - apiGroups:
   - serving.knative.dev
   resources:
@@ -111,7 +84,6 @@ rules:
   - create
   - delete
   - update
-{{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -126,36 +98,6 @@ subjects:
 - kind: ServiceAccount
   name: oscar-sa
   namespace: {{ .Release.Namespace | quote }}
-{{- if and (eq (lower .Values.serverlessBackend) "openfaas") .Values.openfaas.scaler.enable }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: secret-reader
-  namespace: {{ .Values.openfaas.namespace | quote }}
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - get
-  - list
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: secret-reader-binding
-  namespace: {{ .Values.openfaas.namespace | quote }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: secret-reader
-subjects:
-- kind: ServiceAccount
-  name: oscar-sa
-  namespace: {{ .Release.Namespace | quote }}
-{{- end }}
 {{- if .Values.yuniKorn.enable }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
