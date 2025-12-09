@@ -86,6 +86,6 @@ tests:
       - equal:
           path: metadata.annotations
           value:
-            traefik.ingress.kubernetes.io/router.middlewares: im-rewrite@kubernetescrd,im-buffering@kubernetescrd
+            traefik.ingress.kubernetes.io/router.middlewares: NAMESPACE-im-rewrite@kubernetescrd,NAMESPACE-im-buffering@kubernetescrd
             traefik.ingress.kubernetes.io/service.servers-transport: im-transport
         documentIndex: 3
