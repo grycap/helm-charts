@@ -17,7 +17,7 @@ spec:
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: im-dashboard
+  name: im
 spec:
   parentRefs:
   - name: {{ .Values.im.httproute.gateway.name }}
@@ -26,7 +26,7 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: "{{ .Values.im.ingress.path }}"
+        value: "{{ .Values.im.httproute.path }}"
     filters:
     - type: URLRewrite
       urlRewrite:
