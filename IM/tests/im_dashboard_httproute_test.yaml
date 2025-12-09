@@ -1,6 +1,6 @@
 suite: test im httproute
 templates:
-  - im_dashbaord_httproute.yaml
+  - im_dashboard_httproute.yaml
 tests:
   - name: test1
     set:
@@ -24,7 +24,7 @@ tests:
           value: im
         documentIndex: 1
       - equal:
-          path: spec.rules[0]matches[0].path.value
+          path: spec.rules[0].matches[0].path.value
           value: /im-dashboard
         documentIndex: 1
       - equal:

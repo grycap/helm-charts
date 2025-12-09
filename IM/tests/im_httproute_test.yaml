@@ -24,7 +24,7 @@ tests:
           value: im
         documentIndex: 1
       - equal:
-          path: spec.rules[0]matches[0].path.value
+          path: spec.rules[0].matches[0].path.value
           value: /im
         documentIndex: 1
       - equal:
