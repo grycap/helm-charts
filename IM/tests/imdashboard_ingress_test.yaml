@@ -77,5 +77,5 @@ tests:
           path: metadata.annotations
           value:
             traefik.ingress.kubernetes.io/router.middlewares: NAMESPACE-imdashboard-rewrite@kubernetescrd,NAMESPACE-imdashboard-buffering@kubernetescrd
-            traefik.ingress.kubernetes.io/service.servers-transport: imdashboard-transport
+            traefik.ingress.kubernetes.io/service.servers-transport: NAMESPACE-imdashboard-transport
         documentIndex: 3
