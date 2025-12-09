@@ -73,33 +73,6 @@ rules:
   - create
   - update
   - delete
-
-{{- if eq (lower .Values.serverlessBackend) "openfaas" }}
-- apiGroups:
-  - apps
-  resources:
-  - deployments
-  - daemonsets
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-  - update
-  - patch
-- apiGroups:
-  - openfaas.com
-  resources:
-  - functions
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-{{- end }}
-{{- if eq (lower .Values.serverlessBackend) "knative" }}
 - apiGroups:
   - serving.knative.dev
   resources:
@@ -111,7 +84,6 @@ rules:
   - create
   - delete
   - update
-{{- end }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -126,36 +98,6 @@ subjects:
 - kind: ServiceAccount
   name: oscar-sa
   namespace: {{ .Release.Namespace | quote }}
-{{- if and (eq (lower .Values.serverlessBackend) "openfaas") .Values.openfaas.scaler.enable }}
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  name: secret-reader
-  namespace: {{ .Values.openfaas.namespace | quote }}
-rules:
-- apiGroups:
-  - ""
-  resources:
-  - secrets
-  verbs:
-  - get
-  - list
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: secret-reader-binding
-  namespace: {{ .Values.openfaas.namespace | quote }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: secret-reader
-subjects:
-- kind: ServiceAccount
-  name: oscar-sa
-  namespace: {{ .Release.Namespace | quote }}
-{{- end }}
 {{- if .Values.yuniKorn.enable }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -230,3 +172,133 @@ subjects:
   name: oscar-sa
   namespace: {{ .Release.Namespace | quote }}
 {{- end }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: oscar-controller-global
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+  - list
+  - create
+  - update
+- apiGroups:
+  - rbac.authorization.k8s.io
+  resources:
+  - roles
+  - rolebindings
+  verbs:
+  - get
+  - list
+  - create
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - pods/log
+  - podtemplates
+  - configmaps
+  - secrets
+  - services
+  - persistentvolumeclaims
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - apps
+  resources:
+  - daemonsets
+  - deployments
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - autoscaling
+  resources:
+  - horizontalpodautoscalers
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - batch
+  resources:
+  - jobs
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - deletecollection
+  - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - serving.knative.dev
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - ""
+  resources:
+  - persistentvolumes
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: oscar-controller-global-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: oscar-controller-global
+subjects:
+- kind: ServiceAccount
+  name: oscar-sa
+  namespace: {{ .Release.Namespace | quote }}

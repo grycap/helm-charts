@@ -7,7 +7,7 @@ tests:
       servicesNamespace: test-namespace
     asserts:
       - hasDocuments:
-          count: 3
+          count: 5
       - documentIndex: 0
         isKind:
           of: ServiceAccount
