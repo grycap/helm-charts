@@ -6,7 +6,7 @@ tests:
     set:
       imdashboard.deploy: true
       imdashboard.httproute.enabled: true
-      imdashboard.httproute.path: /im-imdashboard
+      imdashboard.httproute.path: /im-dashboard
     asserts:
       - hasDocuments:
           count: 2
@@ -22,7 +22,7 @@ tests:
         documentIndex: 1
       - equal:
           path: metadata.name
-          value: im
+          value: im-dashboard
         documentIndex: 1
       - equal:
           path: spec.rules[0].matches[0].path.value
