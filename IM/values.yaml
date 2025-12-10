@@ -49,6 +49,7 @@ imdashboard:
   version: latest
   ingress:
     enabled: true
+    type: nginx  # or traefik
     host: ""
     path: "/im-dashboard"
     tls: []
@@ -82,6 +83,7 @@ im:
   image: ghcr.io/grycap/im
   ingress:
     enabled: true
+    type: nginx  # or traefik
     host: ""
     path: "/im"
     tls: []
