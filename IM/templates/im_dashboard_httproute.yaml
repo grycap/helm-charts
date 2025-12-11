@@ -20,7 +20,8 @@ spec:
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
-  name: imdashboard-bufferingspec:
+  name: imdashboard-buffering
+spec:
   buffering:
     maxRequestBodyBytes: 20971520   # 20 MB
     memRequestBodyBytes: 65536      # 64 KB
@@ -87,6 +88,6 @@ spec:
 {{ if eq .Values.imdashboard.httproute.type "traefik" }}
         group: traefik.io
         kind: Middleware
-        name: im-buffering
+        name: imdashboard-buffering
 {{- end }}
 {{- end }}
