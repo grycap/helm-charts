@@ -55,6 +55,7 @@ imdashboard:
     tls: []
   httproute:
     enabled: false
+    type: nginx  # or traefik
     gateway:
       name: nginx-gateway
       namespace: nginx-gateway

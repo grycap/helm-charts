@@ -1,5 +1,6 @@
----
 {{ if  and .Values.imdashboard.deploy .Values.imdashboard.httproute.enabled }}
+{{ if eq .Values.imdashboard.httproute.type "nginx" }}
+---
 apiVersion: gateway.nginx.org/v1alpha1
 kind: SnippetsFilter
 metadata:
@@ -13,6 +14,39 @@ spec:
         proxy_read_timeout 1800s;
         client_max_body_size 20m;
         client_body_buffer_size 64k;
+{{- end }}
+{{ if eq .Values.imdashboard.httproute.type "traefik" }}
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: imdashboard-bufferingspec:
+  buffering:
+    maxRequestBodyBytes: 20971520   # 20 MB
+    memRequestBodyBytes: 65536      # 64 KB
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: imdashboard-transport
+spec:
+  forwardingTimeouts:
+    dialTimeout: 1800s
+    responseHeaderTimeout: 1800s
+    idleConnTimeout: 1800s
+---
+apiVersion: traefik.io/v1alpha1
+kind: TraefikService
+metadata:
+  name: im-dashboard
+spec:
+  weighted:
+    services:
+      - name: im-dashboard-svc
+        port: 5001
+        serversTransport: imdashboard-transport
+{{- end }}
+{{- end }}
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -27,6 +61,16 @@ spec:
     - path:
         type: PathPrefix
         value: "{{ .Values.imdashboard.httproute.path }}"
+    backendRefs:
+{{ if eq .Values.imdashboard.httproute.type "traefik" }}
+    - group: traefik.io
+      kind: TraefikService
+      name: im-dashboard
+{{- end }}
+{{ if eq .Values.imdashboard.httproute.type "nginx" }}
+    - name: im-dashboard-svc
+      port: 5001
+{{- end }}
     filters:
     - type: URLRewrite
       urlRewrite:
@@ -35,10 +79,14 @@ spec:
           replacePrefixMatch: "/"
     - type: ExtensionRef
       extensionRef:
+{{ if eq .Values.imdashboard.httproute.type "nginx" }}
         group: gateway.nginx.org
         kind: SnippetsFilter
         name: dashboard-snippets
-    backendRefs:
-    - name: im-dashboard-svc
-      port: 5001
+{{- end }}
+{{ if eq .Values.imdashboard.httproute.type "traefik" }}
+        group: traefik.io
+        kind: Middleware
+        name: im-buffering
+{{- end }}
 {{- end }}
