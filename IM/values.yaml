@@ -23,25 +23,39 @@ mysql:
       CREATE DATABASE IF NOT EXISTS imdashdb;
       GRANT ALL PRIVILEGES ON imdashdb.* TO 'imuser'@'%';
 
+
+#  Install MongoDB Community Operator first
+# helm repo add mongodb https://mongodb.github.io/helm-charts
+# helm install community-operator mongodb/community-operator --namespace mongodb --create-namespace --set operator.watchNamespace="*"
+#  It is needed to create the RBAC resources in the target namespace
+# git clone https://github.com/mongodb/mongodb-kubernetes-operator.git
+# cd mongodb-kubernetes-operator
+# kubectl apply -k config/rbac --namespace <my-namespace>
 mongodb:
   enabled: false
+  version: "8.0.17"
   architecture: replicaset
   replicaCount: 2
   arbiter:
-    enabled: false
+    enabled: true
   auth:
-    replicaSetKey: "f079596e599b8210f566"
     rootUser: root
     rootPassword: rootpass
-  persistence:
-    enabled: true
-    storageClass: ""
-    accessMode: ReadWriteOnce
-    size: 8Gi
+  data:
+    persistence:
+      accessMode: ReadWriteOnce
+      size: 8Gi
+  log:
+    persistence:
+      accessMode: ReadWriteOnce
+      size: 4Gi
   resources:
     requests:
-      memory: 512Mi
-      cpu: 250m
+      memory: 200Mi
+      cpu: 500m
+    limits:
+      memory: 4Gi
+      cpu: 2
 
 imdashboard:
   deploy: false

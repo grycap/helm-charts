@@ -38,9 +38,9 @@ spec:
             value: mongodb://{{ .Values.mongodb.auth.rootUser }}:{{ .Values.mongodb.auth.rootPassword }}@
 {{- range (untilStep 0 (int .Values.mongodb.replicaCount) 1) -}}
 {{- if ne . 0 }},{{ end -}}
-{{ $ReleaseName }}-mongodb-{{ . }}.{{ $ReleaseName }}-mongodb-headless
+{{ $ReleaseName }}-mongodb-{{ . }}.{{ $ReleaseName }}-mongodb-svc
 {{- end -}}
-/imdb?replicaSet=rs0
+/imdb?replicaSet={{ $ReleaseName }}-mongodb
 {{- else }}
             value: mysql://{{ .Values.mysql.mysqlUser }}:{{ .Values.mysql.mysqlPassword }}@{{ .Release.Name }}-mysql/imdb
 {{- end }}
