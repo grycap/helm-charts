@@ -499,9 +499,9 @@ entries:
     version: 1.0.0
   oscar:
   - apiVersion: v1
-    created: "2026-01-29T15:35:58.518275421Z"
+    created: "2026-01-29T15:50:58.671000632Z"
     description: Open Source Serverless Computing for Data-Processing Applications
-    digest: 0b632ef869aac34e581b96b2d935f937dac514d3e42bf9f54caf3ce7af33112f
+    digest: eefe5f38fc3606128597ee2924d12caca8a0e80e38e2b0f3569cc23d7930f4b9
     home: https://grycap.github.io/oscar
     icon: https://github.com/grycap/helm-charts/raw/master/icons/oscar.png
     keywords:
