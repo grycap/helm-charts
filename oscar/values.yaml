@@ -128,7 +128,7 @@ resources:
 
 # Configure kueue resource
 kueue:
-  enable: "true"
+  enable: "false"
   default:
     cpu: "2"
     memory: "2Gi"
