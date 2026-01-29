@@ -215,6 +215,7 @@ rules:
   - secrets
   - services
   - persistentvolumeclaims
+  - deletecollection
   verbs:
   - get
   - list
@@ -289,6 +290,21 @@ rules:
   - watch
   - create
   - update
+- apiGroups:
+  - kueue.x-k8s.io
+  resources:
+  - resourceflavors
+  - clusterqueues
+  - localqueues
+  - workloads
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
