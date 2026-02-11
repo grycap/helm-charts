@@ -215,7 +215,6 @@ rules:
   - secrets
   - services
   - persistentvolumeclaims
-  - deletecollection
   verbs:
   - get
   - list
@@ -223,6 +222,7 @@ rules:
   - create
   - delete
   - update
+  - deletecollection
 - apiGroups:
   - apps
   resources:
