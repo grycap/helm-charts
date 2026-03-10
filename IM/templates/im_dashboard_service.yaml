@@ -5,7 +5,6 @@ apiVersion: traefik.io/v1alpha1
 kind: ServersTransport
 metadata:
   name: imdashboard-transport
-  namespace: {{ .Release.Namespace }}
 spec:
   forwardingTimeouts:
     dialTimeout: 1800s
