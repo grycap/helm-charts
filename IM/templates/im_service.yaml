@@ -4,6 +4,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: ServersTransport
 metadata:
   name: im-transport
+  namespace: {{ .Release.Namespace }}
 spec:
   forwardingTimeouts:
     dialTimeout: 1800s
