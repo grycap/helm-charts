@@ -139,6 +139,14 @@ spec:
           value: {{ .Values.TTLJob | quote }}
         - name: JOB_LISTING_LIMIT
           value: {{ .Values.JobListingLimit | quote }}
+        - name: KUEUE_ENABLE
+          value: {{ .Values.kueue.enable | quote }}
+        - name: KUEUE_DEFAULT_CPU
+          value: {{ .Values.kueue.default.cpu | quote }}
+        - name: KUEUE_DEFAULT_MEMORY
+          value: {{ .Values.kueue.default.memory | quote }}
+        - name: KUEUE_DEFAULT_FLAVOR
+          value: {{ .Values.kueue.default.flavor | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}
