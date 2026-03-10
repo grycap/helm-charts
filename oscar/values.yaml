@@ -49,6 +49,16 @@ ingress:
   certManagerIssuer: ""
   host: ""
 
+# HTTPRoute configuration
+httproute:
+# Create a HTTPRoute to expose OSCAR
+  create: false
+  host: ""
+  type: traefik  # or nginx
+  gateway:
+    name: traefik-gateway
+    namespace: traefik
+
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
