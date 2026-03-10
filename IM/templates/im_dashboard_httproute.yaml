@@ -5,6 +5,7 @@ apiVersion: gateway.nginx.org/v1alpha1
 kind: SnippetsFilter
 metadata:
   name: dashboard-snippets
+  namespace: {{ .Release.Namespace }}
 spec:
   snippets:
     - context: http.server.location
