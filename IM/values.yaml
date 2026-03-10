@@ -55,9 +55,10 @@ imdashboard:
     tls: []
   httproute:
     enabled: false
+    type: nginx  # or traefik
     gateway:
-      name: nginx-gateway
-      namespace: nginx-gateway
+      name: nginx-gateway # or traefik-gateway
+      namespace: nginx-gateway # or traefik
     path: "/im-dashboard"
   resources:
     requests:

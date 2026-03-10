@@ -1,10 +1,24 @@
 {{ if  .Values.imdashboard.deploy }}
-# IM-Dashboard interface
+{{ if  eq .Values.imdashboard.httproute.type "traefik" }}
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: ServersTransport
+metadata:
+  name: imdashboard-transport
+spec:
+  forwardingTimeouts:
+    dialTimeout: 1800s
+    responseHeaderTimeout: 1800s
+{{- end }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: im-dashboard-svc
+{{- if  eq .Values.imdashboard.httproute.type "traefik" }}
+  annotations:
+    traefik.ingress.kubernetes.io/service.serverstransport: {{ .Release.Namespace }}-imdashboard-transport@kubernetescrd
+{{- end }}
 spec:
   ports:
   - name: http
