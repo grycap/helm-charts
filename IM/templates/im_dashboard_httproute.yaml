@@ -5,7 +5,6 @@ apiVersion: gateway.nginx.org/v1alpha1
 kind: SnippetsFilter
 metadata:
   name: dashboard-snippets
-  namespace: {{ .Release.Namespace }}
 spec:
   snippets:
     - context: http.server.location
@@ -22,7 +21,6 @@ apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: imdashboard-buffering
-  namespace: {{ .Release.Namespace }}
 spec:
   buffering:
     maxRequestBodyBytes: 20971520   # 20 MB
