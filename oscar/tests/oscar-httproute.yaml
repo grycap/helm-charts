@@ -4,8 +4,8 @@ templates:
 tests:
   - name: test oscar httproute with traefik
     set:
-      httpRoute.create: true
-      httpRoute.type: traefik
+      httproute.create: true
+      httproute.type: traefik
     asserts:
       - hasDocuments:
           count: 2
@@ -28,17 +28,17 @@ tests:
           value: /
         documentIndex: 1
       - equal:
-          path: spec.rules[0].filters[1].type
+          path: spec.rules[0].filters[0].type
           value: ExtensionRef
         documentIndex: 1
       - equal:
-          path: spec.rules[0].filters[1].extensionRef.name
+          path: spec.rules[0].filters[0].extensionRef.name
           value: cors-allow-all
         documentIndex: 1
   - name: test oscar httproute with nginx
     set:
-      httpRoute.create: true
-      httpRoute.type: nginx
+      httproute.create: true
+      httproute.type: nginx
     asserts:
       - hasDocuments:
           count: 2
@@ -61,10 +61,10 @@ tests:
           value: /
         documentIndex: 1
       - equal:
-          path: spec.rules[0].filters[1].type
+          path: spec.rules[0].filters[0].type
           value: ExtensionRef
         documentIndex: 1
       - equal:
-          path: spec.rules[0].filters[1].extensionRef.name
+          path: spec.rules[0].filters[0].extensionRef.name
           value: cors-policy
         documentIndex: 1
