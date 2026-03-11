@@ -24,20 +24,22 @@ spec:
 {{- if eq .Values.httproute.type "nginx" }}
 ---
 apiVersion: gateway.nginx.org/v1alpha1
-kind: ClientSettingsPolicy
+kind: SnippetsFilter
 metadata:
-  name: cors-policy
+  name: cors-allow-all
 spec:
-  allowOrigins:
-  - "*"
-  allowMethods:
-  - GET
-  - POST
-  - PUT
-  - OPTIONS
-  - DELETE
-  allowHeaders:
-  - "*"
+  snippets:
+    - context: http.server.location
+      value: |
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Headers "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS" always;
+        add_header Access-Control-Max-Age "600" always;
+        add_header Vary "Origin" always;
+
+        if ($request_method = OPTIONS) {
+          return 204;
+        }
 {{- end }}
 ---
 apiVersion: gateway.networking.k8s.io/v1
@@ -67,8 +69,8 @@ spec:
 {{- end }}
 {{- if eq .Values.httproute.type "nginx" }}
         group: gateway.nginx.org
-        kind: ClientSettingsPolicy
-        name: cors-policy
+        kind: SnippetsFilter
+        name: cors-allow-all
 {{- end }}
     backendRefs:
     - name: oscar
