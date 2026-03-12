@@ -63,6 +63,28 @@ rules:
   - delete
   - update
 - apiGroups:
+  - gateway.networking.k8s.io
+  resources:
+  - httproutes
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - traefik.io
+  resources:
+  - middlewares
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
   - autoscaling
   resources:
   - horizontalpodautoscalers
