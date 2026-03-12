@@ -47,7 +47,7 @@ kind: HTTPRoute
 metadata:
   name: oscar
 spec:
-{{- if ne .Values.ingress.host "" }}
+{{- if ne .Values.httproute.host "" }}
   hostnames:
   - {{ .Values.httproute.host }}
 {{- end }}
