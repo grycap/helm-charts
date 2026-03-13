@@ -1,0 +1,70 @@
+suite: test oscar httproute
+templates:
+  - oscar-httproute.yaml
+tests:
+  - name: test oscar httproute with traefik
+    set:
+      httproute.create: true
+      httproute.type: traefik
+    asserts:
+      - hasDocuments:
+          count: 2
+      - isKind:
+          of: Middleware
+        documentIndex: 0
+      - equal:
+          path: metadata.name
+          value: cors-allow-all
+        documentIndex: 0
+      - isKind:
+          of: HTTPRoute
+        documentIndex: 1
+      - equal:
+          path: metadata.name
+          value: oscar
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].matches[0].path.value
+          value: /
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[0].type
+          value: ExtensionRef
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[0].extensionRef.name
+          value: cors-allow-all
+        documentIndex: 1
+  - name: test oscar httproute with nginx
+    set:
+      httproute.create: true
+      httproute.type: nginx
+    asserts:
+      - hasDocuments:
+          count: 2
+      - isKind:
+          of: SnippetsFilter
+        documentIndex: 0
+      - equal:
+          path: metadata.name
+          value: cors-allow-all
+        documentIndex: 0
+      - isKind:
+          of: HTTPRoute
+        documentIndex: 1
+      - equal:
+          path: metadata.name
+          value: oscar
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].matches[0].path.value
+          value: /
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[0].type
+          value: ExtensionRef
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[0].extensionRef.name
+          value: cors-allow-all
+        documentIndex: 1

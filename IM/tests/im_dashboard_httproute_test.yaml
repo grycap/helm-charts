@@ -1,0 +1,80 @@
+suite: test im httproute
+templates:
+  - im_dashboard_httproute.yaml
+tests:
+  - name: test nginx dashboard http route
+    set:
+      imdashboard.deploy: true
+      imdashboard.httproute.enabled: true
+      imdashboard.httproute.path: /im-dashboard
+      imdashboard.httproute.type: nginx
+    asserts:
+      - hasDocuments:
+          count: 2
+      - isKind:
+          of: SnippetsFilter
+        documentIndex: 0
+      - equal:
+          path: metadata.name
+          value: dashboard-snippets
+        documentIndex: 0
+      - isKind:
+          of: HTTPRoute
+        documentIndex: 1
+      - equal:
+          path: metadata.name
+          value: im-dashboard
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].matches[0].path.value
+          value: /im-dashboard
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[0].type
+          value: URLRewrite
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[0].urlRewrite.path
+          value:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: "/"
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[1].type
+          value: ExtensionRef
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[1].extensionRef.name
+          value: dashboard-snippets
+        documentIndex: 1
+  - name: test traefik dashboard http route
+    set:
+      imdashboard.deploy: true
+      imdashboard.httproute.enabled: true
+      imdashboard.httproute.path: /im-dashboard
+      imdashboard.httproute.type: traefik
+    asserts:
+      - hasDocuments:
+          count: 2
+      - isKind:
+          of: Middleware
+        documentIndex: 0
+      - equal:
+          path: metadata.name
+          value: imdashboard-buffering
+        documentIndex: 0
+      - isKind:
+          of: HTTPRoute
+        documentIndex: 1
+      - equal:
+          path: metadata.name
+          value: im-dashboard
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[1].type
+          value: ExtensionRef
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[1].extensionRef.name
+          value: imdashboard-buffering
+        documentIndex: 1

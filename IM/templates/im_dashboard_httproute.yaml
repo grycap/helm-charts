@@ -1,0 +1,66 @@
+{{ if  and .Values.imdashboard.deploy .Values.imdashboard.httproute.enabled }}
+{{ if  eq .Values.imdashboard.httproute.type "nginx" }}
+---
+apiVersion: gateway.nginx.org/v1alpha1
+kind: SnippetsFilter
+metadata:
+  name: dashboard-snippets
+spec:
+  snippets:
+    - context: http.server.location
+      value: |
+        proxy_connect_timeout 1800s;
+        proxy_send_timeout 1800s;
+        proxy_read_timeout 1800s;
+        client_max_body_size 20m;
+        client_body_buffer_size 64k;
+{{- end }}
+{{ if  eq .Values.imdashboard.httproute.type "traefik" }}
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: imdashboard-buffering
+spec:
+  buffering:
+    maxRequestBodyBytes: 20971520   # 20 MB
+    memRequestBodyBytes: 65536      # 64 KB
+{{- end }}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: im-dashboard
+spec:
+  parentRefs:
+  - name: {{ .Values.imdashboard.httproute.gateway.name }}
+    namespace: {{ .Values.imdashboard.httproute.gateway.namespace }}
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: "{{ .Values.imdashboard.httproute.path }}"
+    filters:
+    - type: URLRewrite
+      urlRewrite:
+        path:
+          type: ReplacePrefixMatch
+          replacePrefixMatch: "/"
+{{ if  eq .Values.imdashboard.httproute.type "nginx" }}
+    - type: ExtensionRef
+      extensionRef:
+        group: gateway.nginx.org
+        kind: SnippetsFilter
+        name: dashboard-snippets
+{{- end }}
+{{ if  eq .Values.imdashboard.httproute.type "traefik" }}
+    - type: ExtensionRef
+      extensionRef:
+        group: traefik.io
+        kind: Middleware
+        name: imdashboard-buffering
+{{- end }}
+    backendRefs:
+    - name: im-dashboard-svc
+      port: 5001
+{{- end }}

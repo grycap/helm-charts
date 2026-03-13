@@ -2,7 +2,7 @@ suite: test im ingress
 templates:
   - im_ingress.yaml
 tests:
-  - name: test1
+  - name: test-nginx
     set:
       im.ingress.enabled: true
       im.ingress.path: /im
@@ -12,6 +12,8 @@ tests:
           hosts:
             - somehost.com
     asserts:
+      - hasDocuments:
+          count: 1
       - isKind:
           of: Ingress
       - equal:
@@ -21,6 +23,9 @@ tests:
           path: spec.rules[0].http.paths[0].path
           value: /im/?(.*)
       - equal:
+          path: spec.rules[0].http.paths[0].pathType
+          value: ImplementationSpecific
+      - equal:
           path: spec.rules[0].host
           value: somehost.com
       - equal:
@@ -29,3 +34,58 @@ tests:
       - equal:
           path: spec.tls[0].secretName
           value: tls-secret
+  - name: test-traefik
+    set:
+      im.ingress.enabled: true
+      im.ingress.type: traefik
+      im.ingress.path: /im
+      im.ingress.host: somehost.com
+    asserts:
+      - hasDocuments:
+          count: 4
+      - isKind:
+          of: Middleware
+        documentIndex: 0
+      - equal:
+          path: spec.replacePathRegex.regex
+          value: "^/im/(.*)"
+        documentIndex: 0
+      - isKind:
+          of: Middleware
+        documentIndex: 1
+      - equal:
+          path: spec.buffering.maxRequestBodyBytes
+          value: 20971520
+        documentIndex: 1
+      - isKind:
+          of: ServersTransport
+        documentIndex: 2
+      - equal:
+          path: spec.forwardingTimeouts.dialTimeout
+          value: "1800s"
+        documentIndex: 2
+      - isKind:
+          of: Ingress
+        documentIndex: 3
+      - equal:
+          path: metadata.name
+          value: im
+        documentIndex: 3
+      - equal:
+          path: spec.rules[0].http.paths[0].path
+          value: /im/
+        documentIndex: 3
+      - equal:
+          path: spec.rules[0].http.paths[0].pathType
+          value: Prefix
+        documentIndex: 3
+      - equal:
+          path: spec.rules[0].host
+          value: somehost.com
+        documentIndex: 3
+      - equal:
+          path: metadata.annotations
+          value:
+            traefik.ingress.kubernetes.io/router.middlewares: NAMESPACE-im-rewrite@kubernetescrd,NAMESPACE-im-buffering@kubernetescrd
+            traefik.ingress.kubernetes.io/service.serverstransport: NAMESPACE-im-transport
+        documentIndex: 3

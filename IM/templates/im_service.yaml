@@ -1,8 +1,23 @@
+{{ if  eq .Values.im.httproute.type "traefik" }}
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: im-transport
+spec:
+  forwardingTimeouts:
+    dialTimeout: 1800s
+    responseHeaderTimeout: 1800s
+{{- end }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: im-backend
+{{- if  eq .Values.im.httproute.type "traefik" }}
+  annotations:
+    traefik.ingress.kubernetes.io/service.serverstransport: {{ .Release.Namespace }}-im-transport@kubernetescrd
+{{- end }}
 spec:
   ports:
   - name: restapi
