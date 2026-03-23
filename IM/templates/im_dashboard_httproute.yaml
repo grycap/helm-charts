@@ -25,6 +25,15 @@ spec:
   buffering:
     maxRequestBodyBytes: 20971520   # 20 MB
     memRequestBodyBytes: 65536      # 64 KB
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: dashboard-prefix
+spec:
+  stripPrefix:
+    prefixes:
+      - /im-dashboard-dev
 {{- end }}
 ---
 apiVersion: gateway.networking.k8s.io/v1
@@ -41,12 +50,12 @@ spec:
         type: PathPrefix
         value: "{{ .Values.imdashboard.httproute.path }}"
     filters:
+{{ if  eq .Values.imdashboard.httproute.type "nginx" }}
     - type: URLRewrite
       urlRewrite:
         path:
           type: ReplacePrefixMatch
           replacePrefixMatch: "/"
-{{ if  eq .Values.imdashboard.httproute.type "nginx" }}
     - type: ExtensionRef
       extensionRef:
         group: gateway.nginx.org
@@ -54,6 +63,11 @@ spec:
         name: dashboard-snippets
 {{- end }}
 {{ if  eq .Values.imdashboard.httproute.type "traefik" }}
+    - type: ExtensionRef
+      extensionRef:
+        group: traefik.io
+        kind: Middleware
+        name: dashboard-prefix
     - type: ExtensionRef
       extensionRef:
         group: traefik.io
