@@ -33,7 +33,7 @@ metadata:
 spec:
   stripPrefix:
     prefixes:
-      - /im-dashboard-dev
+      - "{{ .Values.imdashboard.httproute.path }}"
 {{- end }}
 ---
 apiVersion: gateway.networking.k8s.io/v1
