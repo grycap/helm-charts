@@ -25,6 +25,7 @@ spec:
   buffering:
     maxRequestBodyBytes: 20971520   # 20 MB
     memRequestBodyBytes: 65536      # 64 KB
+{{- end }}
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -67,4 +68,5 @@ spec:
     backendRefs:
     - name: im-dashboard-svc
       port: 5001
+{{- end }}
 {{- end }}
