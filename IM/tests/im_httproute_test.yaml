@@ -40,10 +40,18 @@ tests:
         documentIndex: 1
       - equal:
           path: spec.rules[0].filters[1].type
+          value: RequestHeaderModifier
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[1].requestHeaderModifier.add[0].name
+          value: X-Forwarded-Prefix
+        documentIndex: 1
+      - equal:
+          path: spec.rules[0].filters[2].type
           value: ExtensionRef
         documentIndex: 1
       - equal:
-          path: spec.rules[0].filters[1].extensionRef.name
+          path: spec.rules[0].filters[2].extensionRef.name
           value: im-snippets
         documentIndex: 1
   - name: test traefik http route
@@ -69,10 +77,10 @@ tests:
           value: im
         documentIndex: 1
       - equal:
-          path: spec.rules[0].filters[1].type
+          path: spec.rules[0].filters[2].type
           value: ExtensionRef
         documentIndex: 1
       - equal:
-          path: spec.rules[0].filters[1].extensionRef.name
+          path: spec.rules[0].filters[2].extensionRef.name
           value: im-buffering
         documentIndex: 1
