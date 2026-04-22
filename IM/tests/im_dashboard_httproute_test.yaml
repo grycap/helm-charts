@@ -63,26 +63,18 @@ tests:
       imdashboard.httproute.type: traefik
     asserts:
       - hasDocuments:
-          count: 2
-      - isKind:
-          of: Middleware
-        documentIndex: 0
-      - equal:
-          path: metadata.name
-          value: imdashboard-buffering
-        documentIndex: 0
+          count: 1
       - isKind:
           of: HTTPRoute
-        documentIndex: 1
       - equal:
           path: metadata.name
           value: im-dashboard
-        documentIndex: 1
       - equal:
-          path: spec.rules[0].filters[2].type
-          value: ExtensionRef
-        documentIndex: 1
+          path: spec.rules[0].filters[1].type
+          value: RequestHeaderModifier
       - equal:
-          path: spec.rules[0].filters[2].extensionRef.name
-          value: imdashboard-buffering
-        documentIndex: 1
+          path: spec.rules[0].filters[1].requestHeaderModifier.add[0].name
+          value: X-Forwarded-Prefix
+      - equal:
+          path: spec.rules[0].filters[1].requestHeaderModifier.add[0].value
+          value: /im-dashboard
