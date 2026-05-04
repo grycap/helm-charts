@@ -49,16 +49,6 @@ ingress:
   certManagerIssuer: ""
   host: ""
 
-# HTTPRoute configuration
-httproute:
-# Create a HTTPRoute to expose OSCAR
-  create: false
-  host: ""
-  type: traefik  # or nginx
-  gateway:
-    name: traefik-gateway
-    namespace: traefik
-
 # Container image and pullPolicy for deployment
 image:
   repository: ghcr.io/grycap/oscar
@@ -108,6 +98,12 @@ volume:
   supervisorVersion: "1.6.2"
   watchdogVersion: "0.2.1"
   supervisorKit : "docker://ghcr.io/grycap/faas-supervisor-kit"
+  enable: "true"
+  default:
+    available: "7Gi"
+    max: "5"
+    max_disk: "5Gi"
+    min_disk: "200Mi"
 # Liveness and Readiness probe values.
 # ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
 livenessProbe:
@@ -143,3 +139,40 @@ kueue:
     cpu: "2"
     memory: "2Gi"
     flavor: "oscar-default-flavor"
+
+# Configure Prometheus resource
+
+prometheus:
+  url: ""
+  cpuQuery: "sum(increase(container_cpu_usage_seconds_total{namespace=~\"{{services_namespace}}.*\",service=~\"{{service}}\"}[{{range}}])) / 3600"
+  gpuQuery: "sum(increase(container_gpu_usage_seconds_total{namespace=~\"{{services_namespace}}.*\",service=~\"{{service}}\"}[{{range}}])) / 3600"
+
+# Configure Loki resource
+
+loki:
+  url: ""
+  query: "{namespace=\"{{namespace}}\", app=\"{{app}}\"} |~ \"/(job|run)/\""
+  exposedQuery: "{namespace=\"{{namespace}}\", app=\"{{app}}\"} |~ \"/system/services/.+/exposed\""
+  exposedNamespace: "ingress-nginx"
+  exposedAppLabel: "ingress-nginx"
+
+# Configure Exposed Services
+
+exposedServices:
+  routeKind: "ingress"
+
+# Configure HTTPRoute
+
+httproute:
+  gatewayName: "traefik-gateway"
+  gatewayNamespace: "traefik"
+
+# Configure Ingress Services CORS
+
+ingressServices:
+  corsAllowedOrigins: "https://dashboard.oscar.grycap.net,https://dashboard-devel.oscar.grycap.net,https://dashboard-demo.oscar.grycap.net,http://oscar.oscar.svc.cluster.local,http://host.docker.internal,http://localhost,http://localhost:5173"
+  corsAllowedMethods: "GET, PUT, POST, DELETE, PATCH, HEAD"
+  corsAllowedHeaders: "Authorization, Content-Type"
+
+# Additional config file path
+additionalConfigPath: "config.yaml"

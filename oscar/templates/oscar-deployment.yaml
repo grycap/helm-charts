@@ -147,6 +147,48 @@ spec:
           value: {{ .Values.kueue.default.memory | quote }}
         - name: KUEUE_DEFAULT_FLAVOR
           value: {{ .Values.kueue.default.flavor | quote }}
+        - name: STORAGE_CLASS_NAME
+          value: {{ .Values.volume.storageClassName | quote }}
+        - name: VOLUME_ENABLE
+          value: {{ .Values.volume.enable | quote }}
+        - name: VOLUME_AVAILABLE
+          value: {{ .Values.volume.default.available | quote }}
+        - name: VOLUME_MAX
+          value: {{ .Values.volume.default.max | quote }}
+        - name: VOLUME_MAX_DISK
+          value: {{ .Values.volume.default.max_disk | quote }}
+        - name: VOLUME_MIN_DISK
+          value: {{ .Values.volume.default.min_disk | quote }}
+        - name: PROMETHEUS_URL
+          value: {{ .Values.prometheus.url | quote }}
+        - name: PROMETHEUS_CPU_QUERY
+          value: {{ .Values.prometheus.cpuQuery | quote }}
+        - name: PROMETHEUS_GPU_QUERY
+          value: {{ .Values.prometheus.gpuQuery | quote }}
+        - name: LOKI_URL
+          value: {{ .Values.loki.url | quote }}
+        - name: LOKI_QUERY
+          value: {{ .Values.loki.query | quote }}
+        - name: LOKI_EXPOSED_QUERY
+          value: {{ .Values.loki.exposedQuery | quote }}
+        - name: LOKI_EXPOSED_NAMESPACE
+          value: {{ .Values.loki.exposedNamespace | quote }}
+        - name: LOKI_EXPOSED_APP_LABEL
+          value: {{ .Values.loki.exposedAppLabel | quote }}
+        - name: EXPOSED_SERVICES_ROUTE_KIND
+          value: {{ .Values.exposedServices.routeKind | quote }}
+        - name: HTTPROUTE_GATEWAY_NAME
+          value: {{ .Values.httproute.gatewayName | quote }}
+        - name: HTTPROUTE_GATEWAY_NAMESPACE
+          value: {{ .Values.httproute.gatewayNamespace | quote }}
+        - name: INGRESS_SERVICES_CORS_ALLOWED_ORIGINS
+          value: {{ .Values.ingressServices.corsAllowedOrigins | quote }}
+        - name: INGRESS_SERVICES_CORS_ALLOWED_METHODS
+          value: {{ .Values.ingressServices.corsAllowedMethods | quote }}
+        - name: INGRESS_SERVICES_CORS_ALLOWED_HEADERS
+          value: {{ .Values.ingressServices.corsAllowedHeaders | quote }}
+        - name: ADDITIONAL_CONFIG_PATH
+          value: {{ .Values.additionalConfigPath | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}

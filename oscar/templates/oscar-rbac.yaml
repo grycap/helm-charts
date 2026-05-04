@@ -237,6 +237,8 @@ rules:
   - secrets
   - services
   - persistentvolumeclaims
+  - resourcequotas
+  - limitranges
   verbs:
   - get
   - list
@@ -292,28 +294,6 @@ rules:
   - delete
   - update
 - apiGroups:
-  - gateway.networking.k8s.io
-  resources:
-  - httproutes
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-  - update
-- apiGroups:
-  - traefik.io
-  resources:
-  - middlewares
-  verbs:
-  - get
-  - list
-  - watch
-  - create
-  - delete
-  - update
-- apiGroups:
   - serving.knative.dev
   resources:
   - services
@@ -349,6 +329,28 @@ rules:
   - update
   - patch
   - delete
+- apiGroups:
+  - gateway.networking.k8s.io
+  resources:
+  - httproutes
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
+- apiGroups:
+  - traefik.io
+  resources:
+  - middlewares
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - update
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
