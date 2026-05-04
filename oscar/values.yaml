@@ -164,8 +164,9 @@ exposedServices:
 # Configure HTTPRoute
 
 httproute:
-  gatewayName: "traefik-gateway"
-  gatewayNamespace: "traefik"
+  gateway:
+    name: "traefik-gateway"
+    namespacesamespace: "traefik"
 
 # Configure Ingress Services CORS
 
