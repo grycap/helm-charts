@@ -35,8 +35,9 @@ Then install the IM chart (with Helm v3):
 helm install --namespace=im --create-namespace im  grycap/IM
 ```
 
-The IM chat uses ingress rules to publish the external services (IM service and IM-web portal). So it expects an ingress
-controller installed and configured in the Kubernetes cluster.
+The IM chat uses ingress rules or httproute to publish the external services 
+(IM service and IM-web portal). So it expects an ingress controller or API Gateway installed
+ and configured in the Kubernetes cluster.
 
 ## Configuration
 
@@ -57,6 +58,11 @@ see their documentations for advance configuration parameters.
 | `im.ingress.enabled`              | Create Ingress for IM                                       | `true`           |
 | `im.ingress.host`                 | Ingress host                                                | `""`             |
 | `im.ingress.path`                 | Ingress path                                                | `/im`            |
+| `im.httproute.enabled`            | Create HTTPRoute for IM                                     | `false`          |
+| `im.httproute.type`               | HTTPRoute type (nginx, or traefik)                          | `"nginx"`        |
+| `im.httproute.path`               | HTTPRoute path                                              | `/im`            |
+| `im.httproute.gateway.name`       | Gateway name                                                | `nginx-gateway`  |
+| `im.httproute.gateway.namespace`  | Gateway namespace                                           | `nginx-gateway`  |
 | `im.resources.requests.memory`    | `im` Memory resource requests/limits                        | `256Mi`          |
 | `im.resources.requests.cpu`       | `im` CPU resource requests/limits                           | `250m`           |
 | `im.replicas`                     | Number of IM Pods to run ([see IM HA mode](#IM-HA-mode)).   | `1`              |
@@ -79,6 +85,11 @@ see their documentations for advance configuration parameters.
 | `imdashboard.ingress.enabled`     | Create Ingress                                              | `true`           |
 | `imdashboard.ingress.host`        | Ingress host                                                | `""`             |
 | `imdashboard.ingress.path`        | Ingress path                                                | `/im-imdashboard`|
+| `imdashboard.httproute.enabled`            | Create HTTPRoute for IM Dashboard                          | `false`          |
+| `imdashboard.httproute.type`               | HTTPRoute type (nginx, or traefik)                         | `"nginx"`        |
+| `imdashboard.httproute.path`               | HTTPRoute path                                             | `/im-imdashboard`|
+| `imdashboard.httproute.gateway.name`       | Gateway name                                               | `nginx-gateway`  |
+| `imdashboard.httproute.gateway.namespace`  | Gateway namespace                                          | `nginx-gateway`  |
 | `imdashboard.resources.requests.memory` | `im-dashboard` Memory resource requests/limits                        | `256Mi`          |
 | `imdashboard.resources.requests.cpu`    | `im-dashboard` CPU resource requests/limits                           | `250m`           |
 | `imdashboard.oidc.name`           | `im-dashboard` OIDC provider name.                          | `name`           |

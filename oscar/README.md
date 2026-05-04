@@ -34,7 +34,7 @@ Then install the IM chart (with Helm v3):
 helm install --namespace=oscar oscar grycap/oscar
 ```
 
-*OSCAR can be exposed by a Kubernetes Ingress, so it expects an ingress controller installed and configured in the cluster.*
+*OSCAR can be exposed by a Kubernetes Ingress or HTTPRoute, so it expects an ingress controller or API Gateway installed and configured in the cluster.*
 
 ### Configuration
 
@@ -79,6 +79,11 @@ The following table lists the configurable parameters of the OSCAR chart and the
 | `ingress.create`                        | Create a Kubernetes ingress to expose OSCAR                                                                                                                                                           | `false`                              |
 | `ingress.host`                          | DNS Host for the ingress                                                                                                                                                                              | `""`                                 |
 | `ingress.certManagerIssuer`             | Cert-manager issuer to automatically assign TLS certificates                                                                                                                                          | `""`                                 |
+| `httproute.create`                      | Create a Kubernetes HTTPRoute to expose OSCAR                                                                                                                                                         | `false`                              |
+| `httproute.host`                        | DNS Host for the HTTPRoute                                                                                                                                                                            | `""`                                 |
+| `httproute.type`                        | HTTPRoute type (nginx, or traefik)                                                                                                                                                                    | `"traefik"`                          |
+| `httproute.gateway.name`                | Gateway name                                                                                                                                                                                          | `"traefik-gateway"`                  |
+| `httproute.gateway.namespace`           | Gateway namespace                                                                                                                                                                                     | `"traefik"`                          |
 | `image.repository`                      | Docker Hub image to deploy OSCAR                                                                                                                                                                      | `ghcr.io/grycap/oscar`               |
 | `image.tag`                             | Release tag to install                                                                                                                                                                                | `2.6.0`                              |
 | `image.pullPolicy`                      | Image [pullPolicy](https://kubernetes.io/docs/concepts/containers/images/#updating-images)                                                                                                            | `Always`                             |

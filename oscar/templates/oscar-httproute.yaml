@@ -1,0 +1,78 @@
+
+{{- if .Values.httproute.create }}
+{{- if eq .Values.httproute.type "traefik" }}
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: cors-allow-all
+spec:
+  headers:
+    accessControlAllowHeaders:
+      - "*"
+    accessControlAllowOriginList:
+      - "*"
+    accessControlMaxAge: 600
+    addVaryHeader: true
+    accessControlAllowMethods:
+      - "GET"
+      - "POST"
+      - "PUT"
+      - "DELETE"
+      - "OPTIONS"
+{{- end }}
+{{- if eq .Values.httproute.type "nginx" }}
+---
+apiVersion: gateway.nginx.org/v1alpha1
+kind: SnippetsFilter
+metadata:
+  name: cors-allow-all
+spec:
+  snippets:
+    - context: http.server.location
+      value: |
+        add_header Access-Control-Allow-Origin "*" always;
+        add_header Access-Control-Allow-Headers "*" always;
+        add_header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS" always;
+        add_header Access-Control-Max-Age "600" always;
+        add_header Vary "Origin" always;
+
+        if ($request_method = OPTIONS) {
+          return 204;
+        }
+{{- end }}
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: oscar
+spec:
+{{- if ne .Values.httproute.host "" }}
+  hostnames:
+  - {{ .Values.httproute.host }}
+{{- end }}
+  parentRefs:
+  - name: {{ .Values.httproute.gateway.name }}
+    namespace: {{ .Values.httproute.gateway.namespace }}
+  rules:
+  - matches:
+    - path:
+        type: PathPrefix
+        value: /
+    filters:
+    - type: ExtensionRef
+      extensionRef:
+{{- if eq .Values.httproute.type "traefik" }}
+        group: traefik.io
+        kind: Middleware
+        name: cors-allow-all
+{{- end }}
+{{- if eq .Values.httproute.type "nginx" }}
+        group: gateway.nginx.org
+        kind: SnippetsFilter
+        name: cors-allow-all
+{{- end }}
+    backendRefs:
+    - name: oscar
+      port: {{ .Values.service.port }}
+{{- end }}
