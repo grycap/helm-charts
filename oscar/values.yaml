@@ -166,7 +166,7 @@ exposedServices:
 httproute:
   gateway:
     name: "traefik-gateway"
-    namespacesamespace: "traefik"
+    namespace: "traefik"
 
 # Configure Ingress Services CORS
 
