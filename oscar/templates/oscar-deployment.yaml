@@ -178,9 +178,9 @@ spec:
         - name: EXPOSED_SERVICES_ROUTE_KIND
           value: {{ .Values.exposedServices.routeKind | quote }}
         - name: HTTPROUTE_GATEWAY_NAME
-          value: {{ .Values.httproute.gatewayName | quote }}
+          value: {{ .Values.httproute.gateway.name | quote }}
         - name: HTTPROUTE_GATEWAY_NAMESPACE
-          value: {{ .Values.httproute.gatewayNamespace | quote }}
+          value: {{ .Values.httproute.gateway.namespace | quote }}
         - name: INGRESS_SERVICES_CORS_ALLOWED_ORIGINS
           value: {{ .Values.ingressServices.corsAllowedOrigins | quote }}
         - name: INGRESS_SERVICES_CORS_ALLOWED_METHODS
