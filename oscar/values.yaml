@@ -164,6 +164,9 @@ exposedServices:
 # Configure HTTPRoute
 
 httproute:
+  create: false
+  type: "traefik"
+  host: ""
   gateway:
     name: "traefik-gateway"
     namespace: "traefik"
