@@ -1,168 +1,684 @@
 {
-    "$schema": "http://json-schema.org/schema#",
-    "type": "object",
-    "properties": {
-      "im": {
-        "type": "object",
-        "form": true,
-        "title": "IM Configuration",
-        "description": "IM Service configuration values",
-        "properties": {
-            "version": {
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "mysql": {
+      "type": "object",
+      "title": "MySQL Configuration",
+      "description": "MySQL configuration values",
+      "form": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Enabled",
+          "form": true
+        },
+        "imageTag": {
+          "type": "string",
+          "title": "Image Tag",
+          "form": true
+        },
+        "mysqlPassword": {
+          "type": "string",
+          "title": "MySQL Password",
+          "form": true
+        },
+        "persistence": {
+          "type": "object",
+          "title": "Persistence",
+          "form": true,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Enabled",
+              "form": true
+            },
+            "storageClass": {
               "type": "string",
-              "form": true,
-              "title": "Version"
+              "title": "Storage Class",
+              "form": true
             },
-            "replicas": {
-                "type": "integer",
-                "form": true,
-                "title": "Number of replicas"
+            "accessMode": {
+              "type": "string",
+              "title": "Access Mode",
+              "form": true
             },
-            "ingress": {
+            "size": {
+              "type": "string",
+              "title": "Size",
+              "form": true
+            }
+          }
+        },
+        "mysqlUser": {
+          "type": "string",
+          "title": "MySQL User",
+          "form": true
+        },
+        "initializationFiles": {
+          "type": "object",
+          "title": "Initialization Files",
+          "form": true,
+          "properties": {
+            "imdb.sql": {
+              "type": "string",
+              "title": "imdb.sql",
+              "form": true
+            },
+            "imdashdb.sql": {
+              "type": "string",
+              "title": "imdashdb.sql",
+              "form": true
+            }
+          }
+        }
+      }
+    },
+    "mongodb": {
+      "type": "object",
+      "title": "MongoDB Configuration",
+      "description": "MongoDB configuration values",
+      "form": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Enable",
+          "description": "Flag to enable the MongoDB server to store IM database.",
+          "form": true
+        },
+        "architecture": {
+          "type": "string",
+          "title": "Architecture",
+          "form": true
+        },
+        "replicaCount": {
+          "type": "integer",
+          "title": "Replica Count",
+          "form": true
+        },
+        "arbiter": {
+          "type": "object",
+          "title": "Arbiter",
+          "form": true,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Enabled",
+              "form": true
+            }
+          }
+        },
+        "auth": {
+          "type": "object",
+          "title": "Auth",
+          "form": true,
+          "properties": {
+            "replicaSetKey": {
+              "type": "string",
+              "title": "Replica Set Key",
+              "form": true
+            },
+            "rootUser": {
+              "type": "string",
+              "title": "Root User",
+              "form": true
+            },
+            "rootPassword": {
+              "type": "string",
+              "title": "Root Password",
+              "form": true
+            }
+          }
+        },
+        "persistence": {
+          "type": "object",
+          "title": "Persistence",
+          "form": true,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Enabled",
+              "form": true
+            },
+            "storageClass": {
+              "type": "string",
+              "title": "Storage Class",
+              "form": true
+            },
+            "accessMode": {
+              "type": "string",
+              "title": "Access Mode",
+              "form": true
+            },
+            "size": {
+              "type": "string",
+              "title": "Size",
+              "form": true
+            }
+          }
+        },
+        "resources": {
+          "type": "object",
+          "title": "Resources",
+          "form": true,
+          "properties": {
+            "requests": {
               "type": "object",
+              "title": "Requests",
               "form": true,
-              "title": "Ingress",
-              "description": "Enable the ingress resource that allows accessing the IM service REST API.",
+              "properties": {
+                "memory": {
+                  "type": "string",
+                  "title": "Memory",
+                  "form": true
+                },
+                "cpu": {
+                  "type": "string",
+                  "title": "CPU",
+                  "form": true
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "imdashboard": {
+      "type": "object",
+      "title": "IM-Dashboard Configuration",
+      "description": "IM-Dashboard configuration values",
+      "form": true,
+      "properties": {
+        "deploy": {
+          "type": "boolean",
+          "title": "Deploy",
+          "description": "Flag to deploy the IM-Dashboard (OIDC configuration is required).",
+          "form": true
+        },
+        "image": {
+          "type": "string",
+          "title": "Image",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          }
+        },
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          }
+        },
+        "ingress": {
+          "type": "object",
+          "title": "Ingress",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          },
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Enabled",
+              "form": true
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "form": true
+            },
+            "host": {
+              "type": "string",
+              "title": "Host",
+              "form": true
+            },
+            "path": {
+              "type": "string",
+              "title": "Path",
+              "form": true
+            },
+            "tls": {
+              "type": "array",
+              "title": "TLS",
+              "form": true,
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "httproute": {
+          "type": "object",
+          "title": "HTTPRoute",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          },
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Enabled",
+              "form": true
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "form": true
+            },
+            "gateway": {
+              "type": "object",
+              "title": "Gateway",
+              "form": true,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "form": true
+                },
+                "namespace": {
+                  "type": "string",
+                  "title": "Namespace",
+                  "form": true
+                }
+              }
+            },
+            "path": {
+              "type": "string",
+              "title": "Path",
+              "form": true
+            }
+          }
+        },
+        "resources": {
+          "type": "object",
+          "title": "Resources",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          },
+          "properties": {
+            "requests": {
+              "type": "object",
+              "title": "Requests",
+              "form": true,
+              "properties": {
+                "memory": {
+                  "type": "string",
+                  "title": "Memory",
+                  "form": true
+                },
+                "cpu": {
+                  "type": "string",
+                  "title": "CPU",
+                  "form": true
+                }
+              }
+            }
+          }
+        },
+        "oidc": {
+          "type": "object",
+          "title": "OIDC Configuration",
+          "description": "OIDC Configuration for the authentication provider",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          },
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Provider Name",
+              "form": true
+            },
+            "base_url": {
+              "type": "string",
+              "title": "Provider Base URL",
+              "form": true
+            },
+            "client_id": {
+              "type": "string",
+              "title": "Client ID",
+              "form": true
+            },
+            "client_secret": {
+              "type": "string",
+              "title": "Client Secret",
+              "form": true
+            },
+            "group_membership": {
+              "type": "string",
+              "title": "Group Membership",
+              "form": true
+            },
+            "scopes": {
+              "type": "string",
+              "title": "Scopes",
+              "form": true
+            }
+          }
+        },
+        "support_email": {
+          "type": "string",
+          "title": "Support email",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          }
+        },
+        "analytics_tag": {
+          "type": "string",
+          "title": "Analytics Tag",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          }
+        },
+        "loglevel": {
+          "type": "string",
+          "title": "Log Level",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          }
+        },
+        "static_sites": {
+          "type": "string",
+          "title": "Static Sites",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          }
+        },
+        "external_links": {
+          "type": "string",
+          "title": "External Links",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          }
+        },
+        "credentials_key": {
+          "type": "string",
+          "title": "Credentials Key",
+          "form": true,
+          "hidden": {
+            "value": false,
+            "path": "imdashboard/deploy"
+          }
+        }
+      }
+    },
+    "im": {
+      "type": "object",
+      "title": "IM Configuration",
+      "description": "IM Service configuration values",
+      "form": true,
+      "properties": {
+        "version": {
+          "type": "string",
+          "title": "Version",
+          "form": true
+        },
+        "image": {
+          "type": "string",
+          "title": "Image",
+          "form": true
+        },
+        "ingress": {
+          "type": "object",
+          "title": "Ingress",
+          "description": "Enable the ingress resource that allows accessing the IM service REST API.",
+          "form": true,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Enabled",
+              "form": true
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "form": true,
+              "hidden": {
+                "value": false,
+                "path": "im/ingress/enabled"
+              }
+            },
+            "host": {
+              "type": "string",
+              "title": "Host",
+              "form": true,
+              "hidden": {
+                "value": false,
+                "path": "im/ingress/enabled"
+              }
+            },
+            "path": {
+              "type": "string",
+              "title": "Path",
+              "form": true,
+              "hidden": {
+                "value": false,
+                "path": "im/ingress/enabled"
+              }
+            },
+            "tls": {
+              "type": "array",
+              "title": "TLS",
+              "form": true,
+              "items": {
+                "type": "object"
+              },
+              "hidden": {
+                "value": false,
+                "path": "im/ingress/enabled"
+              }
+            }
+          }
+        },
+        "httproute": {
+          "type": "object",
+          "title": "HTTPRoute",
+          "form": true,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Enabled",
+              "form": true
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "form": true,
+              "hidden": {
+                "value": false,
+                "path": "im/httproute/enabled"
+              }
+            },
+            "gateway": {
+              "type": "object",
+              "title": "Gateway",
+              "form": true,
+              "hidden": {
+                "value": false,
+                "path": "im/httproute/enabled"
+              },
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "form": true
+                },
+                "namespace": {
+                  "type": "string",
+                  "title": "Namespace",
+                  "form": true
+                }
+              }
+            },
+            "path": {
+              "type": "string",
+              "title": "Path",
+              "form": true,
+              "hidden": {
+                "value": false,
+                "path": "im/httproute/enabled"
+              }
+            }
+          }
+        },
+        "resources": {
+          "type": "object",
+          "title": "Resources",
+          "form": true,
+          "properties": {
+            "requests": {
+              "type": "object",
+              "title": "Requests",
+              "form": true,
+              "properties": {
+                "memory": {
+                  "type": "string",
+                  "title": "Memory",
+                  "form": true
+                },
+                "cpu": {
+                  "type": "string",
+                  "title": "CPU",
+                  "form": true
+                }
+              }
+            }
+          }
+        },
+        "replicas": {
+          "type": "integer",
+          "title": "Number of replicas",
+          "form": true
+        },
+        "log": {
+          "type": "object",
+          "title": "Log Configuration",
+          "form": true,
+          "properties": {
+            "level": {
+              "type": "string",
+              "title": "Level",
+              "form": true
+            },
+            "persistence": {
+              "type": "object",
+              "title": "Persistence",
+              "form": true,
               "properties": {
                 "enabled": {
                   "type": "boolean",
                   "title": "Enabled",
                   "form": true
                 },
-                "host": {
+                "storageclass": {
                   "type": "string",
-                  "title": "Host",
-                  "form": true,
-                  "hidden": {
-                    "value": false,
-                    "path": "im/ingress/enabled"
-                  }
+                  "title": "Storage Class",
+                  "form": true
                 },
-                "path": {
+                "accessmode": {
                   "type": "string",
-                  "title": "Path",
-                  "form": true,
-                  "hidden": {
-                    "value": false,
-                    "path": "im/ingress/enabled"
-                  }
+                  "title": "Access Mode",
+                  "form": true
+                },
+                "size": {
+                  "type": "string",
+                  "title": "Size",
+                  "form": true
                 }
               }
             }
+          }
+        },
+        "config": {
+          "type": "array",
+          "title": "Config",
+          "form": true,
+          "items": {
+            "type": "object"
+          }
         }
-      },
-      "imdashboard": {
-        "type": "object",
-        "title": "IM-Dasboard Configuration",
-        "description": "IM-Dashboard configuration values",
-        "form": true,
-        "properties": {
-          "deploy": {
-            "type": "boolean",
-            "title": "Deploy",
-            "description": "Flag to deploy the IM-Dasboard (OIDC configuration is required).",
-            "form": true
-          },
-          "version": {
-            "type": "string",
-            "form": true,
-            "title": "Version",
-            "hidden": {
-                "value": false,
-                "path": "imdashboard/deploy"
-              }
-          },
-          "support_email": {
-            "type": "string",
-            "form": true,
-            "title": "Support email",
-            "hidden": {
-                "value": false,
-                "path": "imdashboard/deploy"
-              }
-          },
-          "ingress": {
-            "type": "object",
-            "form": true,
-            "title": "Ingress",
-            "hidden": {
-              "value": false,
-              "path": "imdashboard/deploy"
-            },
-            "properties": {
-              "host": {
-                "type": "string",
-                "title": "Host",
-                "form": true
-              },
-              "path": {
-                "type": "string",
-                "title": "Path",
-                "form": true
-              }
-            }
-          },
-          "oidc": {
-            "type": "object",
-            "form": true,
-            "title": "OIDC Configuration",
-            "description": "OIDC Configuration for the authenti",
-            "hidden": {
-                "value": false,
-                "path": "imdashboard/deploy"
-            },
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "form": true,
-                    "title": "Provider Name"
-                  },
-                "base_url": {
-                    "type": "string",
-                    "form": true,
-                    "title": "Provider Base URL"
+      }
+    },
+    "vault": {
+      "type": "object",
+      "title": "Vault Configuration",
+      "description": "Vault configuration values",
+      "form": true,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "title": "Enable",
+          "description": "Flag to enable the Vault server.",
+          "form": true
+        },
+        "resources": {
+          "type": "object",
+          "title": "Resources",
+          "form": true,
+          "properties": {
+            "resources": {
+              "type": "object",
+              "title": "Resources",
+              "form": true,
+              "properties": {
+                "cpu": {
+                  "type": "string",
+                  "title": "CPU",
+                  "form": true
                 },
-                "client_id": {
-                    "type": "string",
-                    "form": true,
-                    "title": "Client ID"
-                },
-                "client_secret": {
-                    "type": "string",
-                    "form": true,
-                    "title": "Client Secret"
+                "memory": {
+                  "type": "string",
+                  "title": "Memory",
+                  "form": true
                 }
+              }
             }
           }
-        }
-      },
-      "mongodb": {
-        "type": "object",
-        "form": true,
-        "title": "MongoDB Configuration",
-        "description": "MongoDB configuration values",
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "title": "Enable",
-            "description": "Flag to enable the MongoDB server to store IM database.",
-            "form": true
+        },
+        "dataStorage": {
+          "type": "object",
+          "title": "Data Storage",
+          "form": true,
+          "properties": {
+            "storageClass": {
+              "type": "string",
+              "title": "Storage Class",
+              "form": true
+            }
           }
-        }
-      },
-      "vault": {
-        "type": "object",
-        "form": true,
-        "title": "Vault Configuration",
-        "description": "Vault configuration values",
-        "properties": {
-          "enabled": {
-            "type": "boolean",
-            "title": "Enable",
-            "description": "Flag to enable the Vault server.",
-            "form": true
+        },
+        "injector": {
+          "type": "object",
+          "title": "Injector",
+          "form": true,
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "title": "Enabled",
+              "form": true
+            }
           }
         }
       }
     }
   }
+}
