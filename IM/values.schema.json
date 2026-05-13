@@ -393,9 +393,12 @@
           }
         },
         "static_sites": {
-          "type": "string",
+          "type": "array",
           "title": "Static Sites",
           "form": true,
+          "items": {
+            "type": "string"
+          },         
           "hidden": {
             "value": false,
             "path": "imdashboard/deploy"
@@ -613,7 +616,7 @@
           "title": "Config",
           "form": true,
           "items": {
-            "type": "object"
+            "type": "string"
           }
         }
       }
