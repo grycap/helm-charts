@@ -13,9 +13,6 @@ mysql:
   # * mysqlUser must be granted in both dbs.
   mysqlUser: imuser
   initializationFiles:
-    imweb.sql: |-
-      CREATE DATABASE IF NOT EXISTS imweb;
-      GRANT ALL PRIVILEGES ON imweb.* TO 'imuser'@'%';
     imdb.sql: |-
       CREATE DATABASE IF NOT EXISTS imdb;
       GRANT ALL PRIVILEGES ON imdb.* TO 'imuser'@'%';
@@ -48,17 +45,17 @@ imdashboard:
   image: ghcr.io/grycap/im-dashboard
   version: latest
   ingress:
-    enabled: true
+    enabled: false
     type: nginx  # or traefik
     host: ""
     path: "/im-dashboard"
     tls: []
   httproute:
-    enabled: false
-    type: nginx  # or traefik
+    enabled: true
+    type: traefik # or nginx
     gateway:
-      name: nginx-gateway # or traefik-gateway
-      namespace: nginx-gateway # or traefik
+      name: traefik-gateway
+      namespace: traefik
     path: "/im-dashboard"
   resources:
     requests:
@@ -74,7 +71,7 @@ imdashboard:
   support_email: root@server.com
   analytics_tag: ""
   loglevel: info
-  static_sites: '[]'
+  static_sites: []
   external_links: '[ { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" },
                      { "url": "https://youtu.be/vmtzGOZxiUg", "menu_item_name": "IM Video Demo" }]'
   credentials_key: 'PXZ66574VjKIMSRXPWquRbcH8HaxH2yPRYsgZljlclA='
@@ -83,16 +80,17 @@ im:
   version: latest
   image: ghcr.io/grycap/im
   ingress:
-    enabled: true
+    enabled: false
     type: nginx  # or traefik
     host: ""
     path: "/im"
     tls: []
   httproute:
-    enabled: false
+    enabled: true
+    type: traefik # or nginx
     gateway:
-      name: nginx-gateway
-      namespace: nginx-gateway
+      name: traefik-gateway
+      namespace: traefik
     path: "/im"
   resources:
     requests:
