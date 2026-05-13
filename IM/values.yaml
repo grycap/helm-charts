@@ -71,7 +71,7 @@ imdashboard:
   support_email: root@server.com
   analytics_tag: ""
   loglevel: info
-  static_sites: '[]'
+  static_sites: []
   external_links: '[ { "url": "https://imdocs.readthedocs.io/", "menu_item_name": "IM Docs" },
                      { "url": "https://youtu.be/vmtzGOZxiUg", "menu_item_name": "IM Video Demo" }]'
   credentials_key: 'PXZ66574VjKIMSRXPWquRbcH8HaxH2yPRYsgZljlclA='
