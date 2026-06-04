@@ -66,6 +66,10 @@ minIO:
   region:  us-east-1
   accessKey: minio
   secretKey: minio123
+  quota:
+    enabled: "false"
+    buckets: "5"
+    storage: "5Gi"
 
 # Apache YuniKorn configuration
 yuniKorn:
