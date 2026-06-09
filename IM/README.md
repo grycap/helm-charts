@@ -68,23 +68,17 @@ see their documentations for advance configuration parameters.
 | `im.replicas`                     | Number of IM Pods to run ([see IM HA mode](#IM-HA-mode)).   | `1`              |
 | `im.log.level`                    | IM Log Level                                                | `DEBUG`          |
 | `im.log.persistence.enabled`      | Create a volume to store `log` data.                        | `false`          |
-| `im.log.persistence.storageClass` | Type of PVC for `log`.                                      | `""`             |
-| `im.log.persistence.accessMode`   | Access mode of the `log` PVC.                               | `ReadWriteOnce`  |
+| `im.log.persistence.storageclass` | Type of PVC for `log`.                                      | `""`             |
+| `im.log.persistence.accessmode`   | Access mode of the `log` PVC.                               | `ReadWriteOnce`  |
 | `im.log.persistence.size`         | Size of PVC for `log`.                                      | `8Gi`            |
 | `im.config`                       | List of IM configuration values. (See [IM docs](https://imdocs.readthedocs.io/en/latest/manual.html#configuration)).             | `[]`             |
-| `imweb.version`                   | `im-web` docker image version                               | `latest`         |
-| `imweb.image`                     | `im-web` docker image name                                  | `grycap/im-web`  |
-| `imweb.ingress.enabled`           | Create Ingress                                              | `true`           |
-| `imweb.ingress.host`              | Ingress host                                                | `""`             |
-| `imweb.ingress.path`              | Ingress path                                                | `/im-web`        |
-| `imweb.resources.requests.memory` | `im-web` Memory resource requests/limits                    | `256Mi`          |
-| `imweb.resources.requests.cpu`    | `im-web` CPU resource requests/limits                       | `250m`           |
 | `imdashboard.deploy`              | Deploy `im-dashboard` web interface.                        | `false`          |
 | `imdashboard.version`             | `im-dashboard` docker image version.                        | `latest`         |
 | `imdashboard.image`               | `im-imdashboard` docker image name                          | `grycap/im-imdashboard`|
 | `imdashboard.ingress.enabled`     | Create Ingress                                              | `true`           |
 | `imdashboard.ingress.host`        | Ingress host                                                | `""`             |
 | `imdashboard.ingress.path`        | Ingress path                                                | `/im-imdashboard`|
+| `imdashboard.ingress.type`        | Ingress type (nginx, or traefik)                            | `nginx`          |
 | `imdashboard.httproute.enabled`            | Create HTTPRoute for IM Dashboard                          | `false`          |
 | `imdashboard.httproute.type`               | HTTPRoute type (nginx, or traefik)                         | `"nginx"`        |
 | `imdashboard.httproute.path`               | HTTPRoute path                                             | `/im-imdashboard`|
@@ -95,7 +89,6 @@ see their documentations for advance configuration parameters.
 | `imdashboard.oidc.name`           | `im-dashboard` OIDC provider name.                          | `name`           |
 | `imdashboard.oidc.base_url`       | `im-dashboard` OIDC provider base URL.                      | `url`            |
 | `imdashboard.oidc.client_id`      | `im-dashboard` OIDC provider Client ID.                     | `id`             |
-| `imdashboard.oidc.client_secret`  | `im-dashboard` OIDC provider Client Secret.                 | `sec`            |
 | `imdashboard.oidc.client_secret`  | `im-dashboard` OIDC provider Client Secret.                 | `sec`            |
 | `imdashboard.oidc.group_membership` | `im-dashboard` OIDC list of groups needed to access the dashboard.           | `[]`                |
 | `imdashboard.oidc.scopes`         | `im-dashboard` OIDC list of scopes.                 | `openid email profile offline_access eduperson_entitlement'`            |
