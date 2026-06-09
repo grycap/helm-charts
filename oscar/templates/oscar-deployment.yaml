@@ -120,13 +120,8 @@ spec:
           value: {{ .Values.reScheduler.threshold | quote }}
         - name: OIDC_ENABLE
           value: {{ .Values.oidc.enable | quote }}
-        {{- if semverCompare "<3.4.0" .Values.image.tag }}
-        - name: OIDC_ISSUER
-          value: {{ .Values.oidc.issuer | quote }}
-        {{- else }}
         - name: OIDC_ISSUERS
           value: {{ .Values.oidc.issuer | quote }}
-        {{- end }}
         - name: OIDC_SUBJECT
           value: {{ .Values.oidc.subject | quote }}
         - name: OIDC_GROUPS
