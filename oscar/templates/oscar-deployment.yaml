@@ -142,6 +142,10 @@ spec:
           value: {{ .Values.kueue.default.memory | quote }}
         - name: KUEUE_DEFAULT_FLAVOR
           value: {{ .Values.kueue.default.flavor | quote }}
+        - name: KUEUE_DEFAULT_EPHEMERAL_STORAGE
+          value: {{ .Values.kueue.default.ephemeralStorage | quote }}
+        - name: KUEUE_DEFAULT_GPU
+          value: {{ .Values.kueue.default.gpu | quote }}
         - name: STORAGE_CLASS_NAME
           value: {{ .Values.volume.storageClassName | quote }}
         - name: VOLUME_ENABLE

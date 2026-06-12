@@ -143,6 +143,8 @@ kueue:
     cpu: "2"
     memory: "2Gi"
     flavor: "oscar-default-flavor"
+    ephemeralStorage: "1Gi"
+    gpu: "1"
 
 # Configure kserve resource
 kserve:
