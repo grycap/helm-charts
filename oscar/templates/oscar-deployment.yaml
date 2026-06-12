@@ -190,6 +190,8 @@ spec:
           value: {{ .Values.minIO.quota.buckets | quote }}
         - name: MINIO_QUOTA_STORAGE
           value: {{ .Values.minIO.quota.storage | quote }}
+        - name: KSERVE_ENABLE
+          value: {{ .Values.kserve.enable | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}

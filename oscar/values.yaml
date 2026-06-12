@@ -144,6 +144,10 @@ kueue:
     memory: "2Gi"
     flavor: "oscar-default-flavor"
 
+# Configure kserve resource
+kserve:
+  enable: "false"
+
 # Configure Prometheus resource
 
 prometheus:
