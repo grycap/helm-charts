@@ -74,6 +74,8 @@ spec:
           value: {{ .Values.openfaas.scaler.interval | quote }}
         - name: OPENFAAS_SCALER_INACTIVITY_DURATION
           value: {{ .Values.openfaas.scaler.inactivityDuration | quote }}
+        - name: OBJECT_STORAGE_TYPE 
+          value: {{ .Values.minIO.object_storage_type | quote }}
         - name: MINIO_ENDPOINT
           value: {{ .Values.minIO.endpoint | quote }}
         - name: MINIO_ACCESS_KEY

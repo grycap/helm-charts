@@ -61,6 +61,7 @@ writeTimeout: 300
 
 # MinIO credentials (must be deployed in the same cluster)
 minIO:
+  object_storage_type: minio
   endpoint: https://minio-service.minio:9000
   TLSVerify: "true"
   region:  us-east-1
