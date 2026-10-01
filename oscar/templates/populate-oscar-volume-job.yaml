@@ -12,7 +12,7 @@ spec:
       - name: bin-downloader
         image: "ghcr.io/grycap/oscar-bin-downloader:{{ .Values.image.tag }}"
         env:
-        - name: FAAS_SUPERVISOR_VERSION
+        - name: OSCAR_SUPERVISOR_VERSION
           value: {{ .Values.volume.supervisorVersion | quote }}
         - name: WATCHDOG_VERSION
           value: {{ .Values.volume.watchdogVersion | quote }}

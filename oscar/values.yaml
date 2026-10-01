@@ -100,7 +100,7 @@ oidc:
 # FaaS Supervisor and FWatchdog versions to populate the OSCAR's PV
 volume:
   storageClassName: ""
-  supervisorVersion: "1.6.2"
+  supervisorVersion: "1.0.0"
   watchdogVersion: "0.2.1"
   supervisorKit : "docker://ghcr.io/grycap/faas-supervisor-kit"
   enable: "true"
@@ -154,23 +154,24 @@ kserve:
 # Configure Prometheus resource
 
 prometheus:
-  url: ""
-  cpuQuery: "sum(increase(container_cpu_usage_seconds_total{namespace=~\"{{services_namespace}}.*\",service=~\"{{service}}\"}[{{range}}])) / 3600"
-  gpuQuery: "sum(increase(container_gpu_usage_seconds_total{namespace=~\"{{services_namespace}}.*\",service=~\"{{service}}\"}[{{range}}])) / 3600"
+  url: "http://prometheus-operator-kube-p-prometheus.monitoring.svc.cluster.local:9090"
+  cpuQuery: "sum(increase(container_cpu_usage_seconds_total{namespace=~\"{{services_namespace}}.*\",pod=~\"{{service}}.*\"}[{{range}}])) / 3600"
+  gpuQuery: "sum(increase(container_gpu_usage_seconds_total{namespace=~\"{{services_namespace}}.*\",pod=~\"{{service}}.*\"}[{{range}}])) / 3600"
 
 # Configure Loki resource
 
 loki:
-  url: ""
-  query: "{namespace=\"{{namespace}}\", app=\"{{app}}\"} |~ \"/(job|run)/\""
-  exposedQuery: "{namespace=\"{{namespace}}\", app=\"{{app}}\"} |~ \"/system/services/.+/exposed\""
-  exposedNamespace: "ingress-nginx"
-  exposedAppLabel: "ingress-nginx"
+  url: "http://loki.monitoring:3100"
+  query: "{namespace=\"oscar\"}"
+  exposedQuery: "{namespace=\"{{namespace}}\", app=\"traefik\"}"
+  exposedNamespace: "traefik"
+  exposedAppLabel: "traefik"
 
 # Configure Exposed Services
 
 exposedServices:
-  routeKind: "ingress"
+  routeKind: "httproute"
+  useSubdomainRoute: "true"
 
 # Configure HTTPRoute
 
