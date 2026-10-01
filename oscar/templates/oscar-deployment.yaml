@@ -198,6 +198,8 @@ spec:
           value: {{ .Values.minIO.quota.storage | quote }}
         - name: KSERVE_ENABLE
           value: {{ .Values.kserve.enable | quote }}
+        - name: EXPOSED_SERVICES_USE_SUBDOMAIN_ROUTE
+          value: {{ .Values.exposedServices.useSubdomainRoute | quote }}
         ports:
         - name: http
           containerPort: {{ .Values.service.port }}
