@@ -20,6 +20,16 @@ spec:
       - "PUT"
       - "DELETE"
       - "OPTIONS"
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: oscar-rate-limit
+spec:
+  rateLimit:
+    average: 5
+    period: 1s
+    burst: 10
 {{- end }}
 {{- if eq .Values.httproute.type "nginx" }}
 ---
@@ -71,6 +81,13 @@ spec:
         group: gateway.nginx.org
         kind: SnippetsFilter
         name: cors-allow-all
+{{- end }}
+{{- if eq .Values.httproute.type "traefik" }}
+    - type: ExtensionRef
+      extensionRef:
+        group: traefik.io
+        kind: Middleware
+        name: oscar-rate-limit
 {{- end }}
     backendRefs:
     - name: oscar
