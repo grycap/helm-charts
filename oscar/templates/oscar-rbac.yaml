@@ -248,6 +248,18 @@ rules:
   - update
   - deletecollection
 - apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - deletecollection
+  - update
+- apiGroups:
   - apps
   resources:
   - daemonsets
