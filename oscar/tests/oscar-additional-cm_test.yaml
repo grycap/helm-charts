@@ -1,0 +1,17 @@
+suite: test oscar deployment
+templates:
+  - oscar-additional-cm.yaml
+tests:
+  - name: test1
+    set:
+      additionalConfig.allowedImagePrefix: [grycap]
+    asserts:
+      - isKind:
+          of: ConfigMap
+      - equal:
+          path: data
+          value:
+            config.yaml: |-
+              images:
+                allowed_prefixes:
+                  - "grycap"
