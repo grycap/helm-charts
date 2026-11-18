@@ -532,7 +532,7 @@ entries:
     version: 1.0.0
   oscar:
   - apiVersion: v1
-    created: "2026-11-18T07:41:36.565316129Z"
+    created: "2026-11-18T07:46:05.474745384Z"
     description: Open Source Serverless Computing for Data-Processing Applications
     digest: e7492c6a1845a52c92c1c365262bb50c00ec6a0b60ce96fb9615c0c67e1b5248
     home: https://grycap.github.io/oscar
