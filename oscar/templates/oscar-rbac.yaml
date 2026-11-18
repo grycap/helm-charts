@@ -55,6 +55,7 @@ rules:
   - networking.k8s.io
   resources:
   - ingresses
+  - networkpolicies
   verbs:
   - get
   - list
@@ -248,6 +249,18 @@ rules:
   - update
   - deletecollection
 - apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - delete
+  - deletecollection
+  - update
+- apiGroups:
   - apps
   resources:
   - daemonsets
@@ -286,6 +299,7 @@ rules:
   - networking.k8s.io
   resources:
   - ingresses
+  - networkpolicies
   verbs:
   - get
   - list

@@ -20,6 +20,10 @@ spec:
       - "PUT"
       - "DELETE"
       - "OPTIONS"
+  rateLimit:
+    average: 5
+    period: 1s
+    burst: 10 
 {{- end }}
 {{- if eq .Values.httproute.type "nginx" }}
 ---
