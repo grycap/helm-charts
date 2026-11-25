@@ -20,10 +20,7 @@ spec:
       - "PUT"
       - "DELETE"
       - "OPTIONS"
-  rateLimit:
-    average: 5
-    period: 1s
-    burst: 10 
+
 ---
 apiVersion: traefik.io/v1alpha1
 kind: Middleware
